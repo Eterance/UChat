@@ -26,8 +26,8 @@ namespace UChat
     public partial class FormMain : Form
     {
 
-        TCPFileTransfer.FileReceiver fileReceiver;
-        TCPFileTransfer.FileSender fileSender;
+        TCPFileTransfer.FileReceiver fileReceiver = new TCPFileTransfer.FileReceiver();
+        TCPFileTransfer.FileSender fileSender = new TCPFileTransfer.FileSender();
         private string RecePath = "";
         /// <summary> 
         /// 一个集合了本程序所有线程的队列，便于程序关闭时结束所有线程。
@@ -1414,7 +1414,7 @@ namespace UChat
         }
         private void BackgroundWorkerFileReceiver_DoWork(object sender, DoWorkEventArgs e)
         {
-            fileReceiver = new TCPFileTransfer.FileReceiver(CommonFoundations.FileTransferTempData.FRDestinationFolder + "/" + CommonFoundations.FileTransferTempData.FileFullName, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRSourceIP);
+            //fileReceiver = new TCPFileTransfer.FileReceiver(CommonFoundations.FileTransferTempData.FRDestinationFolder + "/" + CommonFoundations.FileTransferTempData.FileFullName, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRSourceIP);
             TCPFileTransfer.TaskCompletionStatus status = fileReceiver.Start(ref CommonFoundations.FileTransferTempData.FTRPercentage2);
             if (status == TCPFileTransfer.TaskCompletionStatus.HostCancel && status == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)//任务被取消
             {
@@ -1424,7 +1424,7 @@ namespace UChat
 
         private void BackgroundWorkerFileSender_DoWork(object sender, DoWorkEventArgs e)
         {
-            fileSender = new TCPFileTransfer.FileSender(CommonFoundations.FileTransferTempData.FRSourcePath, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRDestinationIP);
+            //fileSender = new TCPFileTransfer.FileSender(CommonFoundations.FileTransferTempData.FRSourcePath, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRDestinationIP);
             TCPFileTransfer.TaskCompletionStatus status =  fileSender.Start(ref CommonFoundations.FileTransferTempData.FTRPercentage2);
             if (status == TCPFileTransfer.TaskCompletionStatus.HostCancel && status == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)//任务被取消
             {
@@ -1513,9 +1513,9 @@ namespace UChat
 
         private void ButtonCancelFTR_Click(object sender, EventArgs e)
         {
+            CommonFoundations.FileTransferTempData.CancelFTR = true;
             try
             {
-                CommonFoundations.FileTransferTempData.CancelFTR = true;
                 /*fileSender.Stop();
                 fileReceiver.Stop();*/
                 if (buttonFiles.Visible == false)

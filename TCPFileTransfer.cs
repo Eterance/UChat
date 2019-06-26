@@ -60,7 +60,12 @@ namespace UChat
         /// </summary>
         public class FileSender
         {
-            
+             /// <summary>
+             /// 在端口 50024 上发送文件。
+             /// </summary>
+            public FileSender()//构造函数
+            {
+            }
             /// <summary>
             /// 在端口 50024 上发送文件。
             /// </summary>
@@ -69,9 +74,20 @@ namespace UChat
             /// <param name="receiverIP">接收者的 IP</param>
             public FileSender(string filePath, long fileByte, string receiverIP)//构造函数
             {
-                RemoteIP = receiverIP;
+                Setting(filePath, fileByte, receiverIP);
+            }
+
+            /// <summary>
+            /// 设置必要的参数。
+            /// </summary>
+            /// <param name="filePath">文件保存的路径</param>
+            /// <param name="fileByte">文件字节数</param>
+            /// <param name="senderIP">文件发送者的 IP</param>
+            public void Setting(string filePath, long fileByte, string receiverIP)
+            {
                 FilePath = filePath;
                 FileByte = fileByte;
+                RemoteIP = receiverIP;
             }
 
             /// <summary>
@@ -167,10 +183,10 @@ namespace UChat
                                             //CommonFoundations.FileTransferTempData.FTRPercentage2 = PercentageSent;
                                             percentage = Percentage;
 
-                                            if (CommonFoundations.FileTransferTempData.CancelFTR == true)
+                                            /*f (CommonFoundations.FileTransferTempData.CancelFTR == true)
                                             {
                                                 CancelByHost = true;
-                                            }
+                                            }*/
                                             if (CancelByHost == true || CancelByOpposite == true)
                                             {
                                                 if (CancelByHost == true)//自己结束的
@@ -308,6 +324,13 @@ namespace UChat
         /// </summary>
         public class FileReceiver
         {
+
+            /// <summary>
+            /// 在端口 50024 上接受文件。
+            /// </summary>
+            public FileReceiver()//构造函数
+            {
+            }
             /// <summary>
             /// 在端口 50024 上接受文件。
             /// </summary>
@@ -315,6 +338,17 @@ namespace UChat
             /// <param name="fileByte">文件字节数</param>
             /// <param name="senderIP">文件发送者的 IP</param>
             public FileReceiver(string filePath, long fileByte, string senderIP)//构造函数
+            {
+                Setting(filePath, fileByte, senderIP);
+            }
+
+            /// <summary>
+            /// 设置必要的参数。
+            /// </summary>
+            /// <param name="filePath">文件保存的路径</param>
+            /// <param name="fileByte">文件字节数</param>
+            /// <param name="senderIP">文件发送者的 IP</param>
+            public void Setting(string filePath, long fileByte, string senderIP)
             {
                 FilePath = filePath;
                 FileByte = fileByte;
@@ -432,7 +466,7 @@ namespace UChat
                                                 index++;
                                                 blockElementsNums += fragmentBufferLength;
                                                 Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
-                                                                                                       //CommonFoundations.FileTransferTempData.FTRPercentage2 = Percentage;
+                                                //CommonFoundations.FileTransferTempData.FTRPercentage2 = Percentage;
                                                 percentage = Percentage;
 
                                                 if (blockElementsNums == blockBuffer.Length)//缓存块满，需要写入到文件
@@ -446,10 +480,10 @@ namespace UChat
                                             {
                                                 fStream.Write(blockBuffer, 0, blockElementsNums);
                                             }
-                                            if (CommonFoundations.FileTransferTempData.CancelFTR == true)
+                                            /*if (CommonFoundations.FileTransferTempData.CancelFTR == true)
                                             {
                                                 CancelByHost = true;
-                                            }
+                                            }*/
                                             if (CancelByHost == true || CancelByOpposite == true)//任意一方发出了取消请求
                                             {
                                                 if (CancelByHost == true)//自己结束的
@@ -554,9 +588,6 @@ namespace UChat
                     byte[] sendBytes = Encoding.UTF8.GetBytes(message);
                     sendStream.Write(sendBytes, 0, sendBytes.Length);
                     sendStream.Flush();
-                    //sendStream.Close();//关闭网络流  
-                    //MessageBox.Show("ok");
-                    //client.Close();//关闭客户端
                 }
                 catch
                 {
