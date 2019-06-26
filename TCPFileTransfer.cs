@@ -124,7 +124,7 @@ namespace UChat
             /// <summary>
             /// 监听取消控制信息。
             /// </summary>
-            private void ListenCancelSignal()
+            /*private void ListenCancelSignal()
             {
                 TCP tCP = new TCP();
                 string message = tCP.TCPMessageListener(50020);
@@ -132,6 +132,49 @@ namespace UChat
                 {
                     //MessageBox.Show("FUCKYOU\r\n" + message);
                     CancelByOpposite = true;
+                }
+            }*/
+
+
+            /// <summary>
+            /// 处理收到的取消控制消息。
+            /// </summary>
+            /// <param name="iar"></param>
+            public void DoAcceptTcpClient(IAsyncResult iar)
+            {
+                //还原原始的TcpListner对象
+                TcpListener listener = (TcpListener)iar.AsyncState;
+                string message = "";
+                try
+                {
+                    //完成连接的动作，并返回新的TcpClient
+                    TcpClient client = listener.EndAcceptTcpClient(iar);
+
+                    using (client)
+                    {
+                        byte[] buffer = new byte[client.ReceiveBufferSize];//缓冲字节数组
+                        NetworkStream clientStream = client.GetStream();
+                        using (clientStream)
+                        {
+                            clientStream.Read(buffer, 0, buffer.Length);
+                            message = Encoding.UTF8.GetString(buffer).Trim('\0');//收到的信息
+                            clientStream.Close();
+                        }
+                        client.Close();
+                        if (message == "CANCEL")//对面发来的取消请求
+                        {
+                            //MessageBox.Show("FUCKYOU\r\n" + message);
+                            CancelByOpposite = true;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+                finally
+                {
+                    listener.Stop();
                 }
             }
 
@@ -146,8 +189,13 @@ namespace UChat
                 {
                     isAlreadyStart = true;
                     TCP tCP = new TCP();
-                    thread = new Thread(ListenCancelSignal);
-                    thread.Start();//启动取消信息监听线程。
+                    /*thread = new Thread(ListenCancelSignal);
+                    thread.Start();//启动取消信息监听线程。*/
+
+                    TcpListener cancelSignalListener = new TcpListener(IPAddress.Any, 50020);
+                    cancelSignalListener.Start();
+                    //异步接受连接请求
+                    cancelSignalListener.BeginAcceptTcpClient(new AsyncCallback(DoAcceptTcpClient), cancelSignalListener);
 
                     int fragmentBufferLength = fragmentBuffer.Length;
                     long totalindex = FileByte / fragmentBufferLength;//文件的总块数
@@ -198,7 +246,6 @@ namespace UChat
                                                 }
                                                 if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息
                                                 {
-                                                    tCP.TCPMessageSender(RemoteIP, "END", 50020);//发送取消消息监听
                                                     return TaskCompletionStatus.OppositeCancel;
                                                 }
                                             }
@@ -252,6 +299,7 @@ namespace UChat
                     #endregion
                     finally//收尾工作
                     {
+                        cancelSignalListener.Stop();//结束取消控制信息监听器
                         signalStream.Dispose();
                         signalStream.Close();
                         signalClient.Close();
@@ -393,7 +441,7 @@ namespace UChat
             /// <summary>
             /// 监听取消控制信息。
             /// </summary>
-            private void ListenCancelSignal()
+            /*private void ListenCancelSignal()
             {
                 TCP tCP = new TCP();
                 string message = tCP.TCPMessageListener(50020);
@@ -402,8 +450,50 @@ namespace UChat
                     //MessageBox.Show("FUCKYOU\r\n" + message);
                     CancelByOpposite = true;
                 }
-            }
+            }*/
 
+            /// <summary>
+            /// 处理收到的取消控制消息。
+            /// </summary>
+            /// <param name="iar"></param>
+            public void DoAcceptTcpClient(IAsyncResult iar)
+            {
+                //还原原始的TcpListner对象
+                TcpListener listener = (TcpListener)iar.AsyncState;
+                string message = "";
+                try
+                {
+                    //完成连接的动作，并返回新的TcpClient
+                    TcpClient client = listener.EndAcceptTcpClient(iar);
+
+                    using (client)
+                    {
+                        byte[] buffer = new byte[client.ReceiveBufferSize];//缓冲字节数组
+                        NetworkStream clientStream = client.GetStream();
+                        using (clientStream)
+                        {
+                            clientStream.Read(buffer, 0, buffer.Length);
+                            message = Encoding.UTF8.GetString(buffer).Trim('\0');//收到的信息
+                            clientStream.Close();
+                        }
+                        client.Close();
+                        if (message == "CANCEL")//对面发来的取消请求
+                        {
+                            //MessageBox.Show("FUCKYOU\r\n" + message);
+                            CancelByOpposite = true;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+                finally
+                {
+                    listener.Stop();
+                }
+            }
+            adasd;
             /// <summary>
             /// 开始接收文件。返回一个 TaskCompletionStatus 值，指示是文件传输结果。
             /// </summary>
@@ -415,8 +505,14 @@ namespace UChat
                 {
                     isAlreadyStart = true;
                     TCP tCP = new TCP();
+                    /*
                     thread = new Thread(ListenCancelSignal);
-                    thread.Start();//启动取消信息监听线程。
+                    thread.Start();//启动取消信息监听线程。*/
+
+                    TcpListener cancelSignalListener = new TcpListener(IPAddress.Any,50020);
+                    cancelSignalListener.Start();
+                    //异步接受连接请求
+                    cancelSignalListener.BeginAcceptTcpClient(new AsyncCallback(DoAcceptTcpClient), cancelSignalListener);
 
                     int fragmentBufferLength = fragmentBuffer.Length;
                     int blockBufferBufferLength = blockBuffer.Length;
@@ -467,7 +563,6 @@ namespace UChat
                                                 index++;
                                                 blockElementsNums += fragmentBufferLength;
                                                 Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
-                                                //CommonFoundations.FileTransferTempData.FTRPercentage2 = Percentage;
                                                 percentage = Percentage;
 
                                                 if (blockElementsNums == blockBuffer.Length)//缓存块满，需要写入到文件
@@ -491,7 +586,6 @@ namespace UChat
                                                     }
                                                     if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息，不用再发
                                                     {
-                                                        tCP.TCPMessageSender(RemoteIP, "CLOSE", 50020);//发送取消消息监听
 
                                                         fStream.Flush();
                                                         fStream.Dispose();
@@ -564,6 +658,7 @@ namespace UChat
                     #endregion
                     finally//收尾工作
                     {
+                        cancelSignalListener.Stop();//结束取消控制信息监听器
                         signalStream.Dispose();
                         signalClient.Close();
                         tcpListener.Stop();//结束监听器
