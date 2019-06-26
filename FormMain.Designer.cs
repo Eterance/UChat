@@ -62,7 +62,7 @@
             this.labelPercent = new System.Windows.Forms.Label();
             this.panelConfirm = new System.Windows.Forms.Panel();
             this.buttonRefuse = new System.Windows.Forms.Button();
-            this.buttonAccept = new System.Windows.Forms.Button();
+            this.buttonAcceptFTR = new System.Windows.Forms.Button();
             this.labelWating = new System.Windows.Forms.Label();
             this.buttonSelectFile = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -87,18 +87,18 @@
             this.labelEmptyText = new System.Windows.Forms.Label();
             this.timerPercent = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panelNoticeFTRWarning = new System.Windows.Forms.Panel();
+            this.panelNoticeRed = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.labelWarningNotice = new System.Windows.Forms.Label();
+            this.labelNoticeRed = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.panelNoticeFTROver = new System.Windows.Forms.Panel();
+            this.panelNoticeBlue = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.labelNoticeBlue = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
-            this.panelNoticeRefuse = new System.Windows.Forms.Panel();
+            this.panelNoticeYellow = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
-            this.labelRefuseReason = new System.Windows.Forms.Label();
+            this.labelNoticeYellow = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.panelSideBar.SuspendLayout();
             this.panelDetail.SuspendLayout();
@@ -112,9 +112,9 @@
             this.panel2.SuspendLayout();
             this.panelEmpty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmptyIcon)).BeginInit();
-            this.panelNoticeFTRWarning.SuspendLayout();
-            this.panelNoticeFTROver.SuspendLayout();
-            this.panelNoticeRefuse.SuspendLayout();
+            this.panelNoticeRed.SuspendLayout();
+            this.panelNoticeBlue.SuspendLayout();
+            this.panelNoticeYellow.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelChatBoxBG
@@ -558,7 +558,7 @@
             // panelConfirm
             // 
             this.panelConfirm.Controls.Add(this.buttonRefuse);
-            this.panelConfirm.Controls.Add(this.buttonAccept);
+            this.panelConfirm.Controls.Add(this.buttonAcceptFTR);
             this.panelConfirm.Location = new System.Drawing.Point(3, 650);
             this.panelConfirm.Name = "panelConfirm";
             this.panelConfirm.Size = new System.Drawing.Size(358, 52);
@@ -585,25 +585,25 @@
             this.buttonRefuse.UseVisualStyleBackColor = false;
             this.buttonRefuse.Click += new System.EventHandler(this.ButtonRefuse_Click);
             // 
-            // buttonAccept
+            // buttonAcceptFTR
             // 
-            this.buttonAccept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.buttonAccept.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonAccept.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonAccept.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonAccept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAccept.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonAccept.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonAccept.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAccept.Location = new System.Drawing.Point(19, 0);
-            this.buttonAccept.Name = "buttonAccept";
-            this.buttonAccept.Size = new System.Drawing.Size(140, 50);
-            this.buttonAccept.TabIndex = 27;
-            this.buttonAccept.Text = "接受";
-            this.buttonAccept.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonAccept.UseVisualStyleBackColor = false;
-            this.buttonAccept.Click += new System.EventHandler(this.ButtonAccept_Click);
+            this.buttonAcceptFTR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.buttonAcceptFTR.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonAcceptFTR.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonAcceptFTR.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonAcceptFTR.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonAcceptFTR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAcceptFTR.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonAcceptFTR.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonAcceptFTR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAcceptFTR.Location = new System.Drawing.Point(19, 0);
+            this.buttonAcceptFTR.Name = "buttonAcceptFTR";
+            this.buttonAcceptFTR.Size = new System.Drawing.Size(140, 50);
+            this.buttonAcceptFTR.TabIndex = 27;
+            this.buttonAcceptFTR.Text = "接受";
+            this.buttonAcceptFTR.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonAcceptFTR.UseVisualStyleBackColor = false;
+            this.buttonAcceptFTR.Click += new System.EventHandler(this.ButtonAccept_Click);
             // 
             // labelWating
             // 
@@ -871,18 +871,18 @@
             this.timerPercent.Interval = 500;
             this.timerPercent.Tick += new System.EventHandler(this.TimerPercent_Tick);
             // 
-            // panelNoticeFTRWarning
+            // panelNoticeRed
             // 
-            this.panelNoticeFTRWarning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(27)))), ((int)(((byte)(1)))));
-            this.panelNoticeFTRWarning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelNoticeFTRWarning.Controls.Add(this.label9);
-            this.panelNoticeFTRWarning.Controls.Add(this.labelWarningNotice);
-            this.panelNoticeFTRWarning.Controls.Add(this.button1);
-            this.panelNoticeFTRWarning.Location = new System.Drawing.Point(825, 50);
-            this.panelNoticeFTRWarning.Name = "panelNoticeFTRWarning";
-            this.panelNoticeFTRWarning.Size = new System.Drawing.Size(450, 100);
-            this.panelNoticeFTRWarning.TabIndex = 26;
-            this.panelNoticeFTRWarning.Visible = false;
+            this.panelNoticeRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(27)))), ((int)(((byte)(1)))));
+            this.panelNoticeRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNoticeRed.Controls.Add(this.label9);
+            this.panelNoticeRed.Controls.Add(this.labelNoticeRed);
+            this.panelNoticeRed.Controls.Add(this.button1);
+            this.panelNoticeRed.Location = new System.Drawing.Point(825, 50);
+            this.panelNoticeRed.Name = "panelNoticeRed";
+            this.panelNoticeRed.Size = new System.Drawing.Size(450, 100);
+            this.panelNoticeRed.TabIndex = 26;
+            this.panelNoticeRed.Visible = false;
             // 
             // label9
             // 
@@ -895,16 +895,16 @@
             this.label9.TabIndex = 7;
             this.label9.Text = "警告";
             // 
-            // labelWarningNotice
+            // labelNoticeRed
             // 
-            this.labelWarningNotice.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelWarningNotice.ForeColor = System.Drawing.Color.White;
-            this.labelWarningNotice.Location = new System.Drawing.Point(16, 40);
-            this.labelWarningNotice.Name = "labelWarningNotice";
-            this.labelWarningNotice.Size = new System.Drawing.Size(427, 49);
-            this.labelWarningNotice.TabIndex = 6;
-            this.labelWarningNotice.Text = "在文件传输时无法退出程序。若仍要退出，请取消文件传输任务后再尝试退出程序。";
-            this.labelWarningNotice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelNoticeRed.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelNoticeRed.ForeColor = System.Drawing.Color.White;
+            this.labelNoticeRed.Location = new System.Drawing.Point(16, 40);
+            this.labelNoticeRed.Name = "labelNoticeRed";
+            this.labelNoticeRed.Size = new System.Drawing.Size(427, 49);
+            this.labelNoticeRed.TabIndex = 6;
+            this.labelNoticeRed.Text = "在文件传输时无法退出程序。若仍要退出，请取消文件传输任务后再尝试退出程序。";
+            this.labelNoticeRed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button1
             // 
@@ -924,19 +924,19 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // panelNoticeFTROver
+            // panelNoticeBlue
             // 
-            this.panelNoticeFTROver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(43)))), ((int)(((byte)(77)))));
-            this.panelNoticeFTROver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelNoticeFTROver.Controls.Add(this.button4);
-            this.panelNoticeFTROver.Controls.Add(this.label11);
-            this.panelNoticeFTROver.Controls.Add(this.label12);
-            this.panelNoticeFTROver.Controls.Add(this.button5);
-            this.panelNoticeFTROver.Location = new System.Drawing.Point(825, 50);
-            this.panelNoticeFTROver.Name = "panelNoticeFTROver";
-            this.panelNoticeFTROver.Size = new System.Drawing.Size(450, 100);
-            this.panelNoticeFTROver.TabIndex = 28;
-            this.panelNoticeFTROver.Visible = false;
+            this.panelNoticeBlue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(43)))), ((int)(((byte)(77)))));
+            this.panelNoticeBlue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNoticeBlue.Controls.Add(this.button4);
+            this.panelNoticeBlue.Controls.Add(this.label11);
+            this.panelNoticeBlue.Controls.Add(this.labelNoticeBlue);
+            this.panelNoticeBlue.Controls.Add(this.button5);
+            this.panelNoticeBlue.Location = new System.Drawing.Point(825, 50);
+            this.panelNoticeBlue.Name = "panelNoticeBlue";
+            this.panelNoticeBlue.Size = new System.Drawing.Size(450, 100);
+            this.panelNoticeBlue.TabIndex = 28;
+            this.panelNoticeBlue.Visible = false;
             // 
             // button4
             // 
@@ -967,16 +967,16 @@
             this.label11.TabIndex = 7;
             this.label11.Text = "提示";
             // 
-            // label12
+            // labelNoticeBlue
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(16, 50);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(122, 21);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "文件传输完成。";
+            this.labelNoticeBlue.AutoSize = true;
+            this.labelNoticeBlue.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelNoticeBlue.ForeColor = System.Drawing.Color.White;
+            this.labelNoticeBlue.Location = new System.Drawing.Point(16, 50);
+            this.labelNoticeBlue.Name = "labelNoticeBlue";
+            this.labelNoticeBlue.Size = new System.Drawing.Size(122, 21);
+            this.labelNoticeBlue.TabIndex = 6;
+            this.labelNoticeBlue.Text = "文件传输完成。";
             // 
             // button5
             // 
@@ -996,18 +996,18 @@
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
-            // panelNoticeRefuse
+            // panelNoticeYellow
             // 
-            this.panelNoticeRefuse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(75)))), ((int)(((byte)(0)))));
-            this.panelNoticeRefuse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelNoticeRefuse.Controls.Add(this.label10);
-            this.panelNoticeRefuse.Controls.Add(this.labelRefuseReason);
-            this.panelNoticeRefuse.Controls.Add(this.button3);
-            this.panelNoticeRefuse.Location = new System.Drawing.Point(825, 50);
-            this.panelNoticeRefuse.Name = "panelNoticeRefuse";
-            this.panelNoticeRefuse.Size = new System.Drawing.Size(450, 100);
-            this.panelNoticeRefuse.TabIndex = 29;
-            this.panelNoticeRefuse.Visible = false;
+            this.panelNoticeYellow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(75)))), ((int)(((byte)(0)))));
+            this.panelNoticeYellow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNoticeYellow.Controls.Add(this.label10);
+            this.panelNoticeYellow.Controls.Add(this.labelNoticeYellow);
+            this.panelNoticeYellow.Controls.Add(this.button3);
+            this.panelNoticeYellow.Location = new System.Drawing.Point(825, 50);
+            this.panelNoticeYellow.Name = "panelNoticeYellow";
+            this.panelNoticeYellow.Size = new System.Drawing.Size(450, 100);
+            this.panelNoticeYellow.TabIndex = 29;
+            this.panelNoticeYellow.Visible = false;
             // 
             // label10
             // 
@@ -1020,16 +1020,16 @@
             this.label10.TabIndex = 7;
             this.label10.Text = "注意";
             // 
-            // labelRefuseReason
+            // labelNoticeYellow
             // 
-            this.labelRefuseReason.AutoSize = true;
-            this.labelRefuseReason.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelRefuseReason.ForeColor = System.Drawing.Color.White;
-            this.labelRefuseReason.Location = new System.Drawing.Point(16, 50);
-            this.labelRefuseReason.Name = "labelRefuseReason";
-            this.labelRefuseReason.Size = new System.Drawing.Size(234, 21);
-            this.labelRefuseReason.TabIndex = 6;
-            this.labelRefuseReason.Text = "对方拒绝了你的文件传输请求。";
+            this.labelNoticeYellow.AutoSize = true;
+            this.labelNoticeYellow.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelNoticeYellow.ForeColor = System.Drawing.Color.White;
+            this.labelNoticeYellow.Location = new System.Drawing.Point(16, 50);
+            this.labelNoticeYellow.Name = "labelNoticeYellow";
+            this.labelNoticeYellow.Size = new System.Drawing.Size(234, 21);
+            this.labelNoticeYellow.TabIndex = 6;
+            this.labelNoticeYellow.Text = "对方拒绝了你的文件传输请求。";
             // 
             // button3
             // 
@@ -1056,9 +1056,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(125)))), ((int)(((byte)(236)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.Controls.Add(this.panelNoticeFTRWarning);
-            this.Controls.Add(this.panelNoticeRefuse);
-            this.Controls.Add(this.panelNoticeFTROver);
+            this.Controls.Add(this.panelNoticeYellow);
+            this.Controls.Add(this.panelNoticeRed);
+            this.Controls.Add(this.panelNoticeBlue);
             this.Controls.Add(this.panelTips);
             this.Controls.Add(this.labelAlert);
             this.Controls.Add(this.labelChatBorder);
@@ -1092,12 +1092,12 @@
             this.panel2.ResumeLayout(false);
             this.panelEmpty.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmptyIcon)).EndInit();
-            this.panelNoticeFTRWarning.ResumeLayout(false);
-            this.panelNoticeFTRWarning.PerformLayout();
-            this.panelNoticeFTROver.ResumeLayout(false);
-            this.panelNoticeFTROver.PerformLayout();
-            this.panelNoticeRefuse.ResumeLayout(false);
-            this.panelNoticeRefuse.PerformLayout();
+            this.panelNoticeRed.ResumeLayout(false);
+            this.panelNoticeRed.PerformLayout();
+            this.panelNoticeBlue.ResumeLayout(false);
+            this.panelNoticeBlue.PerformLayout();
+            this.panelNoticeYellow.ResumeLayout(false);
+            this.panelNoticeYellow.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1151,7 +1151,7 @@
         private System.Windows.Forms.Label labelWating;
         private System.Windows.Forms.Panel panelConfirm;
         private System.Windows.Forms.Button buttonRefuse;
-        private System.Windows.Forms.Button buttonAccept;
+        private System.Windows.Forms.Button buttonAcceptFTR;
         private System.Windows.Forms.Timer timerFTTimeout;
         public System.ComponentModel.BackgroundWorker backgroundWorkerFileReceiver;
         public System.ComponentModel.BackgroundWorker backgroundWorkerFileSender;
@@ -1160,19 +1160,19 @@
         public System.Windows.Forms.Label labelPercent;
         private System.Windows.Forms.Timer timerPercent;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Panel panelNoticeFTRWarning;
+        private System.Windows.Forms.Panel panelNoticeRed;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label labelWarningNotice;
+        private System.Windows.Forms.Label labelNoticeRed;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonCancelFTR;
-        private System.Windows.Forms.Panel panelNoticeFTROver;
+        private System.Windows.Forms.Panel panelNoticeBlue;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelNoticeBlue;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Panel panelNoticeRefuse;
+        private System.Windows.Forms.Panel panelNoticeYellow;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label labelRefuseReason;
+        private System.Windows.Forms.Label labelNoticeYellow;
         private System.Windows.Forms.Button button3;
     }
 }

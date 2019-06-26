@@ -130,6 +130,7 @@ namespace UChat
                 string message = tCP.TCPMessageListener(50020);
                 if (message == "CANCEL")//对面发来的取消请求
                 {
+                    //MessageBox.Show("FUCKYOU\r\n" + message);
                     CancelByOpposite = true;
                 }
             }
@@ -137,7 +138,7 @@ namespace UChat
             /// <summary>
             /// 开始发送文件。返回一个 TaskCompletionStatus 值，指示是文件传输结果。
             /// </summary>
-            /// <param name="percentage">将文件传输任务进度以 0-100 的数字传递出来到这个数。</param
+            /// <param name="percentage">将文件传输任务进度以 0-100 的数字传递出来到这个数。</param>
             /// <returns>返回一个 bool 值，指示是否完成文件传输。false 表示遭到用户中断。</returns>
             public TaskCompletionStatus Start(ref int percentage)
             {
@@ -189,15 +190,15 @@ namespace UChat
                                             }*/
                                             if (CancelByHost == true || CancelByOpposite == true)
                                             {
+
                                                 if (CancelByHost == true)//自己结束的
-                                                {                                                    
-                                                    tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
+                                                {
                                                     tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
                                                     return TaskCompletionStatus.HostCancel;
                                                 }
-                                                if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息，不用再发
+                                                if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息
                                                 {
-                                                    tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
+                                                    tCP.TCPMessageSender(RemoteIP, "END", 50020);//发送取消消息监听
                                                     return TaskCompletionStatus.OppositeCancel;
                                                 }
                                             }
@@ -257,9 +258,8 @@ namespace UChat
                         client.Close();//关闭客户端
                         signalListener.Stop();
                     }
-                    tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
                     isAlreadyStart = false;
-                    return TaskCompletionStatus.Success;
+                    return TaskCompletionStatus.Success;//完美结束
                 }
                 else
                 {
@@ -399,6 +399,7 @@ namespace UChat
                 string message = tCP.TCPMessageListener(50020);
                 if (message == "CANCEL")//对面发来的取消请求
                 {
+                    //MessageBox.Show("FUCKYOU\r\n" + message);
                     CancelByOpposite = true;
                 }
             }
@@ -406,7 +407,7 @@ namespace UChat
             /// <summary>
             /// 开始接收文件。返回一个 TaskCompletionStatus 值，指示是文件传输结果。
             /// </summary>
-            /// <param name="percentage">将文件传输任务进度以 0-100 的数字传递出来到这个数。</param
+            /// <param name="percentage">将文件传输任务进度以 0-100 的数字传递出来到这个数。</param>
             /// <returns>返回一个 bool 值，指示是否完成文件传输。false 表示遭到用户中断。</returns>
             public TaskCompletionStatus Start(ref int percentage)
             {
@@ -480,14 +481,21 @@ namespace UChat
                                                 {
                                                     if (CancelByHost == true)//自己结束的
                                                     {
-                                                        tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
                                                         tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
+
+                                                        fStream.Flush();
+                                                        fStream.Dispose();
+                                                        fStream.Close();
                                                         File.Delete(FilePath);//删除未完成的文件
                                                         return TaskCompletionStatus.HostCancel;
                                                     }
                                                     if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息，不用再发
                                                     {
-                                                        tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
+                                                        tCP.TCPMessageSender(RemoteIP, "CLOSE", 50020);//发送取消消息监听
+
+                                                        fStream.Flush();
+                                                        fStream.Dispose();
+                                                        fStream.Close();
                                                         File.Delete(FilePath);//删除未完成的文件
                                                         return TaskCompletionStatus.OppositeCancel;
                                                     }
@@ -508,11 +516,9 @@ namespace UChat
                                         }
                                     }
                                 }
-                                signalStream.Dispose();
-                                newClient.Close();
-                                signalClient.Close();
                             }
                         }
+                        newClient.Close();
                     }
                     #region
                     catch (ArgumentNullException e)
@@ -556,10 +562,13 @@ namespace UChat
                         MessageBox.Show("未知错误！\r\n" + e.ToString());
                     }
                     #endregion
-                    finally
+                    finally//收尾工作
                     {
+                        signalStream.Dispose();
+                        signalClient.Close();
                         tcpListener.Stop();//结束监听器
                     }
+                    isAlreadyStart = false;
                     return TaskCompletionStatus.Success;//完美结束
                 }
                 else
