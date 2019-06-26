@@ -129,6 +129,7 @@ namespace UChat
             {
                 tcpListener.Stop();
             }
+            MessageBox.Show(message);
             return message;            
         }
 

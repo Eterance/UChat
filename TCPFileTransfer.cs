@@ -74,7 +74,7 @@ namespace UChat
             /// <param name="receiverIP">接收者的 IP</param>
             public FileSender(string filePath, long fileByte, string receiverIP)//构造函数
             {
-                Setting(filePath, fileByte, receiverIP);
+                SetParameters(filePath, fileByte, receiverIP);
             }
 
             /// <summary>
@@ -83,7 +83,7 @@ namespace UChat
             /// <param name="filePath">文件保存的路径</param>
             /// <param name="fileByte">文件字节数</param>
             /// <param name="senderIP">文件发送者的 IP</param>
-            public void Setting(string filePath, long fileByte, string receiverIP)
+            public void SetParameters(string filePath, long fileByte, string receiverIP)
             {
                 FilePath = filePath;
                 FileByte = fileByte;
@@ -339,7 +339,7 @@ namespace UChat
             /// <param name="senderIP">文件发送者的 IP</param>
             public FileReceiver(string filePath, long fileByte, string senderIP)//构造函数
             {
-                Setting(filePath, fileByte, senderIP);
+                SetParameters(filePath, fileByte, senderIP);
             }
 
             /// <summary>
@@ -348,7 +348,7 @@ namespace UChat
             /// <param name="filePath">文件保存的路径</param>
             /// <param name="fileByte">文件字节数</param>
             /// <param name="senderIP">文件发送者的 IP</param>
-            public void Setting(string filePath, long fileByte, string senderIP)
+            public void SetParameters(string filePath, long fileByte, string senderIP)
             {
                 FilePath = filePath;
                 FileByte = fileByte;
@@ -474,8 +474,28 @@ namespace UChat
                                                     fStream.Write(blockBuffer, 0, blockBufferBufferLength);
                                                     blockElementsNums = 0;
                                                 }
+
+                                                //任意一方发出了取消请求
+                                                if (CancelByHost == true || CancelByOpposite == true)
+                                                {
+                                                    if (CancelByHost == true)//自己结束的
+                                                    {
+                                                        tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
+                                                        tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
+                                                        File.Delete(FilePath);//删除未完成的文件
+                                                        return TaskCompletionStatus.HostCancel;
+                                                    }
+                                                    if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息，不用再发
+                                                    {
+                                                        tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
+                                                        File.Delete(FilePath);//删除未完成的文件
+                                                        return TaskCompletionStatus.OppositeCancel;
+                                                    }
+                                                }
+
                                                 BlockSaved(ref signalStream, "OK");//发送消息让对方传输下一个块
                                             }
+
                                             if (blockElementsNums != 0)//缓存块里有东西，需要最后一次写入
                                             {
                                                 fStream.Write(blockBuffer, 0, blockElementsNums);
@@ -484,21 +504,6 @@ namespace UChat
                                             {
                                                 CancelByHost = true;
                                             }*/
-                                            if (CancelByHost == true || CancelByOpposite == true)//任意一方发出了取消请求
-                                            {
-                                                if (CancelByHost == true)//自己结束的
-                                                {
-                                                    tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
-                                                    tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
-                                                    return TaskCompletionStatus.HostCancel;
-                                                }
-                                                if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息，不用再发
-                                                {
-                                                    tCP.TCPMessageSender("127.0.0.1", "no", 50020);//连接本机以关掉 取消消息监听
-                                                    return TaskCompletionStatus.OppositeCancel;
-                                                }
-                                                File.Delete(FilePath);//删除未完成的文件
-                                            }
                                             //BlockSaved(ref signalStream, "OVER");//发送消息让对方结束传输
                                         }
                                     }
@@ -550,11 +555,11 @@ namespace UChat
                     {
                         MessageBox.Show("未知错误！\r\n" + e.ToString());
                     }
+                    #endregion
                     finally
                     {
                         tcpListener.Stop();//结束监听器
                     }
-                    #endregion
                     return TaskCompletionStatus.Success;//完美结束
                 }
                 else

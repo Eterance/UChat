@@ -28,6 +28,8 @@ namespace UChat
 
         TCPFileTransfer.FileReceiver fileReceiver = new TCPFileTransfer.FileReceiver();
         TCPFileTransfer.FileSender fileSender = new TCPFileTransfer.FileSender();
+        TCPFileTransfer.TaskCompletionStatus FTRResult;
+
         private string RecePath = "";
         /// <summary> 
         /// 一个集合了本程序所有线程的队列，便于程序关闭时结束所有线程。
@@ -1415,8 +1417,12 @@ namespace UChat
         private void BackgroundWorkerFileReceiver_DoWork(object sender, DoWorkEventArgs e)
         {
             //fileReceiver = new TCPFileTransfer.FileReceiver(CommonFoundations.FileTransferTempData.FRDestinationFolder + "/" + CommonFoundations.FileTransferTempData.FileFullName, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRSourceIP);
-            TCPFileTransfer.TaskCompletionStatus status = fileReceiver.Start(ref CommonFoundations.FileTransferTempData.FTRPercentage2);
-            if (status == TCPFileTransfer.TaskCompletionStatus.HostCancel && status == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)//任务被取消
+            fileReceiver.SetParameters(
+                CommonFoundations.FileTransferTempData.FRDestinationFolder + "/" + CommonFoundations.FileTransferTempData.FileFullName,
+                CommonFoundations.FileTransferTempData.FileLengthBytes,
+                CommonFoundations.FileTransferTempData.FRSourceIP);
+            FTRResult = fileReceiver.Start(ref CommonFoundations.FileTransferTempData.FTRPercentage2);
+            if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel || FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)//任务被取消
             {
                 backgroundWorkerFileReceiver.CancelAsync();//传输取消
             }
@@ -1425,8 +1431,12 @@ namespace UChat
         private void BackgroundWorkerFileSender_DoWork(object sender, DoWorkEventArgs e)
         {
             //fileSender = new TCPFileTransfer.FileSender(CommonFoundations.FileTransferTempData.FRSourcePath, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRDestinationIP);
-            TCPFileTransfer.TaskCompletionStatus status =  fileSender.Start(ref CommonFoundations.FileTransferTempData.FTRPercentage2);
-            if (status == TCPFileTransfer.TaskCompletionStatus.HostCancel && status == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)//任务被取消
+            fileSender.SetParameters(
+                CommonFoundations.FileTransferTempData.FRSourcePath,
+                CommonFoundations.FileTransferTempData.FileLengthBytes,
+                CommonFoundations.FileTransferTempData.FRDestinationIP);
+            FTRResult =  fileSender.Start(ref CommonFoundations.FileTransferTempData.FTRPercentage2);
+            if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel || FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)//任务被取消
             {
                 backgroundWorkerFileSender.CancelAsync();//传输取消
             }
@@ -1452,13 +1462,21 @@ namespace UChat
         private delegate void DG_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e);
         private void BackgroundWorkerFileReceiver_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (panelNoticeFTROver.InvokeRequired == false)
+            if (FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)
             {
                 if (backgroundWorkerFileReceiver.CancellationPending == true)
                 {
                     panelNoticeFTRWarning.BringToFront();
                     panelNoticeFTRWarning.Visible = true;
-                    labelWarningNotice.Text = "文件传输被取消。";
+                    labelWarningNotice.Text = "文件传输被对方取消。";
+                    ResetSendFileBarUI(false);
+                    CommonFoundations.FileTransferTempData.ResetFTRTempData();
+                }
+                if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
+                {
+                    panelNoticeFTRWarning.BringToFront();
+                    panelNoticeFTRWarning.Visible = true;
+                    labelWarningNotice.Text = "文件传输已经取消。";
                     ResetSendFileBarUI(false);
                     CommonFoundations.FileTransferTempData.ResetFTRTempData();
                 }
@@ -1479,11 +1497,19 @@ namespace UChat
         {
             if (panelNoticeFTROver.InvokeRequired == false)
             {
-                if (backgroundWorkerFileSender.CancellationPending == true)
+                if (FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)
                 {
                     panelNoticeFTRWarning.BringToFront();
                     panelNoticeFTRWarning.Visible = true;
-                    labelWarningNotice.Text = "文件传输被取消。";
+                    labelWarningNotice.Text = "文件传输被对方取消。";
+                    ResetSendFileBarUI(false);
+                    CommonFoundations.FileTransferTempData.ResetFTRTempData();
+                }
+                if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
+                {
+                    panelNoticeFTRWarning.BringToFront();
+                    panelNoticeFTRWarning.Visible = true;
+                    labelWarningNotice.Text = "文件传输已经取消。";
                     ResetSendFileBarUI(false);
                     CommonFoundations.FileTransferTempData.ResetFTRTempData();
                 }
@@ -1513,11 +1539,11 @@ namespace UChat
 
         private void ButtonCancelFTR_Click(object sender, EventArgs e)
         {
-            CommonFoundations.FileTransferTempData.CancelFTR = true;
+            //CommonFoundations.FileTransferTempData.CancelFTR = true;
             try
             {
-                /*fileSender.Stop();
-                fileReceiver.Stop();*/
+                fileReceiver.Abort();
+                fileSender.Abort();
                 if (buttonFiles.Visible == false)
                 {
                     ResetSendFileBarUI(false);
