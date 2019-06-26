@@ -101,6 +101,7 @@
             this.labelNoticeYellow = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.panelSetting = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelSideBar.SuspendLayout();
             this.panelDetail.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -116,6 +117,7 @@
             this.panelNoticeRed.SuspendLayout();
             this.panelNoticeBlue.SuspendLayout();
             this.panelNoticeYellow.SuspendLayout();
+            this.panelSetting.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelChatBoxBG
@@ -247,6 +249,7 @@
             this.buttonSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.toolTip1.SetToolTip(this.buttonSetting, "设置");
             this.buttonSetting.UseVisualStyleBackColor = false;
+            this.buttonSetting.Click += new System.EventHandler(this.ButtonSetting_Click);
             // 
             // buttonExit2
             // 
@@ -1054,10 +1057,22 @@
             this.panelSetting.AutoScroll = true;
             this.panelSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
             this.panelSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelSetting.Controls.Add(this.panel1);
             this.panelSetting.Location = new System.Drawing.Point(51, 1);
             this.panelSetting.Name = "panelSetting";
             this.panelSetting.Size = new System.Drawing.Size(367, 718);
             this.panelSetting.TabIndex = 26;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(14, 184);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(339, 295);
+            this.panel1.TabIndex = 27;
             // 
             // FormMain
             // 
@@ -1066,6 +1081,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(125)))), ((int)(((byte)(236)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.panelSetting);
             this.Controls.Add(this.panelNoticeYellow);
             this.Controls.Add(this.panelNoticeRed);
             this.Controls.Add(this.panelNoticeBlue);
@@ -1082,7 +1098,6 @@
             this.Controls.Add(this.labelChatBoxBG);
             this.Controls.Add(this.panelLANBar);
             this.Controls.Add(this.panelFileBar);
-            this.Controls.Add(this.panelSetting);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMain";
@@ -1109,6 +1124,7 @@
             this.panelNoticeBlue.PerformLayout();
             this.panelNoticeYellow.ResumeLayout(false);
             this.panelNoticeYellow.PerformLayout();
+            this.panelSetting.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1186,5 +1202,6 @@
         private System.Windows.Forms.Label labelNoticeYellow;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panelSetting;
+        private System.Windows.Forms.Panel panel1;
     }
 }

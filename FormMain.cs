@@ -949,6 +949,7 @@ namespace UChat
             panelSideBar.BringToFront();
             buttonFiles.BackColor = CommonFoundations.MainBlue;
             buttonLAN.BackColor = Color.Transparent;
+            buttonSetting.BackColor = Color.Transparent;
         }
 
         /// <summary>
@@ -1212,6 +1213,7 @@ namespace UChat
             panelSideBar.BringToFront();
             buttonLAN.BackColor = CommonFoundations.MainBlue;
             buttonFiles.BackColor = Color.Transparent;
+            buttonSetting.BackColor = Color.Transparent;
             //UpdateLANList();
         }
 
@@ -1611,6 +1613,15 @@ namespace UChat
         {
             panelNoticeYellow.Visible = false;
 
+        }
+
+        private void ButtonSetting_Click(object sender, EventArgs e)
+        {
+            panelSetting.BringToFront();
+            panelSideBar.BringToFront();
+            buttonSetting.BackColor = CommonFoundations.MainBlue;
+            buttonLAN.BackColor = Color.Transparent;
+            buttonFiles.BackColor = Color.Transparent;
         }
     }
     
