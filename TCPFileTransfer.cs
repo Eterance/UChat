@@ -116,26 +116,11 @@ namespace UChat
             /// 已经发送的百分比。范围是 0~100。
             /// </summary>
             public int Percentage { get; private set; } = 0;
-
-            Thread thread;
-
-            TcpListener signalListener = new TcpListener(IPAddress.Any, 50023);//监听控制信息
-
             /// <summary>
-            /// 监听取消控制信息。
+            /// 监听控制信息
             /// </summary>
-            /*private void ListenCancelSignal()
-            {
-                TCP tCP = new TCP();
-                string message = tCP.TCPMessageListener(50020);
-                if (message == "CANCEL")//对面发来的取消请求
-                {
-                    //MessageBox.Show("FUCKYOU\r\n" + message);
-                    CancelByOpposite = true;
-                }
-            }*/
-
-
+            TcpListener signalListener = new TcpListener(IPAddress.Any, 50023);
+            
             /// <summary>
             /// 处理收到的取消控制消息。
             /// </summary>
@@ -163,14 +148,13 @@ namespace UChat
                         client.Close();
                         if (message == "CANCEL")//对面发来的取消请求
                         {
-                            //MessageBox.Show("FUCKYOU\r\n" + message);
                             CancelByOpposite = true;
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString());
+                    //MessageBox.Show(e.ToString());
                 }
                 finally
                 {
@@ -189,8 +173,6 @@ namespace UChat
                 {
                     isAlreadyStart = true;
                     TCP tCP = new TCP();
-                    /*thread = new Thread(ListenCancelSignal);
-                    thread.Start();//启动取消信息监听线程。*/
 
                     TcpListener cancelSignalListener = new TcpListener(IPAddress.Any, 50020);
                     cancelSignalListener.Start();
@@ -229,13 +211,13 @@ namespace UChat
                                             BlockServed(ref signalStream, signalClient.ReceiveBufferSize);  //这是一个阻塞方法，只有收到确认后才继续传下一个数据片
                                             index++;
                                             Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
-                                            //CommonFoundations.FileTransferTempData.FTRPercentage2 = PercentageSent;
                                             percentage = Percentage;
 
-                                            /*f (CommonFoundations.FileTransferTempData.CancelFTR == true)
+
+                                            if (CommonFoundations.FileTransferTempData.CancelFTR == true)
                                             {
                                                 CancelByHost = true;
-                                            }*/
+                                            }
                                             if (CancelByHost == true || CancelByOpposite == true)
                                             {
 
@@ -345,7 +327,6 @@ namespace UChat
                     }
                     try
                     {
-                        //TcpClient tcpClient = signalListener.AcceptTcpClient();
                         string message = "";
                         byte[] buffer = new byte[receiveBufferSize];//缓冲字节数组
                         signalStream.Read(buffer, 0, buffer.Length);
@@ -434,24 +415,7 @@ namespace UChat
             /// 已经发送的百分比。范围是 0~100。
             /// </summary>
             public int Percentage { get; private set; } = 0;
-
-            Thread thread;
-
-
-            /// <summary>
-            /// 监听取消控制信息。
-            /// </summary>
-            /*private void ListenCancelSignal()
-            {
-                TCP tCP = new TCP();
-                string message = tCP.TCPMessageListener(50020);
-                if (message == "CANCEL")//对面发来的取消请求
-                {
-                    //MessageBox.Show("FUCKYOU\r\n" + message);
-                    CancelByOpposite = true;
-                }
-            }*/
-
+            
             /// <summary>
             /// 处理收到的取消控制消息。
             /// </summary>
@@ -479,14 +443,13 @@ namespace UChat
                         client.Close();
                         if (message == "CANCEL")//对面发来的取消请求
                         {
-                            //MessageBox.Show("FUCKYOU\r\n" + message);
                             CancelByOpposite = true;
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString());
+                    //MessageBox.Show(e.ToString());
                 }
                 finally
                 {
@@ -505,9 +468,6 @@ namespace UChat
                 {
                     isAlreadyStart = true;
                     TCP tCP = new TCP();
-                    /*
-                    thread = new Thread(ListenCancelSignal);
-                    thread.Start();//启动取消信息监听线程。*/
 
                     TcpListener cancelSignalListener = new TcpListener(IPAddress.Any,50020);
                     cancelSignalListener.Start();
@@ -571,6 +531,10 @@ namespace UChat
                                                     blockElementsNums = 0;
                                                 }
 
+                                                if (CommonFoundations.FileTransferTempData.CancelFTR == true)
+                                                {
+                                                    CancelByHost = true;
+                                                }
                                                 //任意一方发出了取消请求
                                                 if (CancelByHost == true || CancelByOpposite == true)
                                                 {
@@ -602,10 +566,6 @@ namespace UChat
                                             {
                                                 fStream.Write(blockBuffer, 0, blockElementsNums);
                                             }
-                                            /*if (CommonFoundations.FileTransferTempData.CancelFTR == true)
-                                            {
-                                                CancelByHost = true;
-                                            }*/
                                             //BlockSaved(ref signalStream, "OVER");//发送消息让对方结束传输
                                         }
                                     }

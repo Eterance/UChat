@@ -26,8 +26,8 @@ namespace UChat
     public partial class FormMain : Form
     {
 
-        TCPFileTransfer.FileReceiver fileReceiver = new TCPFileTransfer.FileReceiver();
-        TCPFileTransfer.FileSender fileSender = new TCPFileTransfer.FileSender();
+        /*TCPFileTransfer.FileReceiver fileReceiver = new TCPFileTransfer.FileReceiver();
+        TCPFileTransfer.FileSender fileSender = new TCPFileTransfer.FileSender();*/
         TCPFileTransfer.TaskCompletionStatus FTRResult;
 
         private string RecePath = "";
@@ -973,20 +973,28 @@ namespace UChat
         /// </summary>
         private void FTROverProcessor()
         {
-            timerPercent.Stop();
-            timerPercent.Enabled = false;
-
-            panelNoticeBlue.Visible = true;
-            panelNoticeBlue.BringToFront();
-            //做清理工作
-            CommonFoundations.FileTransferTempData.ResetFTRTempData();
-            ResetSendFileBarUI(false);
-            if (buttonFiles.Visible == false)
+            if (panelLANBar.InvokeRequired == false)
             {
-                panelLANBar.BringToFront();
-                panelSideBar.BringToFront();
-                buttonFiles.BackColor = CommonFoundations.MainBlue;
-                buttonLAN.BackColor = Color.Transparent;
+                timerPercent.Stop();
+                timerPercent.Enabled = false;
+
+                panelNoticeBlue.Visible = true;
+                panelNoticeBlue.BringToFront();
+                //做清理工作
+                CommonFoundations.FileTransferTempData.ResetFTRTempData();
+                ResetSendFileBarUI(false);
+                if (buttonFiles.Visible == false)
+                {
+                    panelLANBar.BringToFront();
+                    panelSideBar.BringToFront();
+                    buttonFiles.BackColor = CommonFoundations.MainBlue;
+                    buttonLAN.BackColor = Color.Transparent;
+                }
+            }
+            else
+            {
+                Action action = new Action(FTROverProcessor);
+                panelLANBar.Invoke(action);
             }
         }
 
@@ -1417,6 +1425,7 @@ namespace UChat
         private void BackgroundWorkerFileReceiver_DoWork(object sender, DoWorkEventArgs e)
         {
             //fileReceiver = new TCPFileTransfer.FileReceiver(CommonFoundations.FileTransferTempData.FRDestinationFolder + "/" + CommonFoundations.FileTransferTempData.FileFullName, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRSourceIP);
+            TCPFileTransfer.FileReceiver fileReceiver = new TCPFileTransfer.FileReceiver();
             fileReceiver.SetParameters(
                 CommonFoundations.FileTransferTempData.FRDestinationFolder + "/" + CommonFoundations.FileTransferTempData.FileFullName,
                 CommonFoundations.FileTransferTempData.FileLengthBytes,
@@ -1427,10 +1436,13 @@ namespace UChat
         private void BackgroundWorkerFileSender_DoWork(object sender, DoWorkEventArgs e)
         {
             //fileSender = new TCPFileTransfer.FileSender(CommonFoundations.FileTransferTempData.FRSourcePath, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRDestinationIP);
+
+            TCPFileTransfer.FileSender fileSender = new TCPFileTransfer.FileSender();
             fileSender.SetParameters(
                 CommonFoundations.FileTransferTempData.FRSourcePath,
                 CommonFoundations.FileTransferTempData.FileLengthBytes,
                 CommonFoundations.FileTransferTempData.FRDestinationIP);
+            fileSender.hehe = 0;
             FTRResult =  fileSender.Start(ref CommonFoundations.FileTransferTempData.FTRPercentage2);
         }
 
@@ -1466,18 +1478,26 @@ namespace UChat
                 }
                 else
                 {
-                    if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
+                    if (panelNoticeYellow.InvokeRequired == false)
                     {
-                        labelNoticeYellow.BringToFront();
-                        labelNoticeYellow.Visible = true;
-                        labelNoticeYellow.Text = "文件传输已经取消。";
-                        ResetSendFileBarUI(false);
-                        CommonFoundations.FileTransferTempData.ResetFTRTempData();
+                        if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
+                        {
+                            labelNoticeYellow.BringToFront();
+                            labelNoticeYellow.Visible = true;
+                            labelNoticeYellow.Text = "文件传输已经取消。";
+                            ResetSendFileBarUI(false);
+                            CommonFoundations.FileTransferTempData.ResetFTRTempData();
+                        }
+                        else
+                        {
+                            RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
+                            FTROverProcessor();
+                        }
                     }
                     else
                     {
-                        RecePath = CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName;
-                        FTROverProcessor();
+                        Action<object, RunWorkerCompletedEventArgs> dG_BackgroundWorker_RunWorkerCompleted = new Action<object, RunWorkerCompletedEventArgs>(BackgroundWorkerFileSender_RunWorkerCompleted);
+                        panelNoticeYellow.Invoke(dG_BackgroundWorker_RunWorkerCompleted, sender, e);
                     }
                 }
             }
@@ -1502,18 +1522,26 @@ namespace UChat
                 }
                 else
                 {
-                    if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
+                    if (panelNoticeYellow.InvokeRequired == false)
                     {
-                        labelNoticeYellow.BringToFront();
-                        labelNoticeYellow.Visible = true;
-                        labelNoticeYellow.Text = "文件传输已经取消。";
-                        ResetSendFileBarUI(false);
-                        CommonFoundations.FileTransferTempData.ResetFTRTempData();
+                        if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
+                        {
+                            labelNoticeYellow.BringToFront();
+                            labelNoticeYellow.Visible = true;
+                            labelNoticeYellow.Text = "文件传输已经取消。";
+                            ResetSendFileBarUI(false);
+                            CommonFoundations.FileTransferTempData.ResetFTRTempData();
+                        }
+                        else
+                        {
+                            RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
+                            FTROverProcessor();
+                        }
                     }
                     else
                     {
-                        RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
-                        FTROverProcessor();
+                        Action<object, RunWorkerCompletedEventArgs> dG_BackgroundWorker_RunWorkerCompleted = new Action<object, RunWorkerCompletedEventArgs>(BackgroundWorkerFileSender_RunWorkerCompleted);
+                        panelNoticeYellow.Invoke(dG_BackgroundWorker_RunWorkerCompleted, sender, e);
                     }
                 }
             }
@@ -1537,11 +1565,11 @@ namespace UChat
 
         private void ButtonCancelFTR_Click(object sender, EventArgs e)
         {
-            //CommonFoundations.FileTransferTempData.CancelFTR = true;
+            CommonFoundations.FileTransferTempData.CancelFTR = true;
             try
             {
-                fileReceiver.Abort();
-                fileSender.Abort();
+                /*fileReceiver.Abort();
+                fileSender.Abort();*/
                 if (buttonFiles.Visible == false)
                 {
                     ResetSendFileBarUI(false);
