@@ -493,7 +493,7 @@ namespace UChat
                     listener.Stop();
                 }
             }
-            adasd;
+
             /// <summary>
             /// 开始接收文件。返回一个 TaskCompletionStatus 值，指示是文件传输结果。
             /// </summary>
