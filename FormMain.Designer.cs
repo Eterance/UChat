@@ -100,6 +100,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.labelNoticeYellow = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.panelSetting = new System.Windows.Forms.Panel();
             this.panelSideBar.SuspendLayout();
             this.panelDetail.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -603,7 +604,6 @@
             this.buttonAcceptFTR.Text = "接受";
             this.buttonAcceptFTR.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAcceptFTR.UseVisualStyleBackColor = false;
-            this.buttonAcceptFTR.Click += new System.EventHandler(this.ButtonAccept_Click);
             // 
             // labelWating
             // 
@@ -1049,6 +1049,16 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
+            // panelSetting
+            // 
+            this.panelSetting.AutoScroll = true;
+            this.panelSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.panelSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelSetting.Location = new System.Drawing.Point(51, 1);
+            this.panelSetting.Name = "panelSetting";
+            this.panelSetting.Size = new System.Drawing.Size(367, 718);
+            this.panelSetting.TabIndex = 26;
+            // 
             // FormMain
             // 
             this.AcceptButton = this.buttonSendM;
@@ -1072,6 +1082,7 @@
             this.Controls.Add(this.labelChatBoxBG);
             this.Controls.Add(this.panelLANBar);
             this.Controls.Add(this.panelFileBar);
+            this.Controls.Add(this.panelSetting);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMain";
@@ -1174,5 +1185,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label labelNoticeYellow;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Panel panelSetting;
     }
 }

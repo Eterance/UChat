@@ -289,6 +289,7 @@ namespace UChat
             SetDouble(panelNoticeRed);
             SetDouble(panelNoticeBlue);
             SetDouble(panelNoticeYellow);
+            SetDouble(panelSetting);
 
             SetDouble(pictureBoxTips);
             SetDouble(pictureBoxEmptyIcon);
@@ -1442,7 +1443,6 @@ namespace UChat
                 CommonFoundations.FileTransferTempData.FRSourcePath,
                 CommonFoundations.FileTransferTempData.FileLengthBytes,
                 CommonFoundations.FileTransferTempData.FRDestinationIP);
-            fileSender.hehe = 0;
             FTRResult =  fileSender.Start(ref CommonFoundations.FileTransferTempData.FTRPercentage2);
         }
 
