@@ -102,10 +102,10 @@
             this.button3 = new System.Windows.Forms.Button();
             this.panelSetting = new System.Windows.Forms.Panel();
             this.panelChangeName = new System.Windows.Forms.Panel();
-            this.buttonConfirmChange = new System.Windows.Forms.Button();
-            this.buttonCancelChange = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.textBoxChangeName = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.buttonCancelChange = new System.Windows.Forms.Button();
+            this.buttonConfirmChange = new System.Windows.Forms.Button();
             this.panelSideBar.SuspendLayout();
             this.panelDetail.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -1089,25 +1089,29 @@
             this.panelChangeName.Size = new System.Drawing.Size(339, 245);
             this.panelChangeName.TabIndex = 27;
             // 
-            // buttonConfirmChange
+            // textBoxChangeName
             // 
-            this.buttonConfirmChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.buttonConfirmChange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonConfirmChange.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.buttonConfirmChange.FlatAppearance.BorderSize = 0;
-            this.buttonConfirmChange.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonConfirmChange.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonConfirmChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonConfirmChange.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonConfirmChange.ForeColor = System.Drawing.Color.White;
-            this.buttonConfirmChange.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonConfirmChange.Location = new System.Drawing.Point(213, 186);
-            this.buttonConfirmChange.Name = "buttonConfirmChange";
-            this.buttonConfirmChange.Size = new System.Drawing.Size(105, 35);
-            this.buttonConfirmChange.TabIndex = 32;
-            this.buttonConfirmChange.Text = "保存";
-            this.buttonConfirmChange.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonConfirmChange.UseVisualStyleBackColor = false;
+            this.textBoxChangeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.textBoxChangeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxChangeName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxChangeName.ForeColor = System.Drawing.Color.White;
+            this.textBoxChangeName.Location = new System.Drawing.Point(21, 102);
+            this.textBoxChangeName.MaxLength = 16;
+            this.textBoxChangeName.Name = "textBoxChangeName";
+            this.textBoxChangeName.Size = new System.Drawing.Size(297, 29);
+            this.textBoxChangeName.TabIndex = 35;
+            this.textBoxChangeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(103, 42);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(154, 21);
+            this.label8.TabIndex = 34;
+            this.label8.Text = "请输入新的用户名：";
             // 
             // buttonCancelChange
             // 
@@ -1129,29 +1133,25 @@
             this.buttonCancelChange.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonCancelChange.UseVisualStyleBackColor = false;
             // 
-            // label8
+            // buttonConfirmChange
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(103, 42);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(154, 21);
-            this.label8.TabIndex = 34;
-            this.label8.Text = "请输入新的用户名：";
-            // 
-            // textBoxChangeName
-            // 
-            this.textBoxChangeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.textBoxChangeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxChangeName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxChangeName.ForeColor = System.Drawing.Color.White;
-            this.textBoxChangeName.Location = new System.Drawing.Point(21, 102);
-            this.textBoxChangeName.MaxLength = 16;
-            this.textBoxChangeName.Name = "textBoxChangeName";
-            this.textBoxChangeName.Size = new System.Drawing.Size(297, 29);
-            this.textBoxChangeName.TabIndex = 35;
-            this.textBoxChangeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.buttonConfirmChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.buttonConfirmChange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonConfirmChange.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.buttonConfirmChange.FlatAppearance.BorderSize = 0;
+            this.buttonConfirmChange.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonConfirmChange.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonConfirmChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonConfirmChange.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonConfirmChange.ForeColor = System.Drawing.Color.White;
+            this.buttonConfirmChange.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonConfirmChange.Location = new System.Drawing.Point(213, 186);
+            this.buttonConfirmChange.Name = "buttonConfirmChange";
+            this.buttonConfirmChange.Size = new System.Drawing.Size(105, 35);
+            this.buttonConfirmChange.TabIndex = 32;
+            this.buttonConfirmChange.Text = "保存";
+            this.buttonConfirmChange.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonConfirmChange.UseVisualStyleBackColor = false;
             // 
             // FormMain
             // 
@@ -1174,9 +1174,9 @@
             this.Controls.Add(this.panelSideBar);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.labelChatBoxBG);
-            this.Controls.Add(this.panelSetting);
             this.Controls.Add(this.panelLANBar);
             this.Controls.Add(this.panelFileBar);
+            this.Controls.Add(this.panelSetting);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMain";
