@@ -261,6 +261,8 @@ namespace UChat
             SetDouble(button5);
             SetDouble(button1);
             SetDouble(button3);
+            SetDouble(buttonConfirmChange);
+            SetDouble(buttonCancelChange);
 
             SetDouble(labelEmptyText);
             SetDouble(label4);
@@ -279,6 +281,7 @@ namespace UChat
             SetDouble(labelNoticeRed);
             SetDouble(label10);
             SetDouble(labelNoticeYellow);
+            SetDouble(label8);
 
             SetDouble(panel2);
             SetDouble(panelLANBar);
@@ -290,6 +293,7 @@ namespace UChat
             SetDouble(panelNoticeBlue);
             SetDouble(panelNoticeYellow);
             SetDouble(panelSetting);
+            SetDouble(panelChangeName);
 
             SetDouble(pictureBoxTips);
             SetDouble(pictureBoxEmptyIcon);
@@ -302,6 +306,7 @@ namespace UChat
             SetDouble(textBoxIP);
             SetDouble(textBoxName);
             SetDouble(textBoxInput);
+            SetDouble(textBoxChangeName);
             #endregion
         }
 
