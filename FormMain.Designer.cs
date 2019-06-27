@@ -615,6 +615,7 @@
             this.buttonAcceptFTR.Text = "接受";
             this.buttonAcceptFTR.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonAcceptFTR.UseVisualStyleBackColor = false;
+            this.buttonAcceptFTR.Click += new System.EventHandler(this.ButtonAcceptFTR_Click);
             // 
             // labelWating
             // 
