@@ -1381,7 +1381,7 @@ namespace UChat
             buttonFiles.BackColor = Color.Transparent; 
         }
 
-        private void ButtonAccept_Click(object sender, EventArgs e)
+        private void ButtonAcceptFTR_Click(object sender, EventArgs e)
         {
             timerFTTimeout.Stop();//超时计时器停止计时
             timerFTTimeout.Enabled = false;
@@ -1393,7 +1393,7 @@ namespace UChat
             };
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)//用户点了确认
             {
-                folderBrowserDialog.ShowDialog();
+                //folderBrowserDialog.ShowDialog();
                 CommonFoundations.FileTransferTempData.FRDestinationFolder = folderBrowserDialog.SelectedPath;//获取用户选定的保存文件夹
                 //MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder);
                 FileTransfer.FileTransferAnswerSender(AcceptStatus.Accept);//向对方确认接收文件
