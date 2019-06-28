@@ -25,6 +25,26 @@ namespace UChat
 {
     public partial class FormMain : Form
     {
+        /// <summary>
+        /// 这是一个声明的 formmain 对象，在本窗口的构造函数中已经将它与本窗口联系在一起。
+        /// </summary>
+        public static FormMain formMain;
+        /// <summary>
+        /// formmain 的构造函数。
+        /// </summary>
+        public FormMain()
+        {
+            InitializeComponent();
+            formMain = this;//把这两个东西联系起来。
+            ThreadsList = new List<Thread>(); //初始化线程列表
+
+
+            //启用双缓冲，减少窗口控件闪烁
+            this.DoubleBuffered = true;//设置本窗体
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+        }
 
         /*TCPFileTransfer.FileReceiver fileReceiver = new TCPFileTransfer.FileReceiver();
         TCPFileTransfer.FileSender fileSender = new TCPFileTransfer.FileSender();*/
@@ -199,10 +219,7 @@ namespace UChat
                 return cp;
             }
         }
-        /// <summary>
-        /// 这是一个声明的 formmain 对象，在本窗口的构造函数中已经将它与本窗口联系在一起。
-        /// </summary>
-        public static FormMain formMain;
+        
         /// <summary>
         /// 为每个控件提供双缓冲，防止画面撕裂和闪烁。
         /// </summary>
@@ -219,23 +236,7 @@ namespace UChat
         /// 其中每个 panel 的名字应该以 panel + UID 作为命名。
         /// </summary>
         public static Panel[] panels;
-
-        /// <summary>
-        /// formmain 的构造函数。
-        /// </summary>
-        public FormMain()
-        {
-            InitializeComponent();
-            formMain = this;//把这两个东西联系起来。
-            ThreadsList = new List<Thread>(); //初始化线程列表
-
-
-            //启用双缓冲，减少窗口控件闪烁
-            this.DoubleBuffered = true;//设置本窗体
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
-            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
-        }
+        
 
         /// <summary>
         /// 为窗口的所有控件实现双缓冲。
@@ -277,7 +278,7 @@ namespace UChat
             SetDouble(labelPercent);
             SetDouble(label11);
             SetDouble(labelNoticeBlue);
-            SetDouble(label9);
+            SetDouble(labelRedTopic);
             SetDouble(labelNoticeRed);
             SetDouble(label10);
             SetDouble(labelNoticeYellow);

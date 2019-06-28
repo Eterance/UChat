@@ -88,7 +88,7 @@
             this.timerPercent = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelNoticeRed = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.labelRedTopic = new System.Windows.Forms.Label();
             this.labelNoticeRed = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.panelNoticeBlue = new System.Windows.Forms.Panel();
@@ -889,7 +889,7 @@
             // 
             this.panelNoticeRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(27)))), ((int)(((byte)(1)))));
             this.panelNoticeRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelNoticeRed.Controls.Add(this.label9);
+            this.panelNoticeRed.Controls.Add(this.labelRedTopic);
             this.panelNoticeRed.Controls.Add(this.labelNoticeRed);
             this.panelNoticeRed.Controls.Add(this.button1);
             this.panelNoticeRed.Location = new System.Drawing.Point(825, 50);
@@ -898,16 +898,16 @@
             this.panelNoticeRed.TabIndex = 26;
             this.panelNoticeRed.Visible = false;
             // 
-            // label9
+            // labelRedTopic
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(16, 11);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(42, 21);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "警告";
+            this.labelRedTopic.AutoSize = true;
+            this.labelRedTopic.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelRedTopic.ForeColor = System.Drawing.Color.White;
+            this.labelRedTopic.Location = new System.Drawing.Point(16, 11);
+            this.labelRedTopic.Name = "labelRedTopic";
+            this.labelRedTopic.Size = new System.Drawing.Size(42, 21);
+            this.labelRedTopic.TabIndex = 7;
+            this.labelRedTopic.Text = "警告";
             // 
             // labelNoticeRed
             // 
@@ -1160,9 +1160,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(125)))), ((int)(((byte)(236)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.panelNoticeRed);
             this.Controls.Add(this.panelTips);
             this.Controls.Add(this.panelNoticeYellow);
-            this.Controls.Add(this.panelNoticeRed);
             this.Controls.Add(this.panelNoticeBlue);
             this.Controls.Add(this.labelAlert);
             this.Controls.Add(this.labelChatBorder);
@@ -1269,7 +1269,7 @@
         private System.Windows.Forms.Timer timerPercent;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panelNoticeRed;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelRedTopic;
         private System.Windows.Forms.Label labelNoticeRed;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonCancelFTR;
