@@ -869,7 +869,7 @@ namespace UChat
                 panelNoticeRed.Visible = true;
                 labelNoticeRed.Text = "在文件传输时无法退出程序。若仍要退出，请取消文件传输任务后再尝试退出程序。";*/
                 NotificationSystem notificationSystem = new NotificationSystem();
-                notificationSystem.NotificationPush("警告", "在文件传输时无法退出程序。若仍要退出，请取消文件传输任务后再尝试退出程序。", NotificationSystem.PresetColors.WarningRed);
+                notificationSystem.PushNotification("警告", "在文件传输时无法退出程序。若仍要退出，请取消文件传输任务后再尝试退出程序。", NotificationSystem.PresetColors.WarningRed);
             }
             else
             {

@@ -43,36 +43,36 @@ namespace UChat
                 /// <summary>
                 /// 警告，红色
                 /// </summary>
-                public static Color WarningRed { get; } = Color.FromArgb(101, 27, 1);
+                readonly public static Color WarningRed = Color.FromArgb(101, 27, 1);
                 /// <summary>
                 /// 注意，黄色
                 /// </summary>
-                public static Color AttentionYellow { get; } = Color.FromArgb(102, 75, 0);
+                readonly public static Color AttentionYellow= Color.FromArgb(102, 75, 0);
                 /// <summary>
                 /// 提示，蓝色
                 /// </summary>
-                public static Color TipsBlue { get; } = Color.FromArgb(0, 43, 77);
+                readonly public static Color TipsBlue = Color.FromArgb(0, 43, 77);
                 /// <summary>
                 /// 标记，紫色
                 /// </summary>
-                public static Color MarkPurple { get; } = Color.FromArgb(56,34,93);
+                readonly public static Color MarkPurple = Color.FromArgb(56,34,93);
                 /// <summary>
                 /// 通过，紫色
                 /// </summary>
-                public static Color OKGreen { get; } = Color.FromArgb(8,83,8);
+                readonly public static Color OKGreen = Color.FromArgb(8,83,8);
                 /// <summary>
                 /// 鼠标进入的颜色
                 /// </summary>
-                internal static Color MouseOverBackColor { get; } = Color.FromArgb(100,100,100);
+                readonly internal static Color MouseOverBackColor = Color.FromArgb(100,100,100);
                 /// <summary>
                 /// 鼠标按下的颜色
                 /// </summary>
-                internal static Color MouseDownBackColor { get; } = Color.FromArgb(90,90,90);
+                readonly internal static Color MouseDownBackColor = Color.FromArgb(90,90,90);
             }
             /// <summary>
             /// 文件的路径。
             /// </summary>
-            string ReceivePath = "";
+            string filePathMain = "";
             /// <summary>
             /// 通知背景坐标
             /// </summary>
@@ -94,8 +94,7 @@ namespace UChat
             Point ButtonOpenLocation = new Point(240, 40);
             Size ButtonOpenSize = new Size(203, 40);
 
-            Font font = new Font("微软雅黑", 12);
-            string filePathMain = "";
+            readonly Font font = new Font("微软雅黑", 12);
 
             /// <summary>
             /// 推送通知。
@@ -104,7 +103,7 @@ namespace UChat
             /// <param name="topic">通知标题 </param>
             /// <param name="backColor">通知的背景颜色。可以使用预设好的背景颜色类 NotificationSystem.PresetColors 。</param>
             /// <param name="filePath">可选参数。指示是否显示“打开文件夹”按钮，以及该文件夹的路径。若无此需求请不要提供该参数，保留默认。</param>
-            public void NotificationPush(string topic, string message, Color backColor, string filePath = "null")
+            public void PushNotification(string topic, string message, Color backColor, string filePath = "null")
             {
                 if (formMain.panelEmpty.InvokeRequired == false)
                 {
@@ -121,13 +120,13 @@ namespace UChat
                     if (filePath != "null")
                     {
                         filePathMain = filePath;
-                        CreateSubButton(ref notiPanel, "", backColor, ButtonOpenLocation, ButtonOpenSize, 1);//打开文件夹
+                        CreateSubButton(ref notiPanel, "打开文件夹", backColor, ButtonOpenLocation, ButtonOpenSize, 1);//打开文件夹
                     }
                     notiPanel.BringToFront();
                 }
                 else
                 {
-                    Action<string, string, Color, string> action = new Action<string, string, Color, string>(NotificationPush);
+                    Action<string, string, Color, string> action = new Action<string, string, Color, string>(PushNotification);
                     formMain.panelEmpty.Invoke(action,message,topic,backColor,filePath);
                 }
             }
