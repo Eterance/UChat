@@ -77,7 +77,7 @@ namespace UChat
             IPEndPoint ipEP1 = new IPEndPoint(IPAddress.Any, 50050);   //IPAddress.any即为所有活动主机
             UdpClient udpReceive = new UdpClient(ipEP1);
             FormMain.NotificationSystem notificationSystem = new FormMain.NotificationSystem();
-            notificationSystem.PushNotification("asdasd", "hgjghj", Color.AliceBlue);
+            notificationSystem.PushNotification("asdasd", "hgjghj", FormMain.NotificationSystem.PresetColors.AttentionYellow);
             while (true)
             {
                 try

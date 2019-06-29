@@ -112,6 +112,7 @@ namespace UChat
                     notiPanel.Location = backPanelLocation;//标定坐标
                     notiPanel.Size = backPanelSize; //标定大小
                     notiPanel.BackColor = backColor;
+                    notiPanel.BorderStyle = BorderStyle.FixedSingle;
                     SetDouble(notiPanel);
                     notiPanel.Visible = true;
                     CreateSubLabel(ref notiPanel, topic, backColor, labelTopicLocation, labelTopicSize);//标题
@@ -193,6 +194,10 @@ namespace UChat
                 {
                     button.BackgroundImage = Properties.Resources.guanbi3;
                     button.BackgroundImageLayout = ImageLayout.Zoom;
+                    button.Click += new EventHandler(CloseNoti_Click);//绑定点击事件
+                }
+                else
+                {
                     button.Click += new EventHandler(Button_Click);//绑定点击事件
                 }
                 SetDouble(button);
@@ -218,6 +223,11 @@ namespace UChat
                 }
             }
 
+            /// <summary>
+            /// 打开文件夹按钮的行为。
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
             private void Button_Click(object sender, EventArgs e)
             {
                 //使用命令行打开资源管理器并定位到文件。
