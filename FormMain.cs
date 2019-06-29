@@ -338,7 +338,8 @@ namespace UChat
         private void FormMain_Load(object sender, EventArgs e)
         {
             ///UDP监听线程
-            Thread UDPListenThread = new Thread(UDP.UDPMessageListener);//UDP监听线程
+            UDP uDP = new UDP();
+            Thread UDPListenThread = new Thread(uDP.UDPMessageListener);//UDP监听线程
             //UDPListenThread.IsBackground = true;
             ThreadsList.Add(UDPListenThread); //将新建的线程加入到线程队列中，以便在窗体结束时关闭所有的线程
             UDPListenThread.Start();
@@ -353,7 +354,7 @@ namespace UChat
 
             InitLANTable();//初始化局域网表格
 
-            UDP.OnlineMessageSend(IPAddress.Broadcast, ReplyStatus.NeedReply, OnlineStatus.Online);//上线广播
+            uDP.OnlineMessageSend(IPAddress.Broadcast, ReplyStatus.NeedReply, OnlineStatus.Online);//上线广播
             IamYourFather();
             ControlsDoubleBuffered();
 
@@ -371,108 +372,7 @@ namespace UChat
             //buttonMenuExpand.Parent = buttonMenu;
         }
 
-        /// <summary>
-        /// 往好友列表里动态添加 panel。
-        /// </summary>
-        /// <param name="panel">panel 数组的成员</param>
-        /// <param name="name"></param>
-        /// <param name="uid"></param>
-        /// <param name="index">该 panel 的序号（从 0 开始），用于标定坐标</param>
-        public static void CreatePanels(ref Panel panel, string uid, string name, int index)
-        {
-            Panel panel2 = new Panel();
-            panel = panel2;
-            //panels[i].Name = "panels" + i.ToString();
-            formMain.panelLANBar.Controls.Add(panel);
-            panel.Location = new Point(0, index * 100);//标定坐标
-            panel.Size = new Size(367, 100); //标定大小
-            panel.BackColor = CommonFoundations.DarkBlue;
-            panel.BringToFront();
-            panel.Name = "panel" + uid;//把UID作为 panel 唯一标识符
-            //添加其它子控件
-            formMain.AddInfoLabels(ref panel, name);
-            //动态绑定消息处理
-            panel.MouseEnter += new EventHandler(formMain.Panels_MouseEnter);
-            panel.MouseLeave += new EventHandler(formMain.Panels_MouseLeave);
-            panel.Click += new EventHandler(formMain.Panels_Click);
-        }
-
-        /// <summary>
-        /// 为好友列表的单个 panel 添加信息元素。
-        /// </summary>
-        /// <param name="panel"></param>
-        public void AddInfoLabels(ref Panel panel, string name)
-        {
-            Label labelStatus = new Label();                        //聊天中指示条
-            labelStatus.Name = "labelStatus";
-            panel.Controls.Add(labelStatus);
-            labelStatus.AutoSize = false;
-            labelStatus.Location = new Point(1, 0);
-            labelStatus.Size = new Size(6, 100);
-            labelStatus.BorderStyle = BorderStyle.None;
-            if (panel.Name.Substring(5, 17) == CommonFoundations.RemoteUID)//如果父 panel 是缓存的 UID，意味着这是正在聊天的佬
-            {
-                labelStatus.BackColor = CommonFoundations.MainBlue;
-            }
-            else
-            {
-                labelStatus.BackColor = Color.Transparent;
-            }
-            labelStatus.Text = null;
-            SetDouble(labelStatus);
-
-            Label labelName = new Label();                                   //用户名
-            labelName.Name = "labelName";
-            panel.Controls.Add(labelName);
-            labelName.AutoSize = false;
-            labelName.Location = new Point(11, 20);
-            labelName.Size = new Size(323, 29);
-            labelName.BorderStyle = BorderStyle.None;
-            labelName.BackColor = Color.Transparent;
-            labelName.ForeColor = Color.White;
-            labelName.Text = name;
-            labelName.Font = new Font("微软雅黑", 14);
-            labelName.MouseEnter += new EventHandler(formMain.Labels_MouseEnter);//动态绑定消息处理
-            labelName.MouseLeave += new EventHandler(formMain.Labels_MouseLeave);
-            labelName.Click += new EventHandler(formMain.Labels_Click);
-            SetDouble(labelName);
-
-            Label labelUnread = new Label();                                   //未读消息，默认不可见
-            labelUnread.Name = "labelUnread";
-            panel.Controls.Add(labelUnread);
-            labelUnread.AutoSize = false;
-            labelUnread.Location = new Point(16, 57);
-            labelUnread.Size = new Size(128, 29);
-            labelUnread.BorderStyle = BorderStyle.None;
-            labelUnread.BackColor = Color.Transparent;
-            labelUnread.ForeColor = Color.DarkOrange;
-            labelUnread.Text = " ◉ 未读消息 ";
-            labelUnread.Visible = false;
-            labelUnread.Font = new Font("微软雅黑", 12, FontStyle.Bold);
-            labelUnread.MouseEnter += new EventHandler(formMain.Labels_MouseEnter);//动态绑定消息处理
-            labelUnread.MouseLeave += new EventHandler(formMain.Labels_MouseLeave);
-            labelUnread.Click += new EventHandler(formMain.Labels_Click);
-            SetDouble(labelUnread);
-
-            /*Label labelIP = new Label();                                   //IP
-            labelIP.Name = "labelIP";
-            panel.Controls.Add(labelIP);
-            labelIP.AutoSize = false;
-            labelIP.Location = new Point(189, 62);
-            labelIP.Size = new Size(138, 19);
-            labelIP.BorderStyle = BorderStyle.None;
-            labelIP.BackColor = Color.Transparent;
-            labelIP.ForeColor = Color.DarkGray;
-            labelIP.TextAlign = ContentAlignment.MiddleRight;//文字右对齐
-            labelIP.Text = "192.167.123." + i.ToString();
-            labelIP.Font = new Font("微软雅黑", 12);
-            labelIP.MouseEnter += new EventHandler(formMain.Labels_MouseEnter);//动态绑定消息处理
-            labelIP.MouseLeave += new EventHandler(formMain.Labels_MouseLeave);
-            labelIP.Click += new EventHandler(formMain.Labels_Click);
-            SetDouble(labelIP);*/
-
-            //return labelUID.Text;
-        }
+       
         /// <summary>
         /// 暂时缓存当前聊天对象的信息，同时在个人信息框显示对面的个人信息
         /// </summary>
@@ -965,13 +865,16 @@ namespace UChat
         {
             if (CommonFoundations.FileTransferTempData.FlieTransferAcceptLock == true)//文件传输时，不允许退出
             {
-                panelNoticeRed.BringToFront();
+                /*panelNoticeRed.BringToFront();
                 panelNoticeRed.Visible = true;
-                labelNoticeRed.Text = "在文件传输时无法退出程序。若仍要退出，请取消文件传输任务后再尝试退出程序。";
+                labelNoticeRed.Text = "在文件传输时无法退出程序。若仍要退出，请取消文件传输任务后再尝试退出程序。";*/
+                NotificationSystem notificationSystem = new NotificationSystem();
+                notificationSystem.NotificationPush("警告", "在文件传输时无法退出程序。若仍要退出，请取消文件传输任务后再尝试退出程序。", NotificationSystem.PresetColors.WarningRed);
             }
             else
             {
-                UDP.OnlineMessageSend(IPAddress.Broadcast, ReplyStatus.NoReplyRequired, OnlineStatus.Offline);
+                UDP uDP = new UDP();
+                uDP.OnlineMessageSend(IPAddress.Broadcast, ReplyStatus.NoReplyRequired, OnlineStatus.Offline);
                 Environment.Exit(0);
             }
         }

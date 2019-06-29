@@ -972,25 +972,24 @@
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(16, 14);
+            this.label11.Location = new System.Drawing.Point(10, 7);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 21);
+            this.label11.Size = new System.Drawing.Size(156, 21);
             this.label11.TabIndex = 7;
             this.label11.Text = "提示";
             // 
             // labelNoticeBlue
             // 
-            this.labelNoticeBlue.AutoSize = true;
             this.labelNoticeBlue.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelNoticeBlue.ForeColor = System.Drawing.Color.White;
-            this.labelNoticeBlue.Location = new System.Drawing.Point(16, 50);
+            this.labelNoticeBlue.Location = new System.Drawing.Point(10, 42);
             this.labelNoticeBlue.Name = "labelNoticeBlue";
-            this.labelNoticeBlue.Size = new System.Drawing.Size(122, 21);
+            this.labelNoticeBlue.Size = new System.Drawing.Size(425, 45);
             this.labelNoticeBlue.TabIndex = 6;
-            this.labelNoticeBlue.Text = "文件传输完成。";
+            this.labelNoticeBlue.Text = "文件传输完成是顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶。";
+            this.labelNoticeBlue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button5
             // 
@@ -1161,9 +1160,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(125)))), ((int)(((byte)(236)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Controls.Add(this.panelNoticeRed);
+            this.Controls.Add(this.panelNoticeBlue);
             this.Controls.Add(this.panelTips);
             this.Controls.Add(this.panelNoticeYellow);
-            this.Controls.Add(this.panelNoticeBlue);
             this.Controls.Add(this.labelAlert);
             this.Controls.Add(this.labelChatBorder);
             this.Controls.Add(this.buttonSendM);
@@ -1200,7 +1199,6 @@
             this.panelNoticeRed.ResumeLayout(false);
             this.panelNoticeRed.PerformLayout();
             this.panelNoticeBlue.ResumeLayout(false);
-            this.panelNoticeBlue.PerformLayout();
             this.panelNoticeYellow.ResumeLayout(false);
             this.panelNoticeYellow.PerformLayout();
             this.panelSetting.ResumeLayout(false);

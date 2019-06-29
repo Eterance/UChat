@@ -166,7 +166,7 @@ namespace UChat
             /// 开始发送文件。返回一个 TaskCompletionStatus 值，指示是文件传输结果。
             /// </summary>
             /// <param name="percentage">将文件传输任务进度以 0-100 的数字传递出来到这个数。</param>
-            /// <returns>返回一个 bool 值，指示是否完成文件传输。false 表示遭到用户中断。</returns>
+            /// <returns>返回一个值，指示完成文件传输的结果。</returns>
             public TaskCompletionStatus Start(ref int percentage)
             {
                 if (isAlreadyStart == false)//没有启动
@@ -461,7 +461,7 @@ namespace UChat
             /// 开始接收文件。返回一个 TaskCompletionStatus 值，指示是文件传输结果。
             /// </summary>
             /// <param name="percentage">将文件传输任务进度以 0-100 的数字传递出来到这个数。</param>
-            /// <returns>返回一个 bool 值，指示是否完成文件传输。false 表示遭到用户中断。</returns>
+            /// <returns>返回一个值，指示完成文件传输的结果。</returns>
             public TaskCompletionStatus Start(ref int percentage)
             {
                 if (isAlreadyStart == false)

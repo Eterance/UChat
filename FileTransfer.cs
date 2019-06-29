@@ -38,7 +38,8 @@ namespace UChat
             /// 【文件传输请求字 FR】+【本用户17位UID】+【12位文件大小（不足左边补0）】+【文件名】
             string carrier = "FR" +  CommonFoundations.HostUID + fileSize.ToString().PadLeft(12, '0') + fileName;
             IPAddress iPAddress = IPAddress.Parse(CommonFoundations.FileTransferTempData.FRDestinationIP);
-            UDP.UDPMessageSender(iPAddress, carrier);
+            UDP uDP = new UDP();
+            uDP.UDPMessageSender(iPAddress, carrier);
         }
 
         /// <summary>
@@ -53,7 +54,8 @@ namespace UChat
             //MessageBox.Show(carrier);
             //MessageBox.Show(carrier);
             IPAddress iPAddress = IPAddress.Parse(CommonFoundations.FileTransferTempData.FRSourceIP);
-            UDP.UDPMessageSender(iPAddress, carrier);
+            UDP uDP = new UDP();
+            uDP.UDPMessageSender(iPAddress, carrier);
         }
 
         /// <summary>
