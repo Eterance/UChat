@@ -23,60 +23,29 @@ using SpecialEnumeration;
 
 namespace UChat
 {
-    /// <summary>
-    /// 文件传输。
-    /// </summary>
     public partial class TCPFileTransfer
     {
         /// <summary>
-        /// 表示文件传输任务完成结果。
+        /// 在端口 50024 上接受文件。
         /// </summary>
-        #region
-        public enum TaskCompletionStatus
+        public class FileReceiver
         {
-            /// <summary>
-            /// 已经被启动了
-            /// </summary>
-            AlreadyRun,
-            /// <summary>
-            /// 发送成功
-            /// </summary>
-            Success,
-            /// <summary>
-            /// 被我方取消
-            /// </summary>
-            HostCancel,
-            /// <summary>
-            /// 被对方取消
-            /// </summary>
-            OppositeCancel,
-            /// <summary>
-            /// 未知错误
-            /// </summary>
-            Error
-        }
-        #endregion
 
-        /// <summary>
-        /// 在端口 50024 上发送文件。
-        /// </summary>
-        public class FileSender
-        {
-             /// <summary>
-             /// 在端口 50024 上发送文件。
-             /// </summary>
-            public FileSender()//构造函数
+            /// <summary>
+            /// 在端口 50024 上接受文件。
+            /// </summary>
+            public FileReceiver()//构造函数
             {
             }
             /// <summary>
-            /// 在端口 50024 上发送文件。
+            /// 在端口 50024 上接受文件。
             /// </summary>
-            /// <param name="filePath">文件的路径</param>
+            /// <param name="filePath">文件保存的路径</param>
             /// <param name="fileByte">文件字节数</param>
-            /// <param name="receiverIP">接收者的 IP</param>
-            public FileSender(string filePath, long fileByte, string receiverIP)//构造函数
+            /// <param name="senderIP">文件发送者的 IP</param>
+            public FileReceiver(string filePath, long fileByte, string senderIP)//构造函数
             {
-                SetParameters(filePath, fileByte, receiverIP);
+                SetParameters(filePath, fileByte, senderIP);
             }
 
             /// <summary>
@@ -84,13 +53,14 @@ namespace UChat
             /// </summary>
             /// <param name="filePath">文件保存的路径</param>
             /// <param name="fileByte">文件字节数</param>
-            /// <param name="receiverIP">文件接受者的 IP</param>
-            public void SetParameters(string filePath, long fileByte, string receiverIP)
+            /// <param name="senderIP">文件发送者的 IP</param>
+            public void SetParameters(string filePath, long fileByte, string senderIP)
             {
                 FilePath = filePath;
                 FileByte = fileByte;
-                RemoteIP = receiverIP;
+                RemoteIP = senderIP;
             }
+
 
             /// <summary>
             /// 是否已经启动
@@ -101,7 +71,11 @@ namespace UChat
             /// </summary>
             byte[] fragmentBuffer = new byte[1400];
             /// <summary>
-            /// 发送的文件路径。
+            /// 数据块缓存
+            /// </summary>
+            byte[] blockBuffer = new byte[100 * 1400];
+            /// <summary>
+            /// 接收的文件路径。
             /// </summary>
             string FilePath { get; set; }
             long FileByte { get; set; }
@@ -118,11 +92,7 @@ namespace UChat
             /// 已经发送的百分比。范围是 0~100。
             /// </summary>
             public int Percentage { get; private set; } = 0;
-            /// <summary>
-            /// 监听控制信息
-            /// </summary>
-            TcpListener signalListener = new TcpListener(IPAddress.Any, 50023);
-            
+
             /// <summary>
             /// 处理收到的取消控制消息。
             /// </summary>
@@ -166,13 +136,13 @@ namespace UChat
             }
 
             /// <summary>
-            /// 开始发送文件。返回一个 TaskCompletionStatus 值，指示是文件传输结果。
+            /// 开始接收文件。返回一个 TaskCompletionStatus 值，指示是文件传输结果。
             /// </summary>
             /// <param name="percentage">将文件传输任务进度以 0-100 的数字传递出来到这个数。</param>
             /// <returns>返回一个值，指示完成文件传输的结果。</returns>
             public TaskCompletionStatus Start(ref int percentage)
             {
-                if (isAlreadyStart == false)//没有启动
+                if (isAlreadyStart == false)
                 {
                     isAlreadyStart = true;
                     TCP tCP = new TCP();
@@ -183,67 +153,108 @@ namespace UChat
                     cancelSignalListener.BeginAcceptTcpClient(new AsyncCallback(DoAcceptTcpClient), cancelSignalListener);
 
                     int fragmentBufferLength = fragmentBuffer.Length;
-                    long totalindex = FileByte / fragmentBufferLength;//文件的总块数
-                    long index = 0;
-                    //int max = 0;
+                    int blockBufferBufferLength = blockBuffer.Length;
+                    int blockElementsNums = 0;//指示 blockBuffer 中有多少个字节
+                    long totalindex = FileByte / fragmentBufferLength;//文件的总片数
+                    long index = 0;//接受数据片的序号
 
-                    signalListener.Start();//开始监听控制信息；
-                    TcpClient signalClient = signalListener.AcceptTcpClient();//接收到控制信号连接请求，即允许建立文件传输连接
+                    Thread.Sleep(50);//等待对面建立控制信号监听
+                    TcpClient signalClient = new TcpClient(RemoteIP, 50023);//请求连接控制消息
+                    signalClient.NoDelay = true;//禁用 Nagle 算法，使数据包立即发出
                     NetworkStream signalStream = signalClient.GetStream();
-                    Thread.Sleep(50);//等待一点时间，让对面建立监听
 
-                    TcpClient client = new TcpClient(RemoteIP, 50024);//初始化一个对象，并连接到目标主机（因此不需要 connect 方法）
-                    client.NoDelay = true;//禁用 Nagle 算法，使数据包立即发出
+                    TcpListener tcpListener = new TcpListener(IPAddress.Any, 50024);//本机所有ip 
                     try
                     {
-                        FileStream fStream = File.OpenRead(FilePath);//打开文件流
-                        NetworkStream sendStream = client.GetStream();
-                        BufferedStream bufferedStream = new BufferedStream(sendStream);//建立缓冲流
+                        FileStream fStream = new FileStream(FilePath, FileMode.Create);
+                        tcpListener.Start();
+                        TcpClient newClient = tcpListener.AcceptTcpClient();
+                        NetworkStream clientStream = newClient.GetStream();
+                        BufferedStream bufferedStream = new BufferedStream(clientStream);//建立缓冲流
                         using (fStream)
                         {
-                            using (client)
+                            using (newClient)
                             {
-                                using (sendStream)
+                                using (clientStream)
                                 {
                                     using (bufferedStream)
                                     {
-                                        while ((fragmentBufferLength = fStream.Read(fragmentBuffer, 0, fragmentBufferLength)) > 0)//blockBufferLength为0时，即文件流到达结尾
+                                        if (clientStream.CanRead)
                                         {
-                                            sendStream.Write(fragmentBuffer, 0, fragmentBufferLength);
-                                            sendStream.Flush();
-                                            BlockConfirmationReceive(ref signalStream, signalClient.ReceiveBufferSize);  //这是一个阻塞方法，只有收到确认后才继续传下一个数据片
-                                            index++;
-                                            Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
-                                            percentage = Percentage;
+                                            while (index <= totalindex)   //判断传入长度（整个文件的长度等于每次传入的次数加上一开始多读取的字符串的长度）  
+                                            {
+                                                if (index == totalindex)//最后一次循环
+                                                {
+                                                    int mod = (int)(FileByte % fragmentBufferLength);//最后一次传输有多少字节
+                                                    if (mod == 0)//文件总字节长度是 数据片 的整数倍，即本次传输没有任何有效字节
+                                                    {
+                                                        fragmentBufferLength = 0;
+                                                        break;//放弃本次的无效数据，退出循环
+                                                    }
+                                                    else//不是整数倍
+                                                    {
+                                                        fragmentBufferLength = mod;
+                                                    }
+                                                }
+                                                bufferedStream.Read(fragmentBuffer, 0, fragmentBufferLength);
+                                                Buffer.BlockCopy(fragmentBuffer, 0, blockBuffer, blockElementsNums, fragmentBufferLength);//把数据片中的数据追加到数据块缓存中
+                                                index++;
+                                                blockElementsNums += fragmentBufferLength;
+                                                Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
+                                                percentage = Percentage;
 
-                                            //中断传输
-                                            #region
-                                            if (CommonFoundations.FileTransferTempData.CancelFTR == true)
-                                            {
-                                                //MessageBox.Show("CancelFTR == true");
-                                                CancelByHost = true;
-                                            }
-                                            if (CancelByHost == true || CancelByOpposite == true)
-                                            {
-                                                //MessageBox.Show("IN CHOOSE");
-                                                if (CancelByHost == true)//自己结束的
+                                                if (blockElementsNums == blockBuffer.Length)//缓存块满，需要写入到文件
                                                 {
-                                                    //MessageBox.Show("CancelByHost == true");
-                                                    tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
-                                                    return TaskCompletionStatus.HostCancel;
+                                                    fStream.Write(blockBuffer, 0, blockBufferBufferLength);
+                                                    blockElementsNums = 0;
                                                 }
-                                                if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息
+
+                                                //中断传输
+                                                #region
+                                                if (CommonFoundations.FileTransferTempData.CancelFTR == true)
                                                 {
-                                                    //MessageBox.Show("CancelByOpposite == true");
-                                                    return TaskCompletionStatus.OppositeCancel;
+                                                    CancelByHost = true;
                                                 }
+                                                //任意一方发出了取消请求
+                                                if (CancelByHost == true || CancelByOpposite == true)
+                                                {
+                                                    if (CancelByHost == true)//自己结束的
+                                                    {
+                                                        tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
+                                                        BlockConfirm(ref signalStream, "OK");//发送消息，让对面解除因为监听 Block 确认造成的阻塞
+
+                                                        fStream.Flush();
+                                                        fStream.Dispose();
+                                                        fStream.Close();
+                                                        File.Delete(FilePath);//删除未完成的文件
+                                                        return TaskCompletionStatus.HostCancel;
+                                                    }
+                                                    if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息，不用再发
+                                                    {
+
+                                                        fStream.Flush();
+                                                        fStream.Dispose();
+                                                        fStream.Close();
+                                                        File.Delete(FilePath);//删除未完成的文件
+                                                        return TaskCompletionStatus.OppositeCancel;
+                                                    }
+                                                }
+                                                #endregion
+
+                                                BlockConfirm(ref signalStream, "OK");//发送消息让对方传输下一个块
                                             }
-                                            #endregion
+
+                                            if (blockElementsNums != 0)//缓存块里有东西，需要最后一次写入
+                                            {
+                                                fStream.Write(blockBuffer, 0, blockElementsNums);
+                                            }
+                                            //BlockSaved(ref signalStream, "OVER");//发送消息让对方结束传输
                                         }
                                     }
                                 }
                             }
                         }
+                        newClient.Close();
                     }
                     //catch
                     #region
@@ -292,10 +303,8 @@ namespace UChat
                     {
                         cancelSignalListener.Stop();//结束取消控制信息监听器
                         signalStream.Dispose();
-                        signalStream.Close();
                         signalClient.Close();
-                        client.Close();//关闭客户端
-                        signalListener.Stop();
+                        tcpListener.Stop();//结束监听器
                     }
                     isAlreadyStart = false;
                     return TaskCompletionStatus.Success;//完美结束
@@ -322,42 +331,20 @@ namespace UChat
             }
 
             /// <summary>
-            /// 如果收到对方发送的"已经处理好之前发送的 2M 块"信息，返回给上一层。在 50023 端口通讯。
+            /// 发送控制信号。
             /// </summary>
-            /// <returns></returns>
-            private bool BlockConfirmationReceive(ref NetworkStream signalStream, int receiveBufferSize)
+            private void BlockConfirm(ref NetworkStream sendStream, string message)
             {
-                while (true)
+                try
                 {
-                    /*if (signalStream.DataAvailable == false)
-                    {
-                        continue;
-                    }*/
-                    try
-                    {
-                        string message = "";
-                        byte[] buffer = new byte[receiveBufferSize];//缓冲字节数组
-                        signalStream.Read(buffer, 0, buffer.Length);
-                        message = Encoding.UTF8.GetString(buffer).Trim('\0');//收到的信息
-                        if (message == "OK")
-                        {
-                            return false;
-                        }
-                        if (message == "OVER")
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return true;
-                        }
-                    }
-                    catch
-                    {
-                    }
+                    byte[] sendBytes = Encoding.UTF8.GetBytes(message);
+                    sendStream.Write(sendBytes, 0, sendBytes.Length);
+                    sendStream.Flush();
+                }
+                catch
+                {
                 }
             }
         }
     }
 }
-

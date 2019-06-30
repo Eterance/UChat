@@ -91,8 +91,8 @@ namespace UChat
             Point ButtonCloseLocation = new Point(409, 0);
             Size ButtonCloseSize = new Size(41, 23);
 
-            Point ButtonOpenLocation = new Point(240, 40);
-            Size ButtonOpenSize = new Size(203, 40);
+            Point ButtonOpenLocation = new Point(240, 45);
+            Size ButtonOpenSize = new Size(195, 40);
 
             readonly Font font = new Font("微软雅黑", 12);
 
@@ -180,7 +180,7 @@ namespace UChat
                     ForeColor = Color.White,
                     Font = font,
                     Text = content,
-                    TextAlign = ContentAlignment.MiddleLeft,
+                    TextAlign = ContentAlignment.MiddleCenter,
                     Location = location,
                     Size = size,
                     Visible = true
@@ -196,8 +196,9 @@ namespace UChat
                     button.BackgroundImageLayout = ImageLayout.Zoom;
                     button.Click += new EventHandler(CloseNoti_Click);//绑定点击事件
                 }
-                else
+                else//打开文件夹按钮
                 {
+                    button.BackColor = Color.Gray;
                     button.Click += new EventHandler(Button_Click);//绑定点击事件
                 }
                 SetDouble(button);

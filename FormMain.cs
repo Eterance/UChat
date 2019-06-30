@@ -258,10 +258,6 @@ namespace UChat
             SetDouble(buttonRefuse);
             SetDouble(buttonAcceptFTR);
             SetDouble(buttonCancelFTR);
-            SetDouble(button4);
-            SetDouble(button5);
-            SetDouble(button1);
-            SetDouble(button3);
             SetDouble(buttonConfirmChange);
             SetDouble(buttonCancelChange);
 
@@ -276,12 +272,6 @@ namespace UChat
             SetDouble(label6);
             SetDouble(labelWating);
             SetDouble(labelPercent);
-            SetDouble(label11);
-            SetDouble(labelNoticeBlue);
-            SetDouble(labelRedTopic);
-            SetDouble(labelNoticeRed);
-            SetDouble(label10);
-            SetDouble(labelNoticeYellow);
             SetDouble(label8);
 
             SetDouble(panel2);
@@ -290,9 +280,6 @@ namespace UChat
             SetDouble(panelTips);
             SetDouble(panelConfirm);
             SetDouble(panelPercent);
-            SetDouble(panelNoticeRed);
-            SetDouble(panelNoticeBlue);
-            SetDouble(panelNoticeYellow);
             SetDouble(panelSetting);
             SetDouble(panelChangeName);
 
@@ -1383,7 +1370,7 @@ namespace UChat
 
         private void BackgroundWorkerFileReceiver_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (panelNoticeBlue.InvokeRequired == false)
+            if (panelTips.InvokeRequired == false)
             {
                 if (FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)
                 {
@@ -1397,43 +1384,37 @@ namespace UChat
                 }
                 else
                 {
-                    if (panelNoticeYellow.InvokeRequired == false)
+                    if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
                     {
-                        if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
-                        {
-                            /*labelNoticeYellow.BringToFront();
-                            labelNoticeYellow.Visible = true;
-                            labelNoticeYellow.Text = "文件传输已经取消。";*/
-                            NotificationSystem notificationSystem = new NotificationSystem();
-                            notificationSystem.PushNotification("提醒", "文件传输已被取消。", NotificationSystem.PresetColors.TipsBlue);
-                            ResetSendFileBarUI(false);
-                            CommonFoundations.FileTransferTempData.ResetFTRTempData();
-                        }
-                        else
-                        {
-                            NotificationSystem notificationSystem = new NotificationSystem();
-                            notificationSystem.PushNotification("完成", "文件传输已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRSourcePath);
-                            //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
-                            FTROverProcessor();
-                        }
+                        /*labelNoticeYellow.BringToFront();
+                        labelNoticeYellow.Visible = true;
+                        labelNoticeYellow.Text = "文件传输已经取消。";*/
+                        NotificationSystem notificationSystem = new NotificationSystem();
+                        notificationSystem.PushNotification("提醒", "文件传输已被取消。", NotificationSystem.PresetColors.TipsBlue);
+                        ResetSendFileBarUI(false);
+                        CommonFoundations.FileTransferTempData.ResetFTRTempData();
                     }
                     else
                     {
-                        Action<object, RunWorkerCompletedEventArgs> dG_BackgroundWorker_RunWorkerCompleted = new Action<object, RunWorkerCompletedEventArgs>(BackgroundWorkerFileSender_RunWorkerCompleted);
-                        panelNoticeYellow.Invoke(dG_BackgroundWorker_RunWorkerCompleted, sender, e);
+                        NotificationSystem notificationSystem = new NotificationSystem();
+                        //MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
+                        notificationSystem.PushNotification("完成", "文件传输已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
+                        //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
+                        FTROverProcessor();
                     }
+                   
                 }
             }
             else
             {
                 Action<object, RunWorkerCompletedEventArgs> dG_BackgroundWorker_RunWorkerCompleted = new Action<object, RunWorkerCompletedEventArgs>(BackgroundWorkerFileReceiver_RunWorkerCompleted);
-                panelNoticeBlue.Invoke(dG_BackgroundWorker_RunWorkerCompleted, sender, e);
+                panelTips.Invoke(dG_BackgroundWorker_RunWorkerCompleted, sender, e);
             }
         }
 
         private void BackgroundWorkerFileSender_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (panelNoticeBlue.InvokeRequired == false)
+            if (panelTips.InvokeRequired == false)
             {
                 if (FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)
                 {
@@ -1447,37 +1428,29 @@ namespace UChat
                 }
                 else
                 {
-                    if (panelNoticeYellow.InvokeRequired == false)
+                    if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
                     {
-                        if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
-                        {
-                            /*labelNoticeYellow.BringToFront();
-                            labelNoticeYellow.Visible = true;
-                            labelNoticeYellow.Text = "文件传输已经取消。";*/
-                            NotificationSystem notificationSystem = new NotificationSystem();
-                            notificationSystem.PushNotification("提醒", "文件传输已被取消。", NotificationSystem.PresetColors.TipsBlue);
-                            ResetSendFileBarUI(false);
-                            CommonFoundations.FileTransferTempData.ResetFTRTempData();
-                        }
-                        else
-                        {
-                            NotificationSystem notificationSystem = new NotificationSystem();
-                            notificationSystem.PushNotification("完成", "文件传输已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRSourcePath);
-                            //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
-                            FTROverProcessor();
-                        }
+                        /*labelNoticeYellow.BringToFront();
+                        labelNoticeYellow.Visible = true;
+                        labelNoticeYellow.Text = "文件传输已经取消。";*/
+                        NotificationSystem notificationSystem = new NotificationSystem();
+                        notificationSystem.PushNotification("提醒", "文件传输已被取消。", NotificationSystem.PresetColors.TipsBlue);
+                        ResetSendFileBarUI(false);
+                        CommonFoundations.FileTransferTempData.ResetFTRTempData();
                     }
                     else
                     {
-                        Action<object, RunWorkerCompletedEventArgs> dG_BackgroundWorker_RunWorkerCompleted = new Action<object, RunWorkerCompletedEventArgs>(BackgroundWorkerFileSender_RunWorkerCompleted);
-                        panelNoticeYellow.Invoke(dG_BackgroundWorker_RunWorkerCompleted, sender, e);
-                    }
+                        NotificationSystem notificationSystem = new NotificationSystem();
+                        notificationSystem.PushNotification("完成", "文件传输已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRSourcePath);
+                        //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
+                        FTROverProcessor();
+                    }                    
                 }
             }
             else
             {
                 Action<object, RunWorkerCompletedEventArgs> dG_BackgroundWorker_RunWorkerCompleted = new Action<object, RunWorkerCompletedEventArgs>(BackgroundWorkerFileSender_RunWorkerCompleted);
-                panelNoticeBlue.Invoke(dG_BackgroundWorker_RunWorkerCompleted, sender, e);
+                panelTips.Invoke(dG_BackgroundWorker_RunWorkerCompleted, sender, e);
             }
         }
 
@@ -1485,11 +1458,6 @@ namespace UChat
         {
             formMain.progressBar1.Value = CommonFoundations.FileTransferTempData.FTRPercentage2;
             formMain.labelPercent.Text = CommonFoundations.FileTransferTempData.FTRPercentage2.ToString() + "%";
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            panelNoticeRed.Visible = false;
         }
 
         private void ButtonCancelFTR_Click(object sender, EventArgs e)
@@ -1529,17 +1497,6 @@ namespace UChat
             p.StartInfo.FileName = "explorer.exe";
             p.StartInfo.Arguments = "/e,/select," + RecePath;//参数 -e 此命令使用默认视图启动 Windows 资源管理器，并把焦点定位在 RecePath。
             p.Start();
-        }
-
-        private void Button5_Click(object sender, EventArgs e)
-        {
-            panelNoticeBlue.Visible = false;
-        }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            panelNoticeYellow.Visible = false;
-
         }
 
         private void ButtonSetting_Click(object sender, EventArgs e)
