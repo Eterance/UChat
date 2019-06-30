@@ -64,7 +64,7 @@ namespace UChat
         /// <summary>
         /// 文件传输的缓存变量。
         /// </summary>
-        public struct FileTransferTempData
+        public class FileTransferTempData
         {
             /// <summary>
             /// 一键重设缓存数据。

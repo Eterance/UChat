@@ -26,7 +26,7 @@ namespace UChat
     /// 进行局域网 UDP 信息发送与监听。通信均在 50050 端口进行。
     /// </summary> 
     /// <returns></returns> 
-    public static class UDP
+    public class UDP
     {
         /// <summary>
         /// 向目的 IP 发送本机上线信息。
@@ -34,7 +34,7 @@ namespace UChat
         /// <param name="iPAddress">目标主机的 IP 地址，当填写 IPAddress.Broadcast 时即为广播。</param>
         /// <param name="replyStatus">广播状态字：请使用 ReplyStatus 枚举类型。</param>
         /// <param name="onlineStatus">在线状态字：请使用 OnlineStatus 结构体。</param>
-        public static void OnlineMessageSend(IPAddress iPAddress, ReplyStatus replyStatus, string onlineStatus)
+        public void OnlineMessageSend(IPAddress iPAddress, ReplyStatus replyStatus, string onlineStatus)
         {
             /// 上线状态信息由以下部分组成：
             /// 【本机活动的IP地址】 + 【分隔符“英文逗号 , ”】 + 【上下线状态字 UP 或 DP 】 + 【本用户17位UID】+ 【广播状态字】 + 【本用户名】
@@ -55,7 +55,7 @@ namespace UChat
         /// </summary>
         /// <param name="iPAddress">目标主机的 IP 地址，当填写 IPAddress.Broadcast 时即为广播。</param>
         /// <param name="carrier">需要发送的信息</param>
-        public static void UDPMessageSender(IPAddress iPAddress, string carrier)
+        public void UDPMessageSender(IPAddress iPAddress, string carrier)
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(iPAddress, 50050);
@@ -72,10 +72,12 @@ namespace UChat
         /// 监听UDP广播与信息。
         /// </summary> 
         /// <returns></returns> 
-        public static void UDPMessageListener()
+        public void UDPMessageListener()
         {
             IPEndPoint ipEP1 = new IPEndPoint(IPAddress.Any, 50050);   //IPAddress.any即为所有活动主机
             UdpClient udpReceive = new UdpClient(ipEP1);
+            /*FormMain.NotificationSystem notificationSystem = new FormMain.NotificationSystem();
+            notificationSystem.PushNotification("asdasd", "hgjghj", FormMain.NotificationSystem.PresetColors.AttentionYellow);*/
             while (true)
             {
                 try
@@ -95,7 +97,7 @@ namespace UChat
         /// 对收到的 UDP 信息作进一步归档处理。涉及跨线程。
         /// </summary>
         /// <param name="carrier"></param>
-        public static void MessageProcessor(string message)
+        public void MessageProcessor(string message)
         {
             if (message.Substring(0,2) == "FR" || message.Substring(0, 2) == "FA")//这些开头代表是文件传输请求
             {
