@@ -808,9 +808,12 @@ namespace UChat
         {
             if (labelWating.InvokeRequired == false)
             {
+                /*
                 panelNoticeYellow.Visible = true;
                 panelNoticeYellow.BringToFront();
-                labelNoticeYellow.Text = "对方正处于另一个文件传输进程，请稍后重试。";
+                labelNoticeYellow.Text = "对方正处于另一个文件传输进程，请稍后重试。";*/
+                NotificationSystem notificationSystem = new NotificationSystem();
+                notificationSystem.PushNotification("错误", "对方正处于另一个文件传输进程，请稍后重试。", NotificationSystem.PresetColors.WarningRed);
                 CommonFoundations.FileTransferTempData.ResetFTRTempData();
                 ResetSendFileBarUI(true);
             }
@@ -828,9 +831,12 @@ namespace UChat
         {
             if (labelWating.InvokeRequired == false)
             {
+                /*
                 panelNoticeYellow.Visible = true;
                 panelNoticeYellow.BringToFront();
-                labelNoticeYellow.Text = "对方拒绝了你的文件传输请求。";
+                labelNoticeYellow.Text = "对方拒绝了你的文件传输请求。";*/
+                NotificationSystem notificationSystem = new NotificationSystem();
+                notificationSystem.PushNotification("注意", "对方拒绝了你的文件传输请求。", NotificationSystem.PresetColors.AttentionYellow);
                 CommonFoundations.FileTransferTempData.ResetFTRTempData();
                 ResetSendFileBarUI(false);
             }
@@ -889,8 +895,8 @@ namespace UChat
                 timerPercent.Stop();
                 timerPercent.Enabled = false;
 
-                panelNoticeBlue.Visible = true;
-                panelNoticeBlue.BringToFront();
+                /*panelNoticeBlue.Visible = true;
+                panelNoticeBlue.BringToFront();*/
                 //做清理工作
                 CommonFoundations.FileTransferTempData.ResetFTRTempData();
                 ResetSendFileBarUI(false);
@@ -1381,9 +1387,11 @@ namespace UChat
             {
                 if (FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)
                 {
-                    panelNoticeRed.BringToFront();
+                    /*panelNoticeRed.BringToFront();
                     panelNoticeRed.Visible = true;
-                    labelNoticeRed.Text = "文件传输被对方取消。";
+                    labelNoticeRed.Text = "文件传输被对方取消。";*/
+                    NotificationSystem notificationSystem = new NotificationSystem();
+                    notificationSystem.PushNotification("注意", "文件传输已被对方取消。", NotificationSystem.PresetColors.AttentionYellow);
                     ResetSendFileBarUI(false);
                     CommonFoundations.FileTransferTempData.ResetFTRTempData();
                 }
@@ -1393,15 +1401,19 @@ namespace UChat
                     {
                         if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
                         {
-                            labelNoticeYellow.BringToFront();
+                            /*labelNoticeYellow.BringToFront();
                             labelNoticeYellow.Visible = true;
-                            labelNoticeYellow.Text = "文件传输已经取消。";
+                            labelNoticeYellow.Text = "文件传输已经取消。";*/
+                            NotificationSystem notificationSystem = new NotificationSystem();
+                            notificationSystem.PushNotification("提醒", "文件传输已被取消。", NotificationSystem.PresetColors.TipsBlue);
                             ResetSendFileBarUI(false);
                             CommonFoundations.FileTransferTempData.ResetFTRTempData();
                         }
                         else
                         {
-                            RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
+                            NotificationSystem notificationSystem = new NotificationSystem();
+                            notificationSystem.PushNotification("完成", "文件传输已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRSourcePath);
+                            //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
                             FTROverProcessor();
                         }
                     }
@@ -1425,9 +1437,11 @@ namespace UChat
             {
                 if (FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)
                 {
-                    panelNoticeRed.BringToFront();
+                    /*panelNoticeRed.BringToFront();
                     panelNoticeRed.Visible = true;
-                    labelNoticeRed.Text = "文件传输被对方取消。";
+                    labelNoticeRed.Text = "文件传输被对方取消。";*/
+                    NotificationSystem notificationSystem = new NotificationSystem();
+                    notificationSystem.PushNotification("注意", "文件传输已被对方取消。", NotificationSystem.PresetColors.AttentionYellow);
                     ResetSendFileBarUI(false);
                     CommonFoundations.FileTransferTempData.ResetFTRTempData();
                 }
@@ -1437,15 +1451,19 @@ namespace UChat
                     {
                         if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
                         {
-                            labelNoticeYellow.BringToFront();
+                            /*labelNoticeYellow.BringToFront();
                             labelNoticeYellow.Visible = true;
-                            labelNoticeYellow.Text = "文件传输已经取消。";
+                            labelNoticeYellow.Text = "文件传输已经取消。";*/
+                            NotificationSystem notificationSystem = new NotificationSystem();
+                            notificationSystem.PushNotification("提醒", "文件传输已被取消。", NotificationSystem.PresetColors.TipsBlue);
                             ResetSendFileBarUI(false);
                             CommonFoundations.FileTransferTempData.ResetFTRTempData();
                         }
                         else
                         {
-                            RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
+                            NotificationSystem notificationSystem = new NotificationSystem();
+                            notificationSystem.PushNotification("完成", "文件传输已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRSourcePath);
+                            //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
                             FTROverProcessor();
                         }
                     }

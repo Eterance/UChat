@@ -1180,7 +1180,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormMain";
+            this.Text = "UChat";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
             this.panelSideBar.ResumeLayout(false);
