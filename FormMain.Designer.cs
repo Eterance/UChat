@@ -33,6 +33,12 @@
             this.labelChatBoxBG = new System.Windows.Forms.Label();
             this.panelSideBar = new System.Windows.Forms.Panel();
             this.labelSideBarBorder = new System.Windows.Forms.Label();
+            this.buttonDetail = new System.Windows.Forms.Button();
+            this.buttonFiles = new System.Windows.Forms.Button();
+            this.buttonMenu = new System.Windows.Forms.Button();
+            this.buttonSetting = new System.Windows.Forms.Button();
+            this.buttonExit2 = new System.Windows.Forms.Button();
+            this.buttonLAN = new System.Windows.Forms.Button();
             this.panelDetail = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -66,6 +72,7 @@
             this.labelAlert = new System.Windows.Forms.Label();
             this.labelForbid = new System.Windows.Forms.Label();
             this.panelTips = new System.Windows.Forms.Panel();
+            this.pictureBoxTips = new System.Windows.Forms.PictureBox();
             this.backgroundWorkerFileReceiver = new System.ComponentModel.BackgroundWorker();
             this.timerFTTimeout = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorkerFileSender = new System.ComponentModel.BackgroundWorker();
@@ -75,16 +82,33 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelEmpty = new System.Windows.Forms.Panel();
+            this.pictureBoxEmptyIcon = new System.Windows.Forms.PictureBox();
             this.labelEmptyText = new System.Windows.Forms.Label();
             this.timerPercent = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelSetting = new System.Windows.Forms.Panel();
+            this.panelChangePW = new System.Windows.Forms.Panel();
+            this.labelError = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBoxNewPWRepeat = new System.Windows.Forms.TextBox();
+            this.textBoxNewPW = new System.Windows.Forms.TextBox();
+            this.textBoxOldPW = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.buttonCancelChangePW = new System.Windows.Forms.Button();
+            this.buttonSavePW = new System.Windows.Forms.Button();
             this.panelChangeName = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxChangeName = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.buttonCancelChange = new System.Windows.Forms.Button();
             this.buttonConfirmChange = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.buttonEnableQSI = new System.Windows.Forms.Button();
+            this.buttonClearData = new System.Windows.Forms.Button();
+            this.buttonChangePW = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.buttonChangeName = new System.Windows.Forms.Button();
@@ -97,32 +121,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.panelLANBarTitle = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.buttonChangePW = new System.Windows.Forms.Button();
-            this.buttonClearData = new System.Windows.Forms.Button();
-            this.panelChangePW = new System.Windows.Forms.Panel();
-            this.textBoxOldPW = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.buttonCancelChangePW = new System.Windows.Forms.Button();
-            this.buttonSavePW = new System.Windows.Forms.Button();
-            this.textBoxNewPW = new System.Windows.Forms.TextBox();
-            this.textBoxNewPWRepeat = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.labelError = new System.Windows.Forms.Label();
-            this.buttonEnableQSI = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
             this.buttonSendM = new System.Windows.Forms.Button();
-            this.buttonDetail = new System.Windows.Forms.Button();
-            this.buttonFiles = new System.Windows.Forms.Button();
-            this.buttonMenu = new System.Windows.Forms.Button();
-            this.buttonSetting = new System.Windows.Forms.Button();
-            this.buttonExit2 = new System.Windows.Forms.Button();
-            this.buttonLAN = new System.Windows.Forms.Button();
-            this.pictureBoxTips = new System.Windows.Forms.PictureBox();
             this.buttonExit = new System.Windows.Forms.Button();
-            this.pictureBoxEmptyIcon = new System.Windows.Forms.PictureBox();
+            this.labelSpeed = new System.Windows.Forms.Label();
+            this.labelProgress = new System.Windows.Forms.Label();
+            this.labelRemainTime = new System.Windows.Forms.Label();
             this.panelSideBar.SuspendLayout();
             this.panelDetail.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -130,16 +133,16 @@
             this.panelPercent.SuspendLayout();
             this.panelConfirm.SuspendLayout();
             this.panelTips.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTips)).BeginInit();
             this.panelLANBar.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelEmpty.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmptyIcon)).BeginInit();
             this.panelSetting.SuspendLayout();
+            this.panelChangePW.SuspendLayout();
             this.panelChangeName.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.panelLANBarTitle.SuspendLayout();
-            this.panelChangePW.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTips)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmptyIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // labelChatBoxBG
@@ -179,6 +182,146 @@
             this.labelSideBarBorder.Size = new System.Drawing.Size(1, 718);
             this.labelSideBarBorder.TabIndex = 15;
             this.labelSideBarBorder.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonDetail
+            // 
+            this.buttonDetail.BackColor = System.Drawing.Color.Transparent;
+            this.buttonDetail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonDetail.FlatAppearance.BorderSize = 0;
+            this.buttonDetail.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonDetail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDetail.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonDetail.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttonDetail.Image = global::UChat.Properties.Resources.个人信息;
+            this.buttonDetail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDetail.Location = new System.Drawing.Point(-1, 150);
+            this.buttonDetail.Name = "buttonDetail";
+            this.buttonDetail.Size = new System.Drawing.Size(302, 50);
+            this.buttonDetail.TabIndex = 11;
+            this.buttonDetail.Text = "  对方的个人信息";
+            this.buttonDetail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDetail.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.buttonDetail, "对方的个人信息");
+            this.buttonDetail.UseVisualStyleBackColor = false;
+            this.buttonDetail.Visible = false;
+            this.buttonDetail.Click += new System.EventHandler(this.ButtonDetail_Click);
+            // 
+            // buttonFiles
+            // 
+            this.buttonFiles.BackColor = System.Drawing.Color.Transparent;
+            this.buttonFiles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonFiles.FlatAppearance.BorderSize = 0;
+            this.buttonFiles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonFiles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFiles.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonFiles.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonFiles.Image = global::UChat.Properties.Resources.传输文件2;
+            this.buttonFiles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonFiles.Location = new System.Drawing.Point(-1, 100);
+            this.buttonFiles.Name = "buttonFiles";
+            this.buttonFiles.Size = new System.Drawing.Size(302, 50);
+            this.buttonFiles.TabIndex = 9;
+            this.buttonFiles.Text = "  文件传输";
+            this.buttonFiles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonFiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.buttonFiles, "文件传输");
+            this.buttonFiles.UseVisualStyleBackColor = false;
+            this.buttonFiles.Visible = false;
+            this.buttonFiles.Click += new System.EventHandler(this.ButtonFiles_Click);
+            // 
+            // buttonMenu
+            // 
+            this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
+            this.buttonMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonMenu.FlatAppearance.BorderSize = 0;
+            this.buttonMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMenu.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonMenu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttonMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonMenu.Image")));
+            this.buttonMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMenu.Location = new System.Drawing.Point(-1, 0);
+            this.buttonMenu.Name = "buttonMenu";
+            this.buttonMenu.Size = new System.Drawing.Size(302, 50);
+            this.buttonMenu.TabIndex = 3;
+            this.buttonMenu.Text = "  UChat";
+            this.buttonMenu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonMenu.UseVisualStyleBackColor = false;
+            this.buttonMenu.Click += new System.EventHandler(this.Button4_Click);
+            // 
+            // buttonSetting
+            // 
+            this.buttonSetting.BackColor = System.Drawing.Color.Transparent;
+            this.buttonSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonSetting.FlatAppearance.BorderSize = 0;
+            this.buttonSetting.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonSetting.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonSetting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSetting.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonSetting.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttonSetting.Image = global::UChat.Properties.Resources.设置2;
+            this.buttonSetting.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSetting.Location = new System.Drawing.Point(-1, 618);
+            this.buttonSetting.Name = "buttonSetting";
+            this.buttonSetting.Size = new System.Drawing.Size(302, 50);
+            this.buttonSetting.TabIndex = 8;
+            this.buttonSetting.Text = "  设置";
+            this.buttonSetting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.buttonSetting, "设置");
+            this.buttonSetting.UseVisualStyleBackColor = false;
+            this.buttonSetting.Click += new System.EventHandler(this.ButtonSetting_Click);
+            // 
+            // buttonExit2
+            // 
+            this.buttonExit2.BackColor = System.Drawing.Color.Transparent;
+            this.buttonExit2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonExit2.FlatAppearance.BorderSize = 0;
+            this.buttonExit2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonExit2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonExit2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonExit2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonExit2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttonExit2.Image = global::UChat.Properties.Resources.退出1;
+            this.buttonExit2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonExit2.Location = new System.Drawing.Point(-1, 668);
+            this.buttonExit2.Name = "buttonExit2";
+            this.buttonExit2.Size = new System.Drawing.Size(302, 50);
+            this.buttonExit2.TabIndex = 2;
+            this.buttonExit2.Text = "  退出";
+            this.buttonExit2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonExit2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.buttonExit2, "退出");
+            this.buttonExit2.UseVisualStyleBackColor = false;
+            this.buttonExit2.Click += new System.EventHandler(this.ButtonExit2_Click);
+            // 
+            // buttonLAN
+            // 
+            this.buttonLAN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(125)))), ((int)(((byte)(236)))));
+            this.buttonLAN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonLAN.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.buttonLAN.FlatAppearance.BorderSize = 0;
+            this.buttonLAN.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonLAN.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonLAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLAN.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonLAN.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonLAN.Image = global::UChat.Properties.Resources.局域网2;
+            this.buttonLAN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonLAN.Location = new System.Drawing.Point(-1, 50);
+            this.buttonLAN.Name = "buttonLAN";
+            this.buttonLAN.Size = new System.Drawing.Size(302, 50);
+            this.buttonLAN.TabIndex = 1;
+            this.buttonLAN.Text = "  局域网";
+            this.buttonLAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonLAN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.buttonLAN, "局域网");
+            this.buttonLAN.UseVisualStyleBackColor = false;
+            this.buttonLAN.Click += new System.EventHandler(this.ButtonLAN_Click);
             // 
             // panelDetail
             // 
@@ -404,6 +547,9 @@
             // 
             // panelPercent
             // 
+            this.panelPercent.Controls.Add(this.labelRemainTime);
+            this.panelPercent.Controls.Add(this.labelProgress);
+            this.panelPercent.Controls.Add(this.labelSpeed);
             this.panelPercent.Controls.Add(this.buttonCancelFTR);
             this.panelPercent.Controls.Add(this.progressBar1);
             this.panelPercent.Controls.Add(this.labelPercent);
@@ -606,6 +752,18 @@
             this.panelTips.TabIndex = 21;
             this.panelTips.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelTips_MouseDown);
             // 
+            // pictureBoxTips
+            // 
+            this.pictureBoxTips.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.pictureBoxTips.BackgroundImage = global::UChat.Properties.Resources.Chat;
+            this.pictureBoxTips.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBoxTips.Location = new System.Drawing.Point(2, 136);
+            this.pictureBoxTips.Name = "pictureBoxTips";
+            this.pictureBoxTips.Size = new System.Drawing.Size(856, 184);
+            this.pictureBoxTips.TabIndex = 25;
+            this.pictureBoxTips.TabStop = false;
+            this.pictureBoxTips.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
+            // 
             // backgroundWorkerFileReceiver
             // 
             this.backgroundWorkerFileReceiver.WorkerReportsProgress = true;
@@ -696,6 +854,17 @@
             this.panelEmpty.Size = new System.Drawing.Size(355, 330);
             this.panelEmpty.TabIndex = 0;
             // 
+            // pictureBoxEmptyIcon
+            // 
+            this.pictureBoxEmptyIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.pictureBoxEmptyIcon.BackgroundImage = global::UChat.Properties.Resources.kong;
+            this.pictureBoxEmptyIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBoxEmptyIcon.Location = new System.Drawing.Point(0, 47);
+            this.pictureBoxEmptyIcon.Name = "pictureBoxEmptyIcon";
+            this.pictureBoxEmptyIcon.Size = new System.Drawing.Size(355, 174);
+            this.pictureBoxEmptyIcon.TabIndex = 4;
+            this.pictureBoxEmptyIcon.TabStop = false;
+            // 
             // labelEmptyText
             // 
             this.labelEmptyText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
@@ -732,6 +901,159 @@
             this.panelSetting.Name = "panelSetting";
             this.panelSetting.Size = new System.Drawing.Size(367, 718);
             this.panelSetting.TabIndex = 26;
+            // 
+            // panelChangePW
+            // 
+            this.panelChangePW.AutoScroll = true;
+            this.panelChangePW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
+            this.panelChangePW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelChangePW.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelChangePW.Controls.Add(this.labelError);
+            this.panelChangePW.Controls.Add(this.label20);
+            this.panelChangePW.Controls.Add(this.label18);
+            this.panelChangePW.Controls.Add(this.textBoxNewPWRepeat);
+            this.panelChangePW.Controls.Add(this.textBoxNewPW);
+            this.panelChangePW.Controls.Add(this.textBoxOldPW);
+            this.panelChangePW.Controls.Add(this.label19);
+            this.panelChangePW.Controls.Add(this.buttonCancelChangePW);
+            this.panelChangePW.Controls.Add(this.buttonSavePW);
+            this.panelChangePW.Location = new System.Drawing.Point(14, 340);
+            this.panelChangePW.Name = "panelChangePW";
+            this.panelChangePW.Size = new System.Drawing.Size(339, 349);
+            this.panelChangePW.TabIndex = 37;
+            this.panelChangePW.Visible = false;
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.labelError.Location = new System.Drawing.Point(35, 237);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(266, 21);
+            this.labelError.TabIndex = 40;
+            this.labelError.Text = "旧密码不正确或两个新密码不相同。";
+            this.labelError.Visible = false;
+            this.labelError.Click += new System.EventHandler(this.LabelError_Click);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label20.ForeColor = System.Drawing.Color.White;
+            this.label20.Location = new System.Drawing.Point(17, 164);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(106, 21);
+            this.label20.TabIndex = 39;
+            this.label20.Text = "确认新的密码";
+            this.label20.Click += new System.EventHandler(this.Label20_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label18.ForeColor = System.Drawing.Color.White;
+            this.label18.Location = new System.Drawing.Point(16, 94);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(170, 21);
+            this.label18.TabIndex = 38;
+            this.label18.Text = "新的密码，不允许为空";
+            // 
+            // textBoxNewPWRepeat
+            // 
+            this.textBoxNewPWRepeat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.textBoxNewPWRepeat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxNewPWRepeat.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxNewPWRepeat.ForeColor = System.Drawing.Color.White;
+            this.textBoxNewPWRepeat.Location = new System.Drawing.Point(21, 189);
+            this.textBoxNewPWRepeat.MaxLength = 16;
+            this.textBoxNewPWRepeat.Name = "textBoxNewPWRepeat";
+            this.textBoxNewPWRepeat.Size = new System.Drawing.Size(297, 29);
+            this.textBoxNewPWRepeat.TabIndex = 37;
+            this.textBoxNewPWRepeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxNewPWRepeat.UseSystemPasswordChar = true;
+            this.textBoxNewPWRepeat.TextChanged += new System.EventHandler(this.TextBoxNewPWRepeat_TextChanged);
+            // 
+            // textBoxNewPW
+            // 
+            this.textBoxNewPW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.textBoxNewPW.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxNewPW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxNewPW.ForeColor = System.Drawing.Color.White;
+            this.textBoxNewPW.Location = new System.Drawing.Point(21, 118);
+            this.textBoxNewPW.MaxLength = 16;
+            this.textBoxNewPW.Name = "textBoxNewPW";
+            this.textBoxNewPW.Size = new System.Drawing.Size(297, 29);
+            this.textBoxNewPW.TabIndex = 36;
+            this.textBoxNewPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxNewPW.UseSystemPasswordChar = true;
+            // 
+            // textBoxOldPW
+            // 
+            this.textBoxOldPW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.textBoxOldPW.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxOldPW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxOldPW.ForeColor = System.Drawing.Color.White;
+            this.textBoxOldPW.Location = new System.Drawing.Point(21, 48);
+            this.textBoxOldPW.MaxLength = 16;
+            this.textBoxOldPW.Name = "textBoxOldPW";
+            this.textBoxOldPW.Size = new System.Drawing.Size(297, 29);
+            this.textBoxOldPW.TabIndex = 35;
+            this.textBoxOldPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxOldPW.UseSystemPasswordChar = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label19.ForeColor = System.Drawing.Color.White;
+            this.label19.Location = new System.Drawing.Point(17, 24);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(122, 21);
+            this.label19.TabIndex = 34;
+            this.label19.Text = "请输入旧的密码";
+            // 
+            // buttonCancelChangePW
+            // 
+            this.buttonCancelChangePW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.buttonCancelChangePW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonCancelChangePW.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.buttonCancelChangePW.FlatAppearance.BorderSize = 0;
+            this.buttonCancelChangePW.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonCancelChangePW.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonCancelChangePW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCancelChangePW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonCancelChangePW.ForeColor = System.Drawing.Color.White;
+            this.buttonCancelChangePW.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCancelChangePW.Location = new System.Drawing.Point(20, 294);
+            this.buttonCancelChangePW.Name = "buttonCancelChangePW";
+            this.buttonCancelChangePW.Size = new System.Drawing.Size(105, 35);
+            this.buttonCancelChangePW.TabIndex = 33;
+            this.buttonCancelChangePW.Text = "取消";
+            this.buttonCancelChangePW.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonCancelChangePW.UseVisualStyleBackColor = false;
+            this.buttonCancelChangePW.Click += new System.EventHandler(this.ButtonCancelChangePW_Click);
+            // 
+            // buttonSavePW
+            // 
+            this.buttonSavePW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.buttonSavePW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonSavePW.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.buttonSavePW.FlatAppearance.BorderSize = 0;
+            this.buttonSavePW.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonSavePW.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonSavePW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSavePW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonSavePW.ForeColor = System.Drawing.Color.White;
+            this.buttonSavePW.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSavePW.Location = new System.Drawing.Point(212, 294);
+            this.buttonSavePW.Name = "buttonSavePW";
+            this.buttonSavePW.Size = new System.Drawing.Size(105, 35);
+            this.buttonSavePW.TabIndex = 32;
+            this.buttonSavePW.Text = "保存";
+            this.buttonSavePW.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonSavePW.UseVisualStyleBackColor = false;
+            this.buttonSavePW.Click += new System.EventHandler(this.ButtonSavePW_Click);
             // 
             // panelChangeName
             // 
@@ -828,6 +1150,94 @@
             this.buttonConfirmChange.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonConfirmChange.UseVisualStyleBackColor = false;
             this.buttonConfirmChange.Click += new System.EventHandler(this.ButtonConfirmChange_Click);
+            // 
+            // label22
+            // 
+            this.label22.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label22.ForeColor = System.Drawing.Color.Gray;
+            this.label22.Location = new System.Drawing.Point(55, 376);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(303, 46);
+            this.label22.TabIndex = 43;
+            this.label22.Text = "启用该选项后，登录程序将不需要输入密码，直接进入主界面。";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label21
+            // 
+            this.label21.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label21.ForeColor = System.Drawing.Color.White;
+            this.label21.Location = new System.Drawing.Point(55, 346);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(125, 24);
+            this.label21.TabIndex = 42;
+            this.label21.Text = "启用快捷登录";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // buttonEnableQSI
+            // 
+            this.buttonEnableQSI.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonEnableQSI.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonEnableQSI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonEnableQSI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEnableQSI.Location = new System.Drawing.Point(27, 348);
+            this.buttonEnableQSI.Name = "buttonEnableQSI";
+            this.buttonEnableQSI.Size = new System.Drawing.Size(25, 22);
+            this.buttonEnableQSI.TabIndex = 41;
+            this.buttonEnableQSI.UseVisualStyleBackColor = true;
+            this.buttonEnableQSI.Click += new System.EventHandler(this.ButtonEnableQSI_Click);
+            // 
+            // buttonClearData
+            // 
+            this.buttonClearData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.buttonClearData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonClearData.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.buttonClearData.FlatAppearance.BorderSize = 0;
+            this.buttonClearData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonClearData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonClearData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClearData.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonClearData.ForeColor = System.Drawing.Color.White;
+            this.buttonClearData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonClearData.Location = new System.Drawing.Point(99, 534);
+            this.buttonClearData.Name = "buttonClearData";
+            this.buttonClearData.Size = new System.Drawing.Size(179, 35);
+            this.buttonClearData.TabIndex = 40;
+            this.buttonClearData.Text = "清空本机所有数据";
+            this.buttonClearData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonClearData.UseVisualStyleBackColor = false;
+            this.buttonClearData.Click += new System.EventHandler(this.ButtonClearData_Click);
+            // 
+            // buttonChangePW
+            // 
+            this.buttonChangePW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.buttonChangePW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonChangePW.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.buttonChangePW.FlatAppearance.BorderSize = 0;
+            this.buttonChangePW.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonChangePW.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonChangePW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonChangePW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonChangePW.ForeColor = System.Drawing.Color.White;
+            this.buttonChangePW.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonChangePW.Location = new System.Drawing.Point(99, 464);
+            this.buttonChangePW.Name = "buttonChangePW";
+            this.buttonChangePW.Size = new System.Drawing.Size(179, 35);
+            this.buttonChangePW.TabIndex = 39;
+            this.buttonChangePW.Text = "更改密码";
+            this.buttonChangePW.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonChangePW.UseVisualStyleBackColor = false;
+            this.buttonChangePW.Click += new System.EventHandler(this.ButtonChangePW_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("微软雅黑 Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(11, 300);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(112, 27);
+            this.label17.TabIndex = 38;
+            this.label17.Text = "数据与安全";
             // 
             // label14
             // 
@@ -984,247 +1394,6 @@
             this.label15.TabIndex = 36;
             this.label15.Text = "局域网";
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("微软雅黑 Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(11, 300);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(112, 27);
-            this.label17.TabIndex = 38;
-            this.label17.Text = "数据与安全";
-            // 
-            // buttonChangePW
-            // 
-            this.buttonChangePW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.buttonChangePW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonChangePW.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.buttonChangePW.FlatAppearance.BorderSize = 0;
-            this.buttonChangePW.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonChangePW.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonChangePW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonChangePW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonChangePW.ForeColor = System.Drawing.Color.White;
-            this.buttonChangePW.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonChangePW.Location = new System.Drawing.Point(99, 464);
-            this.buttonChangePW.Name = "buttonChangePW";
-            this.buttonChangePW.Size = new System.Drawing.Size(179, 35);
-            this.buttonChangePW.TabIndex = 39;
-            this.buttonChangePW.Text = "更改密码";
-            this.buttonChangePW.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonChangePW.UseVisualStyleBackColor = false;
-            this.buttonChangePW.Click += new System.EventHandler(this.ButtonChangePW_Click);
-            // 
-            // buttonClearData
-            // 
-            this.buttonClearData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.buttonClearData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonClearData.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.buttonClearData.FlatAppearance.BorderSize = 0;
-            this.buttonClearData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonClearData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonClearData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClearData.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonClearData.ForeColor = System.Drawing.Color.White;
-            this.buttonClearData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonClearData.Location = new System.Drawing.Point(99, 534);
-            this.buttonClearData.Name = "buttonClearData";
-            this.buttonClearData.Size = new System.Drawing.Size(179, 35);
-            this.buttonClearData.TabIndex = 40;
-            this.buttonClearData.Text = "清空本机所有数据";
-            this.buttonClearData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonClearData.UseVisualStyleBackColor = false;
-            this.buttonClearData.Click += new System.EventHandler(this.ButtonClearData_Click);
-            // 
-            // panelChangePW
-            // 
-            this.panelChangePW.AutoScroll = true;
-            this.panelChangePW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.panelChangePW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelChangePW.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelChangePW.Controls.Add(this.labelError);
-            this.panelChangePW.Controls.Add(this.label20);
-            this.panelChangePW.Controls.Add(this.label18);
-            this.panelChangePW.Controls.Add(this.textBoxNewPWRepeat);
-            this.panelChangePW.Controls.Add(this.textBoxNewPW);
-            this.panelChangePW.Controls.Add(this.textBoxOldPW);
-            this.panelChangePW.Controls.Add(this.label19);
-            this.panelChangePW.Controls.Add(this.buttonCancelChangePW);
-            this.panelChangePW.Controls.Add(this.buttonSavePW);
-            this.panelChangePW.Location = new System.Drawing.Point(14, 340);
-            this.panelChangePW.Name = "panelChangePW";
-            this.panelChangePW.Size = new System.Drawing.Size(339, 349);
-            this.panelChangePW.TabIndex = 37;
-            this.panelChangePW.Visible = false;
-            // 
-            // textBoxOldPW
-            // 
-            this.textBoxOldPW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.textBoxOldPW.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxOldPW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxOldPW.ForeColor = System.Drawing.Color.White;
-            this.textBoxOldPW.Location = new System.Drawing.Point(21, 48);
-            this.textBoxOldPW.MaxLength = 16;
-            this.textBoxOldPW.Name = "textBoxOldPW";
-            this.textBoxOldPW.Size = new System.Drawing.Size(297, 29);
-            this.textBoxOldPW.TabIndex = 35;
-            this.textBoxOldPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxOldPW.UseSystemPasswordChar = true;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(17, 24);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(122, 21);
-            this.label19.TabIndex = 34;
-            this.label19.Text = "请输入旧的密码";
-            // 
-            // buttonCancelChangePW
-            // 
-            this.buttonCancelChangePW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.buttonCancelChangePW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonCancelChangePW.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.buttonCancelChangePW.FlatAppearance.BorderSize = 0;
-            this.buttonCancelChangePW.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonCancelChangePW.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonCancelChangePW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCancelChangePW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonCancelChangePW.ForeColor = System.Drawing.Color.White;
-            this.buttonCancelChangePW.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCancelChangePW.Location = new System.Drawing.Point(20, 294);
-            this.buttonCancelChangePW.Name = "buttonCancelChangePW";
-            this.buttonCancelChangePW.Size = new System.Drawing.Size(105, 35);
-            this.buttonCancelChangePW.TabIndex = 33;
-            this.buttonCancelChangePW.Text = "取消";
-            this.buttonCancelChangePW.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonCancelChangePW.UseVisualStyleBackColor = false;
-            this.buttonCancelChangePW.Click += new System.EventHandler(this.ButtonCancelChangePW_Click);
-            // 
-            // buttonSavePW
-            // 
-            this.buttonSavePW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.buttonSavePW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonSavePW.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.buttonSavePW.FlatAppearance.BorderSize = 0;
-            this.buttonSavePW.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonSavePW.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonSavePW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSavePW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonSavePW.ForeColor = System.Drawing.Color.White;
-            this.buttonSavePW.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSavePW.Location = new System.Drawing.Point(212, 294);
-            this.buttonSavePW.Name = "buttonSavePW";
-            this.buttonSavePW.Size = new System.Drawing.Size(105, 35);
-            this.buttonSavePW.TabIndex = 32;
-            this.buttonSavePW.Text = "保存";
-            this.buttonSavePW.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonSavePW.UseVisualStyleBackColor = false;
-            this.buttonSavePW.Click += new System.EventHandler(this.ButtonSavePW_Click);
-            // 
-            // textBoxNewPW
-            // 
-            this.textBoxNewPW.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.textBoxNewPW.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxNewPW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxNewPW.ForeColor = System.Drawing.Color.White;
-            this.textBoxNewPW.Location = new System.Drawing.Point(21, 118);
-            this.textBoxNewPW.MaxLength = 16;
-            this.textBoxNewPW.Name = "textBoxNewPW";
-            this.textBoxNewPW.Size = new System.Drawing.Size(297, 29);
-            this.textBoxNewPW.TabIndex = 36;
-            this.textBoxNewPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxNewPW.UseSystemPasswordChar = true;
-            // 
-            // textBoxNewPWRepeat
-            // 
-            this.textBoxNewPWRepeat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.textBoxNewPWRepeat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxNewPWRepeat.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxNewPWRepeat.ForeColor = System.Drawing.Color.White;
-            this.textBoxNewPWRepeat.Location = new System.Drawing.Point(21, 189);
-            this.textBoxNewPWRepeat.MaxLength = 16;
-            this.textBoxNewPWRepeat.Name = "textBoxNewPWRepeat";
-            this.textBoxNewPWRepeat.Size = new System.Drawing.Size(297, 29);
-            this.textBoxNewPWRepeat.TabIndex = 37;
-            this.textBoxNewPWRepeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxNewPWRepeat.UseSystemPasswordChar = true;
-            this.textBoxNewPWRepeat.TextChanged += new System.EventHandler(this.TextBoxNewPWRepeat_TextChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(16, 94);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(170, 21);
-            this.label18.TabIndex = 38;
-            this.label18.Text = "新的密码，不允许为空";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label20.ForeColor = System.Drawing.Color.White;
-            this.label20.Location = new System.Drawing.Point(17, 164);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(106, 21);
-            this.label20.TabIndex = 39;
-            this.label20.Text = "确认新的密码";
-            this.label20.Click += new System.EventHandler(this.Label20_Click);
-            // 
-            // labelError
-            // 
-            this.labelError.AutoSize = true;
-            this.labelError.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.labelError.Location = new System.Drawing.Point(35, 237);
-            this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(266, 21);
-            this.labelError.TabIndex = 40;
-            this.labelError.Text = "旧密码不正确或两个新密码不相同。";
-            this.labelError.Visible = false;
-            this.labelError.Click += new System.EventHandler(this.LabelError_Click);
-            // 
-            // buttonEnableQSI
-            // 
-            this.buttonEnableQSI.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.buttonEnableQSI.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonEnableQSI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonEnableQSI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEnableQSI.Location = new System.Drawing.Point(27, 348);
-            this.buttonEnableQSI.Name = "buttonEnableQSI";
-            this.buttonEnableQSI.Size = new System.Drawing.Size(25, 22);
-            this.buttonEnableQSI.TabIndex = 41;
-            this.buttonEnableQSI.UseVisualStyleBackColor = true;
-            this.buttonEnableQSI.Click += new System.EventHandler(this.ButtonEnableQSI_Click);
-            // 
-            // label21
-            // 
-            this.label21.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label21.ForeColor = System.Drawing.Color.White;
-            this.label21.Location = new System.Drawing.Point(55, 346);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(125, 24);
-            this.label21.TabIndex = 42;
-            this.label21.Text = "启用快捷登录";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label22
-            // 
-            this.label22.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label22.ForeColor = System.Drawing.Color.Gray;
-            this.label22.Location = new System.Drawing.Point(55, 376);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(303, 46);
-            this.label22.TabIndex = 43;
-            this.label22.Text = "启用该选项后，登录程序将不需要输入密码，直接进入主界面。";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // buttonSendM
             // 
             this.buttonSendM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
@@ -1245,158 +1414,6 @@
             this.buttonSendM.UseVisualStyleBackColor = false;
             this.buttonSendM.Click += new System.EventHandler(this.ButtonSendM_Click);
             // 
-            // buttonDetail
-            // 
-            this.buttonDetail.BackColor = System.Drawing.Color.Transparent;
-            this.buttonDetail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonDetail.FlatAppearance.BorderSize = 0;
-            this.buttonDetail.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonDetail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDetail.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonDetail.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonDetail.Image = global::UChat.Properties.Resources.个人信息;
-            this.buttonDetail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDetail.Location = new System.Drawing.Point(-1, 150);
-            this.buttonDetail.Name = "buttonDetail";
-            this.buttonDetail.Size = new System.Drawing.Size(302, 50);
-            this.buttonDetail.TabIndex = 11;
-            this.buttonDetail.Text = "  对方的个人信息";
-            this.buttonDetail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDetail.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.buttonDetail, "对方的个人信息");
-            this.buttonDetail.UseVisualStyleBackColor = false;
-            this.buttonDetail.Visible = false;
-            this.buttonDetail.Click += new System.EventHandler(this.ButtonDetail_Click);
-            // 
-            // buttonFiles
-            // 
-            this.buttonFiles.BackColor = System.Drawing.Color.Transparent;
-            this.buttonFiles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonFiles.FlatAppearance.BorderSize = 0;
-            this.buttonFiles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonFiles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFiles.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonFiles.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonFiles.Image = global::UChat.Properties.Resources.传输文件2;
-            this.buttonFiles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonFiles.Location = new System.Drawing.Point(-1, 100);
-            this.buttonFiles.Name = "buttonFiles";
-            this.buttonFiles.Size = new System.Drawing.Size(302, 50);
-            this.buttonFiles.TabIndex = 9;
-            this.buttonFiles.Text = "  文件传输";
-            this.buttonFiles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonFiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.buttonFiles, "文件传输");
-            this.buttonFiles.UseVisualStyleBackColor = false;
-            this.buttonFiles.Visible = false;
-            this.buttonFiles.Click += new System.EventHandler(this.ButtonFiles_Click);
-            // 
-            // buttonMenu
-            // 
-            this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
-            this.buttonMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonMenu.FlatAppearance.BorderSize = 0;
-            this.buttonMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMenu.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonMenu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonMenu.Image = ((System.Drawing.Image)(resources.GetObject("buttonMenu.Image")));
-            this.buttonMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMenu.Location = new System.Drawing.Point(-1, 0);
-            this.buttonMenu.Name = "buttonMenu";
-            this.buttonMenu.Size = new System.Drawing.Size(302, 50);
-            this.buttonMenu.TabIndex = 3;
-            this.buttonMenu.Text = "  UChat";
-            this.buttonMenu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonMenu.UseVisualStyleBackColor = false;
-            this.buttonMenu.Click += new System.EventHandler(this.Button4_Click);
-            // 
-            // buttonSetting
-            // 
-            this.buttonSetting.BackColor = System.Drawing.Color.Transparent;
-            this.buttonSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonSetting.FlatAppearance.BorderSize = 0;
-            this.buttonSetting.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonSetting.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonSetting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSetting.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonSetting.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonSetting.Image = global::UChat.Properties.Resources.设置2;
-            this.buttonSetting.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSetting.Location = new System.Drawing.Point(-1, 618);
-            this.buttonSetting.Name = "buttonSetting";
-            this.buttonSetting.Size = new System.Drawing.Size(302, 50);
-            this.buttonSetting.TabIndex = 8;
-            this.buttonSetting.Text = "  设置";
-            this.buttonSetting.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSetting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.buttonSetting, "设置");
-            this.buttonSetting.UseVisualStyleBackColor = false;
-            this.buttonSetting.Click += new System.EventHandler(this.ButtonSetting_Click);
-            // 
-            // buttonExit2
-            // 
-            this.buttonExit2.BackColor = System.Drawing.Color.Transparent;
-            this.buttonExit2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonExit2.FlatAppearance.BorderSize = 0;
-            this.buttonExit2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonExit2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonExit2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExit2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonExit2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonExit2.Image = global::UChat.Properties.Resources.退出1;
-            this.buttonExit2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonExit2.Location = new System.Drawing.Point(-1, 668);
-            this.buttonExit2.Name = "buttonExit2";
-            this.buttonExit2.Size = new System.Drawing.Size(302, 50);
-            this.buttonExit2.TabIndex = 2;
-            this.buttonExit2.Text = "  退出";
-            this.buttonExit2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonExit2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.buttonExit2, "退出");
-            this.buttonExit2.UseVisualStyleBackColor = false;
-            this.buttonExit2.Click += new System.EventHandler(this.ButtonExit2_Click);
-            // 
-            // buttonLAN
-            // 
-            this.buttonLAN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(125)))), ((int)(((byte)(236)))));
-            this.buttonLAN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonLAN.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.buttonLAN.FlatAppearance.BorderSize = 0;
-            this.buttonLAN.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.buttonLAN.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.buttonLAN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLAN.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonLAN.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonLAN.Image = global::UChat.Properties.Resources.局域网2;
-            this.buttonLAN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonLAN.Location = new System.Drawing.Point(-1, 50);
-            this.buttonLAN.Name = "buttonLAN";
-            this.buttonLAN.Size = new System.Drawing.Size(302, 50);
-            this.buttonLAN.TabIndex = 1;
-            this.buttonLAN.Text = "  局域网";
-            this.buttonLAN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonLAN.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip1.SetToolTip(this.buttonLAN, "局域网");
-            this.buttonLAN.UseVisualStyleBackColor = false;
-            this.buttonLAN.Click += new System.EventHandler(this.ButtonLAN_Click);
-            // 
-            // pictureBoxTips
-            // 
-            this.pictureBoxTips.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.pictureBoxTips.BackgroundImage = global::UChat.Properties.Resources.Chat;
-            this.pictureBoxTips.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBoxTips.Location = new System.Drawing.Point(2, 136);
-            this.pictureBoxTips.Name = "pictureBoxTips";
-            this.pictureBoxTips.Size = new System.Drawing.Size(856, 184);
-            this.pictureBoxTips.TabIndex = 25;
-            this.pictureBoxTips.TabStop = false;
-            this.pictureBoxTips.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
-            // 
             // buttonExit
             // 
             this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
@@ -1415,16 +1432,38 @@
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
             // 
-            // pictureBoxEmptyIcon
+            // labelSpeed
             // 
-            this.pictureBoxEmptyIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.pictureBoxEmptyIcon.BackgroundImage = global::UChat.Properties.Resources.kong;
-            this.pictureBoxEmptyIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBoxEmptyIcon.Location = new System.Drawing.Point(0, 47);
-            this.pictureBoxEmptyIcon.Name = "pictureBoxEmptyIcon";
-            this.pictureBoxEmptyIcon.Size = new System.Drawing.Size(355, 174);
-            this.pictureBoxEmptyIcon.TabIndex = 4;
-            this.pictureBoxEmptyIcon.TabStop = false;
+            this.labelSpeed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.labelSpeed.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.labelSpeed.ForeColor = System.Drawing.Color.White;
+            this.labelSpeed.Location = new System.Drawing.Point(-1, 75);
+            this.labelSpeed.Name = "labelSpeed";
+            this.labelSpeed.Size = new System.Drawing.Size(314, 26);
+            this.labelSpeed.TabIndex = 32;
+            this.labelSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelProgress
+            // 
+            this.labelProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.labelProgress.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.labelProgress.ForeColor = System.Drawing.Color.White;
+            this.labelProgress.Location = new System.Drawing.Point(0, 45);
+            this.labelProgress.Name = "labelProgress";
+            this.labelProgress.Size = new System.Drawing.Size(314, 26);
+            this.labelProgress.TabIndex = 33;
+            this.labelProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelRemainTime
+            // 
+            this.labelRemainTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.labelRemainTime.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.labelRemainTime.ForeColor = System.Drawing.Color.White;
+            this.labelRemainTime.Location = new System.Drawing.Point(-1, 117);
+            this.labelRemainTime.Name = "labelRemainTime";
+            this.labelRemainTime.Size = new System.Drawing.Size(314, 26);
+            this.labelRemainTime.TabIndex = 34;
+            this.labelRemainTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormMain
             // 
@@ -1433,7 +1472,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(125)))), ((int)(((byte)(236)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.Controls.Add(this.panelSetting);
+            this.Controls.Add(this.panelFileBar);
             this.Controls.Add(this.panelSideBar);
             this.Controls.Add(this.panelTips);
             this.Controls.Add(this.labelAlert);
@@ -1447,7 +1486,7 @@
             this.Controls.Add(this.labelChatBoxBG);
             this.Controls.Add(this.panelLANBarTitle);
             this.Controls.Add(this.panelLANBar);
-            this.Controls.Add(this.panelFileBar);
+            this.Controls.Add(this.panelSetting);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormMain";
@@ -1464,21 +1503,21 @@
             this.panelPercent.ResumeLayout(false);
             this.panelConfirm.ResumeLayout(false);
             this.panelTips.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTips)).EndInit();
             this.panelLANBar.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panelEmpty.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmptyIcon)).EndInit();
             this.panelSetting.ResumeLayout(false);
             this.panelSetting.PerformLayout();
+            this.panelChangePW.ResumeLayout(false);
+            this.panelChangePW.PerformLayout();
             this.panelChangeName.ResumeLayout(false);
             this.panelChangeName.PerformLayout();
             this.panelInfo.ResumeLayout(false);
             this.panelInfo.PerformLayout();
             this.panelLANBarTitle.ResumeLayout(false);
             this.panelLANBarTitle.PerformLayout();
-            this.panelChangePW.ResumeLayout(false);
-            this.panelChangePW.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTips)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmptyIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1578,5 +1617,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button buttonEnableQSI;
         private System.Windows.Forms.Label label22;
+        public System.Windows.Forms.Label labelSpeed;
+        public System.Windows.Forms.Label labelProgress;
+        public System.Windows.Forms.Label labelRemainTime;
     }
 }

@@ -56,6 +56,8 @@ namespace UChat
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
+            UDP uDP = new UDP();
+            uDP.OnlineMessageSend(IPAddress.Broadcast, ReplyStatus.NoReplyRequired, OnlineStatus.Offline);
             System.Environment.Exit(0);
         }
     }

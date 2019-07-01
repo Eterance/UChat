@@ -99,7 +99,7 @@ namespace UChat
             /// <summary>
             /// 数据片缓存
             /// </summary>
-            byte[] fragmentBuffer = new byte[1400];
+            byte[] fragmentBuffer = new byte[14000];
             /// <summary>
             /// 发送的文件路径。
             /// </summary>
@@ -184,6 +184,7 @@ namespace UChat
 
                     int fragmentBufferLength = fragmentBuffer.Length;
                     long totalindex = FileByte / fragmentBufferLength;//文件的总块数
+                    CommonFoundations.FileTransferTempData.TotalBlocks = totalindex;
                     long index = 0;
                     //int max = 0;
 
@@ -211,6 +212,7 @@ namespace UChat
                                         {
                                             sendStream.Write(fragmentBuffer, 0, fragmentBufferLength);
                                             sendStream.Flush();
+                                            CommonFoundations.FileTransferTempData.CurrentBlocks = index;
                                             BlockConfirmationReceive(ref signalStream, signalClient.ReceiveBufferSize);  //这是一个阻塞方法，只有收到确认后才继续传下一个数据片
                                             index++;
                                             Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比

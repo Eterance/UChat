@@ -46,14 +46,15 @@ namespace UChat
         /// 发送文件传输请求回复。
         /// </summary>
         /// <param name="AcceptStatus">文件传输请求确认：使用 AcceptStatus 结构体。</param>
-        public static void FileTransferAnswerSender(string AcceptStatus)
+        /// <param name="ip">目的地 IP</param>
+        public static void FileTransferAnswerSender(string AcceptStatus, string ip)
         {
             /// 文件传输请求信息由以下部分组成：
             /// 【文件传输请求字 FR】+【接受状态字】
             string carrier = "FA" + AcceptStatus;
             //MessageBox.Show(carrier);
             //MessageBox.Show(carrier);
-            IPAddress iPAddress = IPAddress.Parse(CommonFoundations.FileTransferTempData.FRSourceIP);
+            IPAddress iPAddress = IPAddress.Parse(ip);
             UDP uDP = new UDP();
             uDP.UDPMessageSender(iPAddress, carrier);
         }
@@ -68,7 +69,9 @@ namespace UChat
             {
                 if (CommonFoundations.FileTransferTempData.FlieTransferAcceptLock == true)//本机锁开，自动拒绝
                 {
-                    FileTransferAnswerSender(AcceptStatus.RefuseByLock);
+                    //MessageBox.Show("自动拒绝对面");
+                    string ip = FormMain.formMain.UIDtoIP(message.Substring(2, 17));
+                    FileTransferAnswerSender(AcceptStatus.RefuseByLock, ip);
                 }
                 else
                 {
@@ -89,9 +92,11 @@ namespace UChat
                         //FormMain.formMain.StartFileSend();
                         break;
                     case "RefuseByUser"://对方拒绝
+                        //MessageBox.Show("被对方拒绝");
                         FormMain.formMain.RefuseRemind();
                         break;
                     case "RefuseByLock"://自动拒绝
+                        //MessageBox.Show("被自动拒绝");
                         FormMain.formMain.BusyRemind();
                         break;
                     default:

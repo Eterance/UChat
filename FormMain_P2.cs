@@ -233,6 +233,7 @@ namespace UChat
             {
                 //使用命令行打开资源管理器并定位到文件。
                 Process p = new Process();
+                MessageBox.Show(filePathMain);
                 p.StartInfo.FileName = "explorer.exe";
                 p.StartInfo.Arguments = "/e,/select," + filePathMain;//参数 -e 此命令使用默认视图启动 Windows 资源管理器，并把焦点定位在 RecePath。
                 p.Start();

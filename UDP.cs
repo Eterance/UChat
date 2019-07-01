@@ -27,7 +27,7 @@ namespace UChat
     /// </summary> 
     /// <returns></returns> 
     public class UDP
-    {
+    { 
         /// <summary>
         /// 向目的 IP 发送本机上线信息。
         /// </summary>

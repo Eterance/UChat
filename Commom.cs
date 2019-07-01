@@ -84,6 +84,9 @@ namespace UChat
                 FTRPercentage = 0;
                 FTRPercentage2 = 0;
                 CancelFTR = false;
+                TotalBlocks = 0;
+                CurrentBlocks = 0;
+                PassBlocks = 0;
             }
             /// <summary>
             /// 发起文件传输请求的文件路径。包括路径，文件名，扩展名。
@@ -129,6 +132,18 @@ namespace UChat
             /// 指示是否要中断文件传输进程。
             /// </summary>
             public static bool CancelFTR = false;
+            /// <summary>
+            /// 指示文件传输总块数。
+            /// </summary>
+            public static long TotalBlocks = 0;
+            /// <summary>
+            /// 指示文件传输当前块数。
+            /// </summary>
+            public static long CurrentBlocks = 0;
+            /// <summary>
+            /// 指示文件传输上一次块数。
+            /// </summary>
+            public static long PassBlocks = 0;
         }
     }
 }

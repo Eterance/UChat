@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 72</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAJ5JREFUWEft
+        0rEJAkEQheEtyDIuPwQxugIsQjAQA0Et5BKDCw3swdACzAwsQNb/YMwuGBZmueB98KfzkkkiIiIiMjs5
+        5weVONqJWAxt6EQ7Z3s6UGMnYjFUXBVTw96qYOhCN+qdXWmgzk7EYuhOX3o5e9OHtnYiFkPFVTE17K0K
+        hhpaU+tsSSta2IlYDD1pNP6hp7+znRARERGROUjpBxC7/1YUToJMAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -141,16 +153,4 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 72</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 72</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAJ5JREFUWEft
-        0rEJAkEQheEtyDIuPwQxugIsQjAQA0Et5BKDCw3swdACzAwsQNb/YMwuGBZmueB98KfzkkkiIiIiMjs5
-        5weVONqJWAxt6EQ7Z3s6UGMnYjFUXBVTw96qYOhCN+qdXWmgzk7EYuhOX3o5e9OHtnYiFkPFVTE17K0K
-        hhpaU+tsSSta2IlYDD1pNP6hp7+znRARERGROUjpBxC7/1YUToJMAAAAAElFTkSuQmCC
-</value>
-  </data>
 </root>

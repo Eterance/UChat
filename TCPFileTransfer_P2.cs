@@ -69,11 +69,11 @@ namespace UChat
             /// <summary>
             /// 数据片缓存
             /// </summary>
-            byte[] fragmentBuffer = new byte[1400];
+            byte[] fragmentBuffer = new byte[14000];
             /// <summary>
             /// 数据块缓存
             /// </summary>
-            byte[] blockBuffer = new byte[100 * 1400];
+            byte[] blockBuffer = new byte[100 * 14000];
             /// <summary>
             /// 接收的文件路径。
             /// </summary>
@@ -156,6 +156,7 @@ namespace UChat
                     int blockBufferBufferLength = blockBuffer.Length;
                     int blockElementsNums = 0;//指示 blockBuffer 中有多少个字节
                     long totalindex = FileByte / fragmentBufferLength;//文件的总片数
+                    CommonFoundations.FileTransferTempData.TotalBlocks = totalindex;
                     long index = 0;//接受数据片的序号
 
                     Thread.Sleep(50);//等待对面建立控制信号监听
@@ -242,6 +243,7 @@ namespace UChat
                                                 #endregion
 
                                                 BlockConfirm(ref signalStream, "OK");//发送消息让对方传输下一个块
+                                                CommonFoundations.FileTransferTempData.CurrentBlocks = index;
                                             }
 
                                             if (blockElementsNums != 0)//缓存块里有东西，需要最后一次写入

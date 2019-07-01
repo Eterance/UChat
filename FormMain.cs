@@ -118,6 +118,23 @@ namespace UChat
         }
 
         /// <summary>
+        /// 遍历查找指定 UID 的对应 IP。
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public string UIDtoIP(string uid)
+        {
+            foreach (DataRow dataRow in LANtable.Rows)
+            {
+                if (dataRow[0].ToString() == uid)
+                {
+                    return dataRow[2].ToString();//返回IP
+                }
+            }
+            return "";
+        }
+
+        /// <summary>
         /// 删除指定 UID 所在的表格行。
         /// </summary>
         /// <param name="uid"></param>
@@ -295,6 +312,8 @@ namespace UChat
             SetDouble(labelError);
             SetDouble(label21);
             SetDouble(label22);
+            SetDouble(labelSpeed);
+            SetDouble(labelProgress);
 
             SetDouble(panel2);
             SetDouble(panelLANBar);
@@ -721,7 +740,7 @@ namespace UChat
         /// </summary>
         /// <param name="fileLength">文件的长度（以字节为单位）</param>
         /// <returns></returns>
-        private string FileSize(long fileLength)
+        public string FileSize(long fileLength)
         {
             double b = 1, kb = 1000 * b, mb = 1000 * kb, gb = 1000 * mb;//这里非常不严谨地用了小b
             double size = fileLength;
@@ -951,6 +970,25 @@ namespace UChat
             {
                 Action action = new Action(FTROverProcessor);
                 panelLANBar.Invoke(action);
+            }
+        }
+
+        /// <summary>
+        /// 把秒数转换为格式化的字符串。自动加上时间单位。
+        /// </summary>
+        /// <param name="sec">总秒数</param>
+        /// <returns></returns>
+        private string SecToString(long sec)
+        {
+            if (sec<=60)//小于1分钟
+            {
+                return sec.ToString() + " 秒";
+            }
+            else
+            {
+                long min = sec / 60;
+                long sec2 = sec % 60;
+                return min.ToString() + " 分钟 " + sec2.ToString() + " 秒";
             }
         }
 
@@ -1346,7 +1384,7 @@ namespace UChat
             }
             else
             {
-                CommonFoundations.FileTransferTempData.FlieTransferAcceptLock = false;//开启锁
+                CommonFoundations.FileTransferTempData.FlieTransferAcceptLock = false;//关闭锁
                 this.BackColor = Color.FromArgb(0, 125, 236);
             }
         }
@@ -1372,7 +1410,7 @@ namespace UChat
         {
             timerFTTimeout.Stop();//超时计时器停止计时
             timerFTTimeout.Enabled = false;
-            FileTransfer.FileTransferAnswerSender(AcceptStatus.RefuseByUser);
+            FileTransfer.FileTransferAnswerSender(AcceptStatus.RefuseByUser,CommonFoundations.FileTransferTempData.FRSourceIP);
             CommonFoundations.FileTransferTempData.ResetFTRTempData();
             ResetSendFileBarUI(false);
             panelFileBar.SendToBack();
@@ -1399,7 +1437,7 @@ namespace UChat
                 //folderBrowserDialog.ShowDialog();
                 CommonFoundations.FileTransferTempData.FRDestinationFolder = folderBrowserDialog.SelectedPath;//获取用户选定的保存文件夹
                 //MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder);
-                FileTransfer.FileTransferAnswerSender(AcceptStatus.Accept);//向对方确认接收文件
+                FileTransfer.FileTransferAnswerSender(AcceptStatus.Accept,CommonFoundations.FileTransferTempData.FRSourceIP);//向对方确认接收文件
                 panelConfirm.Visible = false;
                 panelPercent.Visible = true;
                 panelPercent.BringToFront();
@@ -1421,14 +1459,15 @@ namespace UChat
             {
                 timerFTTimeout.Stop();//超时计时器停止计时
                 timerFTTimeout.Enabled = false;
-                FileTransfer.FileTransferAnswerSender(AcceptStatus.RefuseByUser);
+                FileTransfer.FileTransferAnswerSender(AcceptStatus.RefuseByUser,CommonFoundations.FileTransferTempData.FRSourceIP);
                 CommonFoundations.FileTransferTempData.ResetFTRTempData();
+                this.BackColor = CommonFoundations.MainBlue;
                 ResetSendFileBarUI(true);
             }
         }
         private void BackgroundWorkerFileReceiver_DoWork(object sender, DoWorkEventArgs e)
         {
-            //fileReceiver = new TCPFileTransfer.FileReceiver(CommonFoundations.FileTransferTempData.FRDestinationFolder + "/" + CommonFoundations.FileTransferTempData.FileFullName, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRSourceIP);
+            delayFactor = 0;
             TCPFileTransfer.FileReceiver fileReceiver = new TCPFileTransfer.FileReceiver();
             fileReceiver.SetParameters(
                 CommonFoundations.FileTransferTempData.FRDestinationFolder + "/" + CommonFoundations.FileTransferTempData.FileFullName,
@@ -1439,8 +1478,7 @@ namespace UChat
 
         private void BackgroundWorkerFileSender_DoWork(object sender, DoWorkEventArgs e)
         {
-            //fileSender = new TCPFileTransfer.FileSender(CommonFoundations.FileTransferTempData.FRSourcePath, CommonFoundations.FileTransferTempData.FileLengthBytes, CommonFoundations.FileTransferTempData.FRDestinationIP);
-
+            delayFactor = 0;
             TCPFileTransfer.FileSender fileSender = new TCPFileTransfer.FileSender();
             fileSender.SetParameters(
                 CommonFoundations.FileTransferTempData.FRSourcePath,
@@ -1497,6 +1535,7 @@ namespace UChat
                     {
                         NotificationSystem notificationSystem = new NotificationSystem();
                         //MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
+                        MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
                         notificationSystem.PushNotification("完成", "文件传输已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
                         //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
                         FTROverProcessor();
@@ -1555,10 +1594,37 @@ namespace UChat
             }
         }
 
+        int delayFactor = 0;//时延系数，把 timer 延时
         private void TimerPercent_Tick(object sender, EventArgs e)
         {
+            long currentBytes = CommonFoundations.FileTransferTempData.CurrentBlocks * 14000;//当前已经传输的字节数
+            string cb = formMain.FileSize(currentBytes);
+            long totalBytes = CommonFoundations.FileTransferTempData.TotalBlocks * 14000;//总字节数
+            string tb = formMain.FileSize(totalBytes);
+            if (delayFactor == 10)
+            {
+                long sentBytesPerSec = (CommonFoundations.FileTransferTempData.CurrentBlocks - CommonFoundations.FileTransferTempData.PassBlocks) * 14000 * 2;//过去一段时间里发送的速度
+                string sb = formMain.FileSize(sentBytesPerSec);
+                formMain.labelSpeed.Text = sb + "/s";
+                long remainSec = 0;
+                try//捕捉除于 0 错误
+                {
+                    remainSec = ((totalBytes - currentBytes) / sentBytesPerSec) + 1;//剩余时间
+                }
+                catch 
+                {
+                }
+                formMain.labelRemainTime.Text = "剩余时间约 " + formMain.SecToString(remainSec);
+                CommonFoundations.FileTransferTempData.PassBlocks = CommonFoundations.FileTransferTempData.CurrentBlocks;
+                delayFactor = 0;
+            }
+            else
+            {
+                delayFactor++;
+            }
             formMain.progressBar1.Value = CommonFoundations.FileTransferTempData.FTRPercentage2;
             formMain.labelPercent.Text = CommonFoundations.FileTransferTempData.FTRPercentage2.ToString() + "%";
+            formMain.labelProgress.Text = cb + " / " + tb;
         }
 
         private void ButtonCancelFTR_Click(object sender, EventArgs e)
