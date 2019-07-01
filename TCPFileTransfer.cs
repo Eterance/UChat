@@ -331,10 +331,6 @@ namespace UChat
             {
                 while (true)
                 {
-                    /*if (signalStream.DataAvailable == false)
-                    {
-                        continue;
-                    }*/
                     try
                     {
                         string message = "";
