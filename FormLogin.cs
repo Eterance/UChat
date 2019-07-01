@@ -189,7 +189,7 @@ namespace UChat
                     //AcceptButton = buttonSignIn;
                     labelBar.Text = "UChat  登录账户";
                     DataSet userDataSet = new DataSet();
-                    userDataSet.ReadXml(CommonFoundations.hostUsers_FilePath);//读取本地用户xml存档为表格
+                    userDataSet.ReadXml(CommonFoundations.HostUsers_FilePath);//读取本地用户xml存档为表格
                     labelTitle.Top -= 120;
                     textBoxPassword.Top += 10;
                     buttonSeePW.Top += 10;
@@ -292,11 +292,11 @@ namespace UChat
         private void CreateHostFiles(string name, string password,string UID)
         {
             string userXml = "<Users><User><name>"+ name +"</name><password>"+ password + "</password><UID>" + UID+ "</UID></User></Users>";
-            Directory.CreateDirectory(CommonFoundations.directory_Path);
-            Directory.CreateDirectory(CommonFoundations.history_Path);
+            Directory.CreateDirectory(CommonFoundations.Directory_Path);
+            Directory.CreateDirectory(CommonFoundations.History_Path);
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(userXml);//把字符串转为xml
-            doc.Save(CommonFoundations.hostUsers_FilePath);//保存xml为本地文件
+            doc.Save(CommonFoundations.HostUsers_FilePath);//保存xml为本地文件
         }
 
         private void LabelTips_MouseDown(object sender, MouseEventArgs e)
@@ -407,7 +407,7 @@ namespace UChat
 
         private void Timer2_Tick(object sender, EventArgs e)
         {
-            labelCongratulation.Text = "请尽情使用吧！";
+            labelCongratulation.Text = "请开始使用吧！";
             timer2.Stop();
             timer2.Enabled = false;
             timer3.Enabled = true;
@@ -437,7 +437,7 @@ namespace UChat
         private void ButtonSwitchUID_Click(object sender, EventArgs e)
         {
             DataSet userDataSet = new DataSet();
-            userDataSet.ReadXml(CommonFoundations.hostUsers_FilePath);//读取本地用户xml存档为表格
+            userDataSet.ReadXml(CommonFoundations.HostUsers_FilePath);//读取本地用户xml存档为表格
             if (labelTitle.Text == userDataSet.Tables[0].Rows[0][0].ToString())
             {
                 labelTitle.Text = userDataSet.Tables[0].Rows[0][2].ToString();
@@ -451,7 +451,7 @@ namespace UChat
         private void ButtonSignIn_Click(object sender, EventArgs e)
         {
             DataSet userDataSet = new DataSet();
-            userDataSet.ReadXml(CommonFoundations.hostUsers_FilePath);//读取本地用户xml存档为表格
+            userDataSet.ReadXml(CommonFoundations.HostUsers_FilePath);//读取本地用户xml存档为表格
             if (textBoxPassword.Text == userDataSet.Tables[0].Rows[0][1].ToString()) //密码正确，允许登录
             {
                 CommonFoundations.HostName = userDataSet.Tables[0].Rows[0][0].ToString();

@@ -28,9 +28,10 @@ namespace UChat
     public static class CommonFoundations
     {
         public static string xml_FilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/Contact.xml";
-        public static string hostUsers_FilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/HostUsers.xml";
-        public static string directory_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat";
-        public static string history_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/History";
+        public static string HostUsers_FilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/HostUsers.xml";
+        public static string Directory_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat";
+        public static string History_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/History";
+        public static string QuickSignIn_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/History";
         /// <summary>
         /// 带多一个斜杠的聊天历史记录路径。
         /// </summary>

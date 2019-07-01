@@ -30,7 +30,7 @@ namespace UChat
 
         public static void CheckFilesExist()
         {
-            if (Directory.Exists(CommonFoundations.directory_Path) == true && File.Exists(CommonFoundations.hostUsers_FilePath) == true)//若存在目录直接登录
+            if (Directory.Exists(CommonFoundations.Directory_Path) == true && File.Exists(CommonFoundations.HostUsers_FilePath) == true)//若存在目录直接登录
             {
                 CommonFoundations.fileExist = true;
             }

@@ -50,11 +50,11 @@
   <ItemGroup>
     <Compile Include="Commom.cs" />
     <Compile Include="FileTransfer.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="FormBackground.cs">
       <SubType>Form</SubType>
@@ -79,8 +79,8 @@
     <Compile Include="TCPFileTransfer.cs" />
     <Compile Include="TCPFileTransfer_P2.cs" />
     <Compile Include="UDP.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBackground.resx">
       <DependentUpon>FormBackground.cs</DependentUpon>

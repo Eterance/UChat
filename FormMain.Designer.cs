@@ -63,7 +63,7 @@
             this.panelConfirm = new System.Windows.Forms.Panel();
             this.buttonRefuse = new System.Windows.Forms.Button();
             this.buttonAcceptFTR = new System.Windows.Forms.Button();
-            this.labelWating = new System.Windows.Forms.Label();
+            this.labelWaiting = new System.Windows.Forms.Label();
             this.buttonSelectFile = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.labelTarget = new System.Windows.Forms.Label();
@@ -93,6 +93,20 @@
             this.label8 = new System.Windows.Forms.Label();
             this.buttonCancelChange = new System.Windows.Forms.Button();
             this.buttonConfirmChange = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panelInfo = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxInfoUID = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBoxInfoIP = new System.Windows.Forms.TextBox();
+            this.textBoxInfoName = new System.Windows.Forms.TextBox();
+            this.buttonChangeName = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.panelLANBarTitle = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.panelSideBar.SuspendLayout();
             this.panelDetail.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -107,6 +121,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmptyIcon)).BeginInit();
             this.panelSetting.SuspendLayout();
             this.panelChangeName.SuspendLayout();
+            this.panelInfo.SuspendLayout();
+            this.panelLANBarTitle.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelChatBoxBG
@@ -485,9 +501,10 @@
             this.panelFileBar.AutoScroll = true;
             this.panelFileBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
             this.panelFileBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelFileBar.Controls.Add(this.label16);
             this.panelFileBar.Controls.Add(this.panelPercent);
             this.panelFileBar.Controls.Add(this.panelConfirm);
-            this.panelFileBar.Controls.Add(this.labelWating);
+            this.panelFileBar.Controls.Add(this.labelWaiting);
             this.panelFileBar.Controls.Add(this.buttonSelectFile);
             this.panelFileBar.Controls.Add(this.label6);
             this.panelFileBar.Controls.Add(this.labelTarget);
@@ -601,18 +618,18 @@
             this.buttonAcceptFTR.UseVisualStyleBackColor = false;
             this.buttonAcceptFTR.Click += new System.EventHandler(this.ButtonAcceptFTR_Click);
             // 
-            // labelWating
+            // labelWaiting
             // 
-            this.labelWating.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.labelWating.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.labelWating.ForeColor = System.Drawing.Color.White;
-            this.labelWating.Location = new System.Drawing.Point(0, 149);
-            this.labelWating.Name = "labelWating";
-            this.labelWating.Size = new System.Drawing.Size(367, 286);
-            this.labelWating.TabIndex = 26;
-            this.labelWating.Text = "正在等待对方确认接收文件...";
-            this.labelWating.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelWating.Visible = false;
+            this.labelWaiting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.labelWaiting.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.labelWaiting.ForeColor = System.Drawing.Color.White;
+            this.labelWaiting.Location = new System.Drawing.Point(0, 149);
+            this.labelWaiting.Name = "labelWaiting";
+            this.labelWaiting.Size = new System.Drawing.Size(367, 286);
+            this.labelWaiting.TabIndex = 26;
+            this.labelWaiting.Text = "正在等待对方确认接收文件...";
+            this.labelWaiting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelWaiting.Visible = false;
             // 
             // buttonSelectFile
             // 
@@ -638,13 +655,13 @@
             // label6
             // 
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.ForeColor = System.Drawing.Color.Silver;
-            this.label6.Location = new System.Drawing.Point(3, 23);
+            this.label6.Location = new System.Drawing.Point(3, 65);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(350, 34);
             this.label6.TabIndex = 3;
-            this.label6.Text = "将你的文件传输给";
+            this.label6.Text = "将你的文件发送给";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelTarget
@@ -652,7 +669,7 @@
             this.labelTarget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
             this.labelTarget.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.labelTarget.ForeColor = System.Drawing.Color.White;
-            this.labelTarget.Location = new System.Drawing.Point(3, 55);
+            this.labelTarget.Location = new System.Drawing.Point(3, 100);
             this.labelTarget.Name = "labelTarget";
             this.labelTarget.Size = new System.Drawing.Size(353, 39);
             this.labelTarget.TabIndex = 4;
@@ -777,9 +794,9 @@
             this.panelLANBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelLANBar.Controls.Add(this.panel2);
             this.panelLANBar.Controls.Add(this.panelEmpty);
-            this.panelLANBar.Location = new System.Drawing.Point(51, 1);
+            this.panelLANBar.Location = new System.Drawing.Point(51, 51);
             this.panelLANBar.Name = "panelLANBar";
-            this.panelLANBar.Size = new System.Drawing.Size(367, 718);
+            this.panelLANBar.Size = new System.Drawing.Size(367, 668);
             this.panelLANBar.TabIndex = 6;
             this.panelLANBar.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelLANBar_Paint);
             // 
@@ -836,7 +853,7 @@
             this.panelEmpty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
             this.panelEmpty.Controls.Add(this.pictureBoxEmptyIcon);
             this.panelEmpty.Controls.Add(this.labelEmptyText);
-            this.panelEmpty.Location = new System.Drawing.Point(6, 172);
+            this.panelEmpty.Location = new System.Drawing.Point(6, 155);
             this.panelEmpty.Name = "panelEmpty";
             this.panelEmpty.Size = new System.Drawing.Size(355, 330);
             this.panelEmpty.TabIndex = 0;
@@ -875,6 +892,9 @@
             this.panelSetting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
             this.panelSetting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelSetting.Controls.Add(this.panelChangeName);
+            this.panelSetting.Controls.Add(this.label14);
+            this.panelSetting.Controls.Add(this.panelInfo);
+            this.panelSetting.Controls.Add(this.label9);
             this.panelSetting.Location = new System.Drawing.Point(51, 1);
             this.panelSetting.Name = "panelSetting";
             this.panelSetting.Size = new System.Drawing.Size(367, 718);
@@ -886,14 +906,16 @@
             this.panelChangeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
             this.panelChangeName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelChangeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelChangeName.Controls.Add(this.label13);
             this.panelChangeName.Controls.Add(this.textBoxChangeName);
             this.panelChangeName.Controls.Add(this.label8);
             this.panelChangeName.Controls.Add(this.buttonCancelChange);
             this.panelChangeName.Controls.Add(this.buttonConfirmChange);
-            this.panelChangeName.Location = new System.Drawing.Point(14, 234);
+            this.panelChangeName.Location = new System.Drawing.Point(14, 220);
             this.panelChangeName.Name = "panelChangeName";
-            this.panelChangeName.Size = new System.Drawing.Size(339, 245);
+            this.panelChangeName.Size = new System.Drawing.Size(339, 281);
             this.panelChangeName.TabIndex = 27;
+            this.panelChangeName.Visible = false;
             // 
             // textBoxChangeName
             // 
@@ -907,13 +929,14 @@
             this.textBoxChangeName.Size = new System.Drawing.Size(297, 29);
             this.textBoxChangeName.TabIndex = 35;
             this.textBoxChangeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxChangeName.TextChanged += new System.EventHandler(this.TextBoxChangeName_TextChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(103, 42);
+            this.label8.Location = new System.Drawing.Point(98, 42);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(154, 21);
             this.label8.TabIndex = 34;
@@ -931,18 +954,20 @@
             this.buttonCancelChange.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.buttonCancelChange.ForeColor = System.Drawing.Color.White;
             this.buttonCancelChange.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCancelChange.Location = new System.Drawing.Point(21, 186);
+            this.buttonCancelChange.Location = new System.Drawing.Point(21, 226);
             this.buttonCancelChange.Name = "buttonCancelChange";
             this.buttonCancelChange.Size = new System.Drawing.Size(105, 35);
             this.buttonCancelChange.TabIndex = 33;
             this.buttonCancelChange.Text = "取消";
             this.buttonCancelChange.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonCancelChange.UseVisualStyleBackColor = false;
+            this.buttonCancelChange.Click += new System.EventHandler(this.ButtonCancelChange_Click);
             // 
             // buttonConfirmChange
             // 
             this.buttonConfirmChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.buttonConfirmChange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonConfirmChange.Enabled = false;
             this.buttonConfirmChange.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.buttonConfirmChange.FlatAppearance.BorderSize = 0;
             this.buttonConfirmChange.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
@@ -951,13 +976,191 @@
             this.buttonConfirmChange.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.buttonConfirmChange.ForeColor = System.Drawing.Color.White;
             this.buttonConfirmChange.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonConfirmChange.Location = new System.Drawing.Point(213, 186);
+            this.buttonConfirmChange.Location = new System.Drawing.Point(213, 226);
             this.buttonConfirmChange.Name = "buttonConfirmChange";
             this.buttonConfirmChange.Size = new System.Drawing.Size(105, 35);
             this.buttonConfirmChange.TabIndex = 32;
             this.buttonConfirmChange.Text = "保存";
             this.buttonConfirmChange.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonConfirmChange.UseVisualStyleBackColor = false;
+            this.buttonConfirmChange.Click += new System.EventHandler(this.ButtonConfirmChange_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(11, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(62, 31);
+            this.label9.TabIndex = 35;
+            this.label9.Text = "设置";
+            // 
+            // panelInfo
+            // 
+            this.panelInfo.Controls.Add(this.buttonChangeName);
+            this.panelInfo.Controls.Add(this.label10);
+            this.panelInfo.Controls.Add(this.label11);
+            this.panelInfo.Controls.Add(this.textBoxInfoUID);
+            this.panelInfo.Controls.Add(this.label12);
+            this.panelInfo.Controls.Add(this.textBoxInfoIP);
+            this.panelInfo.Controls.Add(this.textBoxInfoName);
+            this.panelInfo.Location = new System.Drawing.Point(16, 100);
+            this.panelInfo.Name = "panelInfo";
+            this.panelInfo.Size = new System.Drawing.Size(345, 174);
+            this.panelInfo.TabIndex = 36;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.ForeColor = System.Drawing.Color.DarkGray;
+            this.label10.Location = new System.Drawing.Point(1, 77);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(62, 24);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "用户名";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.ForeColor = System.Drawing.Color.DarkGray;
+            this.label11.Location = new System.Drawing.Point(1, 2);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(62, 24);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "U  I  D";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxInfoUID
+            // 
+            this.textBoxInfoUID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.textBoxInfoUID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxInfoUID.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxInfoUID.ForeColor = System.Drawing.Color.White;
+            this.textBoxInfoUID.Location = new System.Drawing.Point(73, 4);
+            this.textBoxInfoUID.Multiline = true;
+            this.textBoxInfoUID.Name = "textBoxInfoUID";
+            this.textBoxInfoUID.ReadOnly = true;
+            this.textBoxInfoUID.Size = new System.Drawing.Size(260, 24);
+            this.textBoxInfoUID.TabIndex = 13;
+            this.textBoxInfoUID.Text = "阿三大苏打";
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.ForeColor = System.Drawing.Color.DarkGray;
+            this.label12.Location = new System.Drawing.Point(1, 39);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(62, 24);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "IP地址";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxInfoIP
+            // 
+            this.textBoxInfoIP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.textBoxInfoIP.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxInfoIP.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxInfoIP.ForeColor = System.Drawing.Color.White;
+            this.textBoxInfoIP.Location = new System.Drawing.Point(73, 41);
+            this.textBoxInfoIP.Multiline = true;
+            this.textBoxInfoIP.Name = "textBoxInfoIP";
+            this.textBoxInfoIP.ReadOnly = true;
+            this.textBoxInfoIP.Size = new System.Drawing.Size(260, 24);
+            this.textBoxInfoIP.TabIndex = 11;
+            this.textBoxInfoIP.Text = "164.154.12.1";
+            // 
+            // textBoxInfoName
+            // 
+            this.textBoxInfoName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.textBoxInfoName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxInfoName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxInfoName.ForeColor = System.Drawing.Color.White;
+            this.textBoxInfoName.Location = new System.Drawing.Point(73, 79);
+            this.textBoxInfoName.MaxLength = 16;
+            this.textBoxInfoName.Multiline = true;
+            this.textBoxInfoName.Name = "textBoxInfoName";
+            this.textBoxInfoName.ReadOnly = true;
+            this.textBoxInfoName.Size = new System.Drawing.Size(269, 34);
+            this.textBoxInfoName.TabIndex = 10;
+            this.textBoxInfoName.Text = "撒旦士大夫士大夫";
+            // 
+            // buttonChangeName
+            // 
+            this.buttonChangeName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.buttonChangeName.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonChangeName.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.buttonChangeName.FlatAppearance.BorderSize = 0;
+            this.buttonChangeName.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
+            this.buttonChangeName.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            this.buttonChangeName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonChangeName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonChangeName.ForeColor = System.Drawing.Color.White;
+            this.buttonChangeName.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonChangeName.Location = new System.Drawing.Point(100, 126);
+            this.buttonChangeName.Name = "buttonChangeName";
+            this.buttonChangeName.Size = new System.Drawing.Size(138, 35);
+            this.buttonChangeName.TabIndex = 33;
+            this.buttonChangeName.Text = "更改用户名";
+            this.buttonChangeName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonChangeName.UseVisualStyleBackColor = false;
+            this.buttonChangeName.Click += new System.EventHandler(this.ButtonChangeName_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label13.Location = new System.Drawing.Point(42, 164);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(266, 21);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "新的用户名将在重启本程序后生效。";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("微软雅黑 Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(11, 60);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(132, 27);
+            this.label14.TabIndex = 37;
+            this.label14.Text = "本机用户信息";
+            // 
+            // panelLANBarTitle
+            // 
+            this.panelLANBarTitle.AutoScroll = true;
+            this.panelLANBarTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.panelLANBarTitle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelLANBarTitle.Controls.Add(this.label15);
+            this.panelLANBarTitle.Location = new System.Drawing.Point(51, 1);
+            this.panelLANBarTitle.Name = "panelLANBarTitle";
+            this.panelLANBarTitle.Size = new System.Drawing.Size(367, 50);
+            this.panelLANBarTitle.TabIndex = 7;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label15.ForeColor = System.Drawing.Color.White;
+            this.label15.Location = new System.Drawing.Point(11, 10);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(86, 31);
+            this.label15.TabIndex = 36;
+            this.label15.Text = "局域网";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(11, 10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(110, 31);
+            this.label16.TabIndex = 37;
+            this.label16.Text = "文件传输";
             // 
             // FormMain
             // 
@@ -966,6 +1169,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(125)))), ((int)(((byte)(236)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.panelSetting);
+            this.Controls.Add(this.panelSideBar);
             this.Controls.Add(this.panelTips);
             this.Controls.Add(this.labelAlert);
             this.Controls.Add(this.labelChatBorder);
@@ -974,11 +1179,10 @@
             this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.buttonMin);
             this.Controls.Add(this.labelNameIndicator);
-            this.Controls.Add(this.panelSideBar);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.labelChatBoxBG);
+            this.Controls.Add(this.panelLANBarTitle);
             this.Controls.Add(this.panelLANBar);
-            this.Controls.Add(this.panelSetting);
             this.Controls.Add(this.panelFileBar);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -992,6 +1196,7 @@
             this.panelDetail.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panelFileBar.ResumeLayout(false);
+            this.panelFileBar.PerformLayout();
             this.panelPercent.ResumeLayout(false);
             this.panelConfirm.ResumeLayout(false);
             this.panelTips.ResumeLayout(false);
@@ -1001,8 +1206,13 @@
             this.panelEmpty.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEmptyIcon)).EndInit();
             this.panelSetting.ResumeLayout(false);
+            this.panelSetting.PerformLayout();
             this.panelChangeName.ResumeLayout(false);
             this.panelChangeName.PerformLayout();
+            this.panelInfo.ResumeLayout(false);
+            this.panelInfo.PerformLayout();
+            this.panelLANBarTitle.ResumeLayout(false);
+            this.panelLANBarTitle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1053,7 +1263,7 @@
         private System.Windows.Forms.Panel panelTips;
         private System.Windows.Forms.PictureBox pictureBoxTips;
         private System.Windows.Forms.Button buttonSelectFile;
-        private System.Windows.Forms.Label labelWating;
+        private System.Windows.Forms.Label labelWaiting;
         private System.Windows.Forms.Panel panelConfirm;
         private System.Windows.Forms.Button buttonRefuse;
         private System.Windows.Forms.Button buttonAcceptFTR;
@@ -1072,5 +1282,19 @@
         private System.Windows.Forms.Button buttonConfirmChange;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxChangeName;
+        private System.Windows.Forms.Panel panelInfo;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxInfoUID;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxInfoIP;
+        private System.Windows.Forms.TextBox textBoxInfoName;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button buttonChangeName;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Panel panelLANBarTitle;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }
