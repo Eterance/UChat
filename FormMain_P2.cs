@@ -233,6 +233,7 @@ namespace UChat
             {
                 //使用命令行打开资源管理器并定位到文件。
                 Process p = new Process();
+                MessageBox.Show(filePathMain);
                 p.StartInfo.FileName = "explorer.exe";
                 p.StartInfo.Arguments = "/e,/select," + filePathMain;//参数 -e 此命令使用默认视图启动 Windows 资源管理器，并把焦点定位在 RecePath。
                 p.Start();
@@ -321,6 +322,25 @@ namespace UChat
             labelUnread.MouseLeave += new EventHandler(formMain.Labels_MouseLeave);
             labelUnread.Click += new EventHandler(formMain.Labels_Click);
             SetDouble(labelUnread);
+
+            /*Label labelIP = new Label();                                   //IP
+            labelIP.Name = "labelIP";
+            panel.Controls.Add(labelIP);
+            labelIP.AutoSize = false;
+            labelIP.Location = new Point(189, 62);
+            labelIP.Size = new Size(138, 19);
+            labelIP.BorderStyle = BorderStyle.None;
+            labelIP.BackColor = Color.Transparent;
+            labelIP.ForeColor = Color.DarkGray;
+            labelIP.TextAlign = ContentAlignment.MiddleRight;//文字右对齐
+            labelIP.Text = "192.167.123." + i.ToString();
+            labelIP.Font = new Font("微软雅黑", 12);
+            labelIP.MouseEnter += new EventHandler(formMain.Labels_MouseEnter);//动态绑定消息处理
+            labelIP.MouseLeave += new EventHandler(formMain.Labels_MouseLeave);
+            labelIP.Click += new EventHandler(formMain.Labels_Click);
+            SetDouble(labelIP);*/
+
+            //return labelUID.Text;
         }
     }
 }

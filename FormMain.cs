@@ -1535,7 +1535,7 @@ namespace UChat
                     {
                         NotificationSystem notificationSystem = new NotificationSystem();
                         //MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
-                        //MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
+                        MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
                         notificationSystem.PushNotification("完成", "文件传输已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
                         //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
                         FTROverProcessor();
