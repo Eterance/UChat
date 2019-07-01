@@ -31,7 +31,7 @@ namespace UChat
         public static string HostUsers_FilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/HostUsers.xml";
         public static string Directory_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat";
         public static string History_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/History";
-        public static string QuickSignIn_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/History";
+        public static string QuickSignIn_Path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/UChat/Flag.qsi";
         /// <summary>
         /// 带多一个斜杠的聊天历史记录路径。
         /// </summary>
@@ -58,6 +58,7 @@ namespace UChat
         public static Color MainBlack = Color.FromArgb(25, 25, 25);
         public static Color DarkBlue = Color.FromArgb(26, 33, 42);
         public static Color LightGray = Color.FromArgb(81, 83, 85);
+        public static Color Orange = Color.FromArgb(255, 128, 0);
         public static Color YourTextColor = MainBlue;
         public static Color MyTextColor = Color.White;
 

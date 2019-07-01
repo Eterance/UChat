@@ -209,10 +209,23 @@ namespace UChat
 
         private void TimerStart_Tick(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
-            timer1.Start();
             timerStart.Stop();
             timerStart.Enabled = false;
+            if (File.Exists(CommonFoundations.QuickSignIn_Path) == true)//快捷登录文件存在，直接进入主界面
+            {
+                DataSet userDataSet = new DataSet();
+                userDataSet.ReadXml(CommonFoundations.HostUsers_FilePath);//读取本地用户xml存档为表格
+                CommonFoundations.HostName = userDataSet.Tables[0].Rows[0][0].ToString();
+                CommonFoundations.HostUID = userDataSet.Tables[0].Rows[0][2].ToString();
+                FormMain formMain = new FormMain();
+                formMain.Show();
+                Close();                
+            }
+            else//不存在
+            {
+                timer1.Enabled = true;
+                timer1.Start();
+            }
         }
 
         private void TextBoxUserName_MouseClick(object sender, MouseEventArgs e)

@@ -262,6 +262,11 @@ namespace UChat
             SetDouble(buttonConfirmChange);
             SetDouble(buttonCancelChange);
             SetDouble(buttonChangeName);
+            SetDouble(buttonChangePW);
+            SetDouble(buttonClearData);
+            SetDouble(buttonCancelChangePW);
+            SetDouble(buttonSavePW);
+            SetDouble(buttonEnableQSI);
 
             SetDouble(labelEmptyText);
             SetDouble(label4);
@@ -283,6 +288,13 @@ namespace UChat
             SetDouble(label14);
             SetDouble(label15);
             SetDouble(label16);
+            SetDouble(label17);
+            SetDouble(label18);
+            SetDouble(label19);
+            SetDouble(label20);
+            SetDouble(labelError);
+            SetDouble(label21);
+            SetDouble(label22);
 
             SetDouble(panel2);
             SetDouble(panelLANBar);
@@ -294,6 +306,7 @@ namespace UChat
             SetDouble(panelChangeName);
             SetDouble(panelInfo);
             SetDouble(panelLANBarTitle);
+            SetDouble(panelChangePW);
 
             SetDouble(pictureBoxTips);
             SetDouble(pictureBoxEmptyIcon);
@@ -310,6 +323,9 @@ namespace UChat
             SetDouble(textBoxInfoUID);
             SetDouble(textBoxInfoIP);
             SetDouble(textBoxInfoName);
+            SetDouble(textBoxNewPW);
+            SetDouble(textBoxOldPW);
+            SetDouble(textBoxNewPWRepeat);
             #endregion
         }
 
@@ -369,6 +385,15 @@ namespace UChat
             panelLANBar.BringToFront();
             panelLANBarTitle.BringToFront();
             panelSideBar.BringToFront();
+
+            if (File.Exists(CommonFoundations.QuickSignIn_Path) == true)//快捷登录文件存在
+            {
+                buttonEnableQSI.BackColor = CommonFoundations.MainBlue;
+            }
+            else
+            {
+                buttonEnableQSI.BackColor = CommonFoundations.DarkBlue;
+            }
         }
 
         /// <summary> 
@@ -957,6 +982,13 @@ namespace UChat
             panelPercent.MouseDown += new MouseEventHandler(Controls_MouseDown);
             labelPercent.MouseDown += new MouseEventHandler(Controls_MouseDown);
             progressBar1.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            panelChangePW.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            labelError.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            label20.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            label19.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            label18.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            label21.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            label22.MouseDown += new MouseEventHandler(Controls_MouseDown);
         }
         #endregion
 
@@ -1581,6 +1613,7 @@ namespace UChat
         private void ButtonChangeName_Click(object sender, EventArgs e)
         {
             panelChangeName.Visible = true;
+            panelChangeName.BringToFront();
             textBoxChangeName.Text = "";
         }
 
@@ -1632,6 +1665,93 @@ namespace UChat
             {
                 buttonConfirmChange.Enabled = true;
             }
+        }
+
+        private void ButtonChangePW_Click(object sender, EventArgs e)
+        {
+            panelChangePW.Visible = true;
+            panelChangePW.BringToFront();
+            textBoxOldPW.Text = "";
+            textBoxNewPW.Text = "";
+            textBoxNewPWRepeat.Text = "";
+        }
+
+        private void ButtonCancelChangePW_Click(object sender, EventArgs e)
+        {
+            panelChangePW.Visible = false;
+        }
+
+        private void ButtonSavePW_Click(object sender, EventArgs e)
+        {
+            DataSet userDataSet = new DataSet();
+            userDataSet.ReadXml(CommonFoundations.HostUsers_FilePath);//读取本地用户xml存档为表格
+            string oldOne = userDataSet.Tables[0].Rows[0][1].ToString();
+
+            if (textBoxOldPW.Text == oldOne && textBoxNewPW.Text == textBoxNewPWRepeat.Text && textBoxNewPW.Text != "")//旧密码正确，新密码都正确且不为空
+            {
+                DataRow dataRow = userDataSet.Tables[0].NewRow();
+                dataRow["UID"] = userDataSet.Tables[0].Rows[0][2];
+                dataRow["password"] = textBoxNewPW.Text;
+                dataRow["name"] = userDataSet.Tables[0].Rows[0][0];
+                userDataSet.Tables[0].Rows.RemoveAt(0);
+                userDataSet.Tables[0].Rows.Add(dataRow);
+                userDataSet.WriteXml(CommonFoundations.HostUsers_FilePath);
+
+                labelError.Visible = false;
+                panelChangePW.Visible = false;
+                NotificationSystem notificationSystem = new NotificationSystem();
+                notificationSystem.PushNotification("提醒","更改密码成功。 ", NotificationSystem.PresetColors.TipsBlue);
+            }
+            else
+            {
+                labelError.Visible = true;
+            }
+        }
+
+        private void ButtonEnableQSI_Click(object sender, EventArgs e)
+        {
+            if (buttonEnableQSI.BackColor == CommonFoundations.DarkBlue)//快捷登录启动
+            {
+                buttonEnableQSI.BackColor = CommonFoundations.MainBlue;
+                //File.Create(CommonFoundations.QuickSignIn_Path);
+                FileStream fileStream = new FileStream(CommonFoundations.QuickSignIn_Path, FileMode.Create);
+                fileStream.Close();
+
+            }
+            else
+            {
+                buttonEnableQSI.BackColor = CommonFoundations.DarkBlue;
+                File.Delete(CommonFoundations.QuickSignIn_Path);
+            }
+        }
+
+        private void ButtonClearData_Click(object sender, EventArgs e)
+        {
+            if (CommonFoundations.FileTransferTempData.FlieTransferAcceptLock == true)//文件传输时不允许清空数据
+            {
+                NotificationSystem notificationSystem = new NotificationSystem();
+                notificationSystem.PushNotification("错误", "文件传输时无法清空用户数据。请结束文件传输后再次尝试。", NotificationSystem.PresetColors.WarningRed);
+            }
+            else
+            {
+                FormClearData formClearData = new FormClearData();
+                formClearData.ShowDialog();
+            }
+        }
+
+        private void TextBoxNewPWRepeat_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LabelError_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label20_Click(object sender, EventArgs e)
+        {
+
         }
     }
     
