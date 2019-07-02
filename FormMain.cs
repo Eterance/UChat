@@ -1471,7 +1471,7 @@ namespace UChat
             {
                 delayFactor++;
             }
-            if (CommonFoundations.FileTransferTempData.FTRPercentage2 >=0 && CommonFoundations.FileTransferTempData.FTRPercentage2 <=100)
+            if (CommonFoundations.FileTransferTempData.FTRPercentage2 >=0 && CommonFoundations.FileTransferTempData.FTRPercentage2 <=100)//只把0·100的值赋给progressbar
             {
                 formMain.progressBar1.Value = CommonFoundations.FileTransferTempData.FTRPercentage2;
             }
