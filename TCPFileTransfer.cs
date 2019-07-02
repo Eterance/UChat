@@ -1,25 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Management;
+using System.Text;
 using System.Threading;
-using System.Windows;
-using System.Timers;
-using System.Diagnostics;
-using SpecialEnumeration;
+using System.Windows.Forms;
 
 namespace UChat
 {
@@ -62,12 +47,13 @@ namespace UChat
         /// </summary>
         public class FileSender
         {
-             /// <summary>
-             /// 在端口 50024 上发送文件。
-             /// </summary>
+            /// <summary>
+            /// 在端口 50024 上发送文件。
+            /// </summary>
             public FileSender()//构造函数
             {
             }
+
             /// <summary>
             /// 在端口 50024 上发送文件。
             /// </summary>
@@ -122,7 +108,7 @@ namespace UChat
             /// 监听控制信息
             /// </summary>
             TcpListener signalListener = new TcpListener(IPAddress.Any, 50023);
-            
+
             /// <summary>
             /// 处理收到的取消控制消息。
             /// </summary>
@@ -150,7 +136,6 @@ namespace UChat
                         client.Close();
                         if (message == "CANCEL")//对面发来的取消请求
                         {
-                            //MessageBox.Show("Copy That");
                             CancelByOpposite = true;
                         }
                     }
@@ -199,50 +184,44 @@ namespace UChat
                     {
                         FileStream fStream = File.OpenRead(FilePath);//打开文件流
                         NetworkStream sendStream = client.GetStream();
-                        BufferedStream bufferedStream = new BufferedStream(sendStream);//建立缓冲流
                         using (fStream)
                         {
                             using (client)
                             {
                                 using (sendStream)
                                 {
-                                    using (bufferedStream)
-                                    {
-                                        while ((fragmentBufferLength = fStream.Read(fragmentBuffer, 0, fragmentBufferLength)) > 0)//blockBufferLength为0时，即文件流到达结尾
-                                        {
-                                            sendStream.Write(fragmentBuffer, 0, fragmentBufferLength);
-                                            sendStream.Flush();
-                                            CommonFoundations.FileTransferTempData.CurrentBlocks = index;
-                                            BlockConfirmationReceive(ref signalStream, signalClient.ReceiveBufferSize);  //这是一个阻塞方法，只有收到确认后才继续传下一个数据片
-                                            index++;
-                                            Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
-                                            percentage = Percentage;
 
-                                            //中断传输
-                                            #region
-                                            if (CommonFoundations.FileTransferTempData.CancelFTR == true)
-                                            {
-                                                //MessageBox.Show("CancelFTR == true");
-                                                CancelByHost = true;
-                                            }
-                                            if (CancelByHost == true || CancelByOpposite == true)
-                                            {
-                                                //MessageBox.Show("IN CHOOSE");
-                                                if (CancelByHost == true)//自己结束的
-                                                {
-                                                    //MessageBox.Show("CancelByHost == true");
-                                                    tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
-                                                    return TaskCompletionStatus.HostCancel;
-                                                }
-                                                if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息
-                                                {
-                                                    //MessageBox.Show("CancelByOpposite == true");
-                                                    return TaskCompletionStatus.OppositeCancel;
-                                                }
-                                            }
-                                            #endregion
+                                    while ((fragmentBufferLength = fStream.Read(fragmentBuffer, 0, fragmentBufferLength)) > 0)//blockBufferLength为0时，即文件流到达结尾
+                                    {
+                                        sendStream.Write(fragmentBuffer, 0, fragmentBufferLength);
+                                        sendStream.Flush();
+                                        CommonFoundations.FileTransferTempData.CurrentBlocks = index;
+                                        BlockConfirmationReceive(ref signalStream, signalClient.ReceiveBufferSize);  //这是一个阻塞方法，只有收到确认后才继续传下一个数据片
+                                        index++;
+                                        Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
+                                        percentage = Percentage;
+
+                                        //中断传输
+                                        #region
+                                        if (CommonFoundations.FileTransferTempData.CancelFTR == true)
+                                        {
+                                            CancelByHost = true;
                                         }
+                                        if (CancelByHost == true || CancelByOpposite == true)
+                                        {
+                                            if (CancelByHost == true)//自己结束的
+                                            {
+                                                tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
+                                                return TaskCompletionStatus.HostCancel;
+                                            }
+                                            if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息
+                                            {
+                                                return TaskCompletionStatus.OppositeCancel;
+                                            }
+                                        }
+                                        #endregion
                                     }
+
                                 }
                             }
                         }

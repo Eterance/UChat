@@ -1,24 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Management;
-using System.Threading;
-using System.Windows;
-using System.Timers;
-using SpecialEnumeration;
 
 namespace UChat
 {
@@ -61,7 +42,6 @@ namespace UChat
         public static Color Orange = Color.FromArgb(255, 128, 0);
         public static Color YourTextColor = MainBlue;
         public static Color MyTextColor = Color.White;
-
 
         /// <summary>
         /// 文件传输的缓存变量。

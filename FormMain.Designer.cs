@@ -58,6 +58,9 @@
             this.panelFileBar = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.panelPercent = new System.Windows.Forms.Panel();
+            this.labelRemainTime = new System.Windows.Forms.Label();
+            this.labelProgress = new System.Windows.Forms.Label();
+            this.labelSpeed = new System.Windows.Forms.Label();
             this.buttonCancelFTR = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.labelPercent = new System.Windows.Forms.Label();
@@ -123,9 +126,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.buttonSendM = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
-            this.labelSpeed = new System.Windows.Forms.Label();
-            this.labelProgress = new System.Windows.Forms.Label();
-            this.labelRemainTime = new System.Windows.Forms.Label();
             this.panelSideBar.SuspendLayout();
             this.panelDetail.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -559,6 +559,39 @@
             this.panelPercent.TabIndex = 30;
             this.panelPercent.Visible = false;
             // 
+            // labelRemainTime
+            // 
+            this.labelRemainTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.labelRemainTime.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.labelRemainTime.ForeColor = System.Drawing.Color.White;
+            this.labelRemainTime.Location = new System.Drawing.Point(-1, 117);
+            this.labelRemainTime.Name = "labelRemainTime";
+            this.labelRemainTime.Size = new System.Drawing.Size(314, 26);
+            this.labelRemainTime.TabIndex = 34;
+            this.labelRemainTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelProgress
+            // 
+            this.labelProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.labelProgress.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.labelProgress.ForeColor = System.Drawing.Color.White;
+            this.labelProgress.Location = new System.Drawing.Point(0, 45);
+            this.labelProgress.Name = "labelProgress";
+            this.labelProgress.Size = new System.Drawing.Size(314, 26);
+            this.labelProgress.TabIndex = 33;
+            this.labelProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelSpeed
+            // 
+            this.labelSpeed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
+            this.labelSpeed.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.labelSpeed.ForeColor = System.Drawing.Color.White;
+            this.labelSpeed.Location = new System.Drawing.Point(-1, 75);
+            this.labelSpeed.Name = "labelSpeed";
+            this.labelSpeed.Size = new System.Drawing.Size(314, 26);
+            this.labelSpeed.TabIndex = 32;
+            this.labelSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // buttonCancelFTR
             // 
             this.buttonCancelFTR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
@@ -934,7 +967,6 @@
             this.labelError.TabIndex = 40;
             this.labelError.Text = "旧密码不正确或两个新密码不相同。";
             this.labelError.Visible = false;
-            this.labelError.Click += new System.EventHandler(this.LabelError_Click);
             // 
             // label20
             // 
@@ -946,7 +978,6 @@
             this.label20.Size = new System.Drawing.Size(106, 21);
             this.label20.TabIndex = 39;
             this.label20.Text = "确认新的密码";
-            this.label20.Click += new System.EventHandler(this.Label20_Click);
             // 
             // label18
             // 
@@ -972,7 +1003,6 @@
             this.textBoxNewPWRepeat.TabIndex = 37;
             this.textBoxNewPWRepeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxNewPWRepeat.UseSystemPasswordChar = true;
-            this.textBoxNewPWRepeat.TextChanged += new System.EventHandler(this.TextBoxNewPWRepeat_TextChanged);
             // 
             // textBoxNewPW
             // 
@@ -1432,39 +1462,6 @@
             this.buttonExit.UseVisualStyleBackColor = false;
             this.buttonExit.Click += new System.EventHandler(this.ButtonExit_Click);
             // 
-            // labelSpeed
-            // 
-            this.labelSpeed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.labelSpeed.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.labelSpeed.ForeColor = System.Drawing.Color.White;
-            this.labelSpeed.Location = new System.Drawing.Point(-1, 75);
-            this.labelSpeed.Name = "labelSpeed";
-            this.labelSpeed.Size = new System.Drawing.Size(314, 26);
-            this.labelSpeed.TabIndex = 32;
-            this.labelSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelProgress
-            // 
-            this.labelProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.labelProgress.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.labelProgress.ForeColor = System.Drawing.Color.White;
-            this.labelProgress.Location = new System.Drawing.Point(0, 45);
-            this.labelProgress.Name = "labelProgress";
-            this.labelProgress.Size = new System.Drawing.Size(314, 26);
-            this.labelProgress.TabIndex = 33;
-            this.labelProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelRemainTime
-            // 
-            this.labelRemainTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(42)))));
-            this.labelRemainTime.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.labelRemainTime.ForeColor = System.Drawing.Color.White;
-            this.labelRemainTime.Location = new System.Drawing.Point(-1, 117);
-            this.labelRemainTime.Name = "labelRemainTime";
-            this.labelRemainTime.Size = new System.Drawing.Size(314, 26);
-            this.labelRemainTime.TabIndex = 34;
-            this.labelRemainTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // FormMain
             // 
             this.AcceptButton = this.buttonSendM;
@@ -1494,7 +1491,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UChat";
             this.Load += new System.EventHandler(this.FormMain_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
+            //this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormMain_MouseDown);
             this.panelSideBar.ResumeLayout(false);
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();

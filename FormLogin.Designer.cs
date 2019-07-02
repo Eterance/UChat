@@ -47,13 +47,13 @@
             this.labelCongratulation = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.labelPWError = new System.Windows.Forms.Label();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.buttonSwitchUID = new System.Windows.Forms.Button();
             this.buttonSeePW = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelBackGround = new System.Windows.Forms.Label();
             this.labelBG = new System.Windows.Forms.Label();
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -276,6 +276,11 @@
             this.labelPWError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelPWError.Visible = false;
             // 
+            // timer3
+            // 
+            this.timer3.Interval = 2000;
+            this.timer3.Tick += new System.EventHandler(this.Timer3_Tick);
+            // 
             // buttonSwitchUID
             // 
             this.buttonSwitchUID.BackColor = System.Drawing.Color.Transparent;
@@ -361,11 +366,6 @@
             this.labelBG.Size = new System.Drawing.Size(1278, 718);
             this.labelBG.TabIndex = 15;
             this.labelBG.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelBG_MouseDown);
-            // 
-            // timer3
-            // 
-            this.timer3.Interval = 2000;
-            this.timer3.Tick += new System.EventHandler(this.Timer3_Tick);
             // 
             // FormLogin
             // 

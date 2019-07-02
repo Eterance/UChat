@@ -1,25 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Management;
+using System.Text;
 using System.Threading;
-using System.Windows;
-using System.Timers;
-using System.Diagnostics;
-using SpecialEnumeration;
+using System.Windows.Forms;
 
 namespace UChat
 {
@@ -30,13 +15,13 @@ namespace UChat
         /// </summary>
         public class FileReceiver
         {
-
             /// <summary>
             /// 在端口 50024 上接受文件。
             /// </summary>
             public FileReceiver()//构造函数
             {
             }
+
             /// <summary>
             /// 在端口 50024 上接受文件。
             /// </summary>
@@ -60,7 +45,6 @@ namespace UChat
                 FileByte = fileByte;
                 RemoteIP = senderIP;
             }
-
 
             /// <summary>
             /// 是否已经启动
@@ -120,14 +104,12 @@ namespace UChat
                         client.Close();
                         if (message == "CANCEL")//对面发来的取消请求
                         {
-                            //MessageBox.Show("Copy That");
                             CancelByOpposite = true;
                         }
                     }
                 }
                 catch //(Exception e)
                 {
-                    //MessageBox.Show(e.ToString());
                 }
                 finally
                 {
@@ -147,6 +129,7 @@ namespace UChat
                     isAlreadyStart = true;
                     TCP tCP = new TCP();
 
+                    //建立中断信号监听
                     TcpListener cancelSignalListener = new TcpListener(IPAddress.Any, 50020);
                     cancelSignalListener.Start();
                     //异步接受连接请求
@@ -178,81 +161,80 @@ namespace UChat
                             {
                                 using (clientStream)
                                 {
-                                    using (bufferedStream)
+
+                                    if (clientStream.CanRead)
                                     {
-                                        if (clientStream.CanRead)
+                                        while (index <= totalindex)   //判断传入长度（整个文件的长度等于每次传入的次数加上一开始多读取的字符串的长度）  
                                         {
-                                            while (index <= totalindex)   //判断传入长度（整个文件的长度等于每次传入的次数加上一开始多读取的字符串的长度）  
+                                            if (index == totalindex)//最后一次循环
                                             {
-                                                if (index == totalindex)//最后一次循环
+                                                int mod = (int)(FileByte % fragmentBufferLength);//最后一次传输有多少字节
+                                                if (mod == 0)//文件总字节长度是 数据片 的整数倍，即本次传输没有任何有效字节
                                                 {
-                                                    int mod = (int)(FileByte % fragmentBufferLength);//最后一次传输有多少字节
-                                                    if (mod == 0)//文件总字节长度是 数据片 的整数倍，即本次传输没有任何有效字节
-                                                    {
-                                                        fragmentBufferLength = 0;
-                                                        break;//放弃本次的无效数据，退出循环
-                                                    }
-                                                    else//不是整数倍
-                                                    {
-                                                        fragmentBufferLength = mod;
-                                                    }
+                                                    fragmentBufferLength = 0;
+                                                    break;//放弃本次的无效数据，退出循环
                                                 }
-                                                bufferedStream.Read(fragmentBuffer, 0, fragmentBufferLength);
-                                                Buffer.BlockCopy(fragmentBuffer, 0, blockBuffer, blockElementsNums, fragmentBufferLength);//把数据片中的数据追加到数据块缓存中
-                                                index++;
-                                                blockElementsNums += fragmentBufferLength;
-                                                Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
-                                                percentage = Percentage;
-
-                                                if (blockElementsNums == blockBuffer.Length)//缓存块满，需要写入到文件
+                                                else//不是整数倍
                                                 {
-                                                    fStream.Write(blockBuffer, 0, blockBufferBufferLength);
-                                                    blockElementsNums = 0;
+                                                    fragmentBufferLength = mod;
                                                 }
+                                            }
+                                            bufferedStream.Read(fragmentBuffer, 0, fragmentBufferLength);
+                                            Buffer.BlockCopy(fragmentBuffer, 0, blockBuffer, blockElementsNums, fragmentBufferLength);//把数据片中的数据追加到数据块缓存中
+                                            index++;
+                                            blockElementsNums += fragmentBufferLength;
+                                            Percentage = (int)(((double)index / totalindex) * 100);//计算传输百分比
+                                            percentage = Percentage;
 
-                                                //中断传输
-                                                #region
-                                                if (CommonFoundations.FileTransferTempData.CancelFTR == true)
-                                                {
-                                                    CancelByHost = true;
-                                                }
-                                                //任意一方发出了取消请求
-                                                if (CancelByHost == true || CancelByOpposite == true)
-                                                {
-                                                    if (CancelByHost == true)//自己结束的
-                                                    {
-                                                        tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
-                                                        BlockConfirm(ref signalStream, "OK");//发送消息，让对面解除因为监听 Block 确认造成的阻塞
-
-                                                        fStream.Flush();
-                                                        fStream.Dispose();
-                                                        fStream.Close();
-                                                        File.Delete(FilePath);//删除未完成的文件
-                                                        return TaskCompletionStatus.HostCancel;
-                                                    }
-                                                    if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息，不用再发
-                                                    {
-
-                                                        fStream.Flush();
-                                                        fStream.Dispose();
-                                                        fStream.Close();
-                                                        File.Delete(FilePath);//删除未完成的文件
-                                                        return TaskCompletionStatus.OppositeCancel;
-                                                    }
-                                                }
-                                                #endregion
-
-                                                BlockConfirm(ref signalStream, "OK");//发送消息让对方传输下一个块
-                                                CommonFoundations.FileTransferTempData.CurrentBlocks = index;
+                                            if (blockElementsNums == blockBuffer.Length)//缓存块满，需要写入到文件
+                                            {
+                                                fStream.Write(blockBuffer, 0, blockBufferBufferLength);
+                                                blockElementsNums = 0;
                                             }
 
-                                            if (blockElementsNums != 0)//缓存块里有东西，需要最后一次写入
+                                            //中断传输
+                                            #region
+                                            if (CommonFoundations.FileTransferTempData.CancelFTR == true)
                                             {
-                                                fStream.Write(blockBuffer, 0, blockElementsNums);
+                                                CancelByHost = true;
                                             }
-                                            //BlockSaved(ref signalStream, "OVER");//发送消息让对方结束传输
+                                            //任意一方发出了取消请求
+                                            if (CancelByHost == true || CancelByOpposite == true)
+                                            {
+                                                if (CancelByHost == true)//自己结束的
+                                                {
+                                                    tCP.TCPMessageSender(RemoteIP, "CANCEL", 50020);//发送取消消息监听
+                                                    BlockConfirm(ref signalStream, "OK");//发送消息，让对面解除因为监听 Block 确认造成的阻塞
+
+                                                    fStream.Flush();
+                                                    fStream.Dispose();
+                                                    fStream.Close();
+                                                    File.Delete(FilePath);//删除未完成的文件
+                                                    return TaskCompletionStatus.HostCancel;
+                                                }
+                                                if (CancelByOpposite == true)//对面结束的，表明已经收到了 取消消息，不用再发
+                                                {
+
+                                                    fStream.Flush();
+                                                    fStream.Dispose();
+                                                    fStream.Close();
+                                                    File.Delete(FilePath);//删除未完成的文件
+                                                    return TaskCompletionStatus.OppositeCancel;
+                                                }
+                                            }
+                                            #endregion
+
+                                            BlockConfirm(ref signalStream, "OK");//发送消息让对方传输下一个块
+                                            CommonFoundations.FileTransferTempData.CurrentBlocks = index;
                                         }
+
+                                        if (blockElementsNums != 0)//缓存块里有东西，需要最后一次写入
+                                        {
+                                            fStream.Write(blockBuffer, 0, blockElementsNums);
+                                        }
+                                        //BlockSaved(ref signalStream, "OVER");//发送消息让对方结束传输
                                     }
+
                                 }
                             }
                         }

@@ -113,6 +113,16 @@ namespace UChat.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap chat5 {
+            get {
+                object obj = ResourceManager.GetObject("chat5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap guanbi3 {
             get {
                 object obj = ResourceManager.GetObject("guanbi3", resourceCulture);

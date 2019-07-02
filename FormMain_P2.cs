@@ -1,25 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Management;
-using System.Threading;
-using System.Windows;
-using System.Timers;
 using System.Diagnostics;
-using SpecialEnumeration;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace UChat
 {
@@ -33,7 +15,6 @@ namespace UChat
         {
             public NotificationSystem()
             {
-                //ReceivePath = FilePath;
             }
             /// <summary>
             /// 预设的背景颜色。
@@ -47,7 +28,7 @@ namespace UChat
                 /// <summary>
                 /// 注意，黄色
                 /// </summary>
-                readonly public static Color AttentionYellow= Color.FromArgb(102, 75, 0);
+                readonly public static Color AttentionYellow = Color.FromArgb(102, 75, 0);
                 /// <summary>
                 /// 提示，蓝色
                 /// </summary>
@@ -55,19 +36,19 @@ namespace UChat
                 /// <summary>
                 /// 标记，紫色
                 /// </summary>
-                readonly public static Color MarkPurple = Color.FromArgb(56,34,93);
+                readonly public static Color MarkPurple = Color.FromArgb(56, 34, 93);
                 /// <summary>
                 /// 通过，紫色
                 /// </summary>
-                readonly public static Color OKGreen = Color.FromArgb(8,83,8);
+                readonly public static Color OKGreen = Color.FromArgb(8, 83, 8);
                 /// <summary>
                 /// 鼠标进入的颜色
                 /// </summary>
-                readonly internal static Color MouseOverBackColor = Color.FromArgb(100,100,100);
+                readonly internal static Color MouseOverBackColor = Color.FromArgb(100, 100, 100);
                 /// <summary>
                 /// 鼠标按下的颜色
                 /// </summary>
-                readonly internal static Color MouseDownBackColor = Color.FromArgb(90,90,90);
+                readonly internal static Color MouseDownBackColor = Color.FromArgb(90, 90, 90);
             }
             /// <summary>
             /// 文件的路径。
@@ -82,7 +63,7 @@ namespace UChat
             /// </summary>
             Size backPanelSize = new Size(450, 100);
 
-            Point labelTopicLocation = new Point(10,7);
+            Point labelTopicLocation = new Point(10, 7);
             Size labelTopicSize = new Size(156, 21);
 
             Point labelMessageLocation = new Point(10, 42);
@@ -107,14 +88,16 @@ namespace UChat
             {
                 if (formMain.panelEmpty.InvokeRequired == false)
                 {
-                    Panel notiPanel = new Panel();//新建panel
-                    formMain.Controls.Add(notiPanel);//往窗口添加控件
-                    notiPanel.Location = backPanelLocation;//标定坐标
-                    notiPanel.Size = backPanelSize; //标定大小
-                    notiPanel.BackColor = backColor;
-                    notiPanel.BorderStyle = BorderStyle.FixedSingle;
+                    Panel notiPanel = new Panel()
+                    {
+                        Location = backPanelLocation,//标定坐标
+                        Size = backPanelSize,//标定大小
+                        BackColor = backColor,
+                        BorderStyle = BorderStyle.FixedSingle,
+                        Visible = true,
+                    };//新建panel
                     SetDouble(notiPanel);
-                    notiPanel.Visible = true;
+                    formMain.Controls.Add(notiPanel);//往窗口添加控件
                     CreateSubLabel(ref notiPanel, topic, backColor, labelTopicLocation, labelTopicSize);//标题
                     CreateSubLabel(ref notiPanel, message, backColor, labelMessageLocation, labelMessageSize);//内容
                     CreateSubButton(ref notiPanel, "", backColor, ButtonCloseLocation, ButtonCloseSize);//关闭按钮
@@ -128,7 +111,7 @@ namespace UChat
                 else
                 {
                     Action<string, string, Color, string> action = new Action<string, string, Color, string>(PushNotification);
-                    formMain.panelEmpty.Invoke(action,message,topic,backColor,filePath);
+                    formMain.panelEmpty.Invoke(action, message, topic, backColor, filePath);
                 }
             }
 
@@ -143,7 +126,7 @@ namespace UChat
             /// <param name="size">label 大小</param>
             private void CreateSubLabel(ref Panel panel, string content, Color backColor, Point location, Size size)
             {
-                Label label = new Label()
+                Label label = new Label()//设置属性
                 {
                     AutoSize = false,
                     BorderStyle = BorderStyle.None,
@@ -170,7 +153,7 @@ namespace UChat
             /// <param name="location">label 位置</param>
             /// <param name="size">label 大小</param>
             /// <param name="borderSize">边框大小，默认为 0</param>
-            private void CreateSubButton(ref Panel panel, string content, Color backColor, Point location, Size size, int borderSize= 0)
+            private void CreateSubButton(ref Panel panel, string content, Color backColor, Point location, Size size, int borderSize = 0)
             {
                 Button button = new Button()
                 {//属性设置
@@ -321,25 +304,6 @@ namespace UChat
             labelUnread.MouseLeave += new EventHandler(formMain.Labels_MouseLeave);
             labelUnread.Click += new EventHandler(formMain.Labels_Click);
             SetDouble(labelUnread);
-
-            /*Label labelIP = new Label();                                   //IP
-            labelIP.Name = "labelIP";
-            panel.Controls.Add(labelIP);
-            labelIP.AutoSize = false;
-            labelIP.Location = new Point(189, 62);
-            labelIP.Size = new Size(138, 19);
-            labelIP.BorderStyle = BorderStyle.None;
-            labelIP.BackColor = Color.Transparent;
-            labelIP.ForeColor = Color.DarkGray;
-            labelIP.TextAlign = ContentAlignment.MiddleRight;//文字右对齐
-            labelIP.Text = "192.167.123." + i.ToString();
-            labelIP.Font = new Font("微软雅黑", 12);
-            labelIP.MouseEnter += new EventHandler(formMain.Labels_MouseEnter);//动态绑定消息处理
-            labelIP.MouseLeave += new EventHandler(formMain.Labels_MouseLeave);
-            labelIP.Click += new EventHandler(formMain.Labels_Click);
-            SetDouble(labelIP);*/
-
-            //return labelUID.Text;
         }
     }
 }
