@@ -3,11 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
@@ -215,29 +213,6 @@ namespace UChat
             }
         }
 
-        /// <summary>
-        /// 点击任务栏实现窗口最小化与还原。
-        /// </summary>
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                const int WS_MINIMIZEBOX = 0x00020000;
-                CreateParams cp = base.CreateParams;
-                cp.Style = cp.Style | WS_MINIMIZEBOX;   // 允许最小化操作                  
-                return cp;
-            }
-        }
-
-        /// <summary>
-        /// 为控件提供双缓冲，防止画面撕裂和闪烁。
-        /// </summary>
-        /// <param name="cc"></param>
-        public static void SetDouble(Control cc)
-        {
-            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
-        }
-
         public static Color enterColor = Color.FromArgb(100, 100, 100);//好友列表鼠标进入的颜色
         public static Color downColor = Color.FromArgb(65, 65, 65);//好友列表鼠标按下的颜色
         /// <summary>
@@ -337,17 +312,6 @@ namespace UChat
             SetDouble(textBoxNewPWRepeat);
             #endregion
         }
-
-        ///允许无边框窗口拖动————————————
-        #region
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-        [DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-        ///————————End——————————
-        #endregion
 
         /// <summary>
         /// 文件传输线程
@@ -970,6 +934,12 @@ namespace UChat
             label18.MouseDown += new MouseEventHandler(Controls_MouseDown);
             label21.MouseDown += new MouseEventHandler(Controls_MouseDown);
             label22.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            labelNameIndicator.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            label2.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            panelSideBar.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            pictureBoxTips.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            panelTips.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            labelForbid.MouseDown += new MouseEventHandler(Controls_MouseDown);
         }
         #endregion
 
@@ -1136,15 +1106,6 @@ namespace UChat
             ExitProgram();
         }
 
-        private void LabelNameIndicator_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
         private void Timer1_Tick(object sender, EventArgs e)
         {
             if (panelSideBar.Width == 300)
@@ -1184,7 +1145,6 @@ namespace UChat
             buttonLAN.BackColor = CommonFoundations.MainBlue;
             buttonFiles.BackColor = Color.Transparent;
             buttonSetting.BackColor = Color.Transparent;
-            //UpdateLANList();
         }
 
         private void ButtonFiles_Click(object sender, EventArgs e)
@@ -1220,15 +1180,6 @@ namespace UChat
             ExitProgram();
         }
 
-        private void Label2_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
         private void Panel2_MouseLeave(object sender, EventArgs e)
         {
             panel2.BackColor = CommonFoundations.DarkBlue;
@@ -1245,49 +1196,11 @@ namespace UChat
             {
                 timer1.Enabled = true;
                 timer1.Start();
-                //panelSideBar.Width = 200;
-                //panelSideBar.BorderStyle = BorderStyle.FixedSingle;
             }
             else
             {
                 timer2.Enabled = true;
                 timer2.Start();
-            }
-        }
-
-        private void PanelSideBar_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        private void PanelTips_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        private void LabelForbid_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
 
@@ -1306,13 +1219,13 @@ namespace UChat
                 string filePath = dialog.FileName;
                 string file = dialog.SafeFileName;
 
+                //缓存发送者信息
                 CommonFoundations.FileTransferTempData.FRSourcePath = dialog.FileName;
                 CommonFoundations.FileTransferTempData.FRDestinationIP = CommonFoundations.RemoteIP;
                 CommonFoundations.FileTransferTempData.FileFullName = file;
 
                 FileInfo fileInfo = new FileInfo(filePath);
                 CommonFoundations.FileTransferTempData.FileLengthBytes = fileInfo.Length;
-                //MessageBox.Show(fileInfo.Length.ToString());
                 FileTransfer.FileTransferRequestSender(file, fileInfo.Length);
                 string fileBytes = FileSize(fileInfo.Length);
                 CommonFoundations.FileTransferTempData.FileLengthBytes = fileInfo.Length;
@@ -1333,11 +1246,6 @@ namespace UChat
             Control _Control = (Control)sender;
             ShowScrollBar(_Control.Handle, 0, 0);
         }
-
-        //去掉panel水平条子-------------------------------------------------------------------
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern int ShowScrollBar(IntPtr hWnd, int bar, int show);
-        //-------------------------------------------------------------------------------------
 
         private void PanelLANBar_Paint(object sender, PaintEventArgs e)
         {
@@ -1373,9 +1281,7 @@ namespace UChat
             };
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)//用户点了确认
             {
-                //folderBrowserDialog.ShowDialog();
                 CommonFoundations.FileTransferTempData.FRDestinationFolder = folderBrowserDialog.SelectedPath;//获取用户选定的保存文件夹
-                //MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder);
                 FileTransfer.FileTransferAnswerSender(AcceptStatus.Accept, CommonFoundations.FileTransferTempData.FRSourceIP);//向对方确认接收文件
                 panelConfirm.Visible = false;
                 panelPercent.Visible = true;
@@ -1450,9 +1356,6 @@ namespace UChat
             {
                 if (FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)
                 {
-                    /*panelNoticeRed.BringToFront();
-                    panelNoticeRed.Visible = true;
-                    labelNoticeRed.Text = "文件传输被对方取消。";*/
                     NotificationSystem notificationSystem = new NotificationSystem();
                     notificationSystem.PushNotification("注意", "文件接收已被对方取消。", NotificationSystem.PresetColors.AttentionYellow);
                     ResetSendFileBarUI(false);
@@ -1462,9 +1365,6 @@ namespace UChat
                 {
                     if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
                     {
-                        /*labelNoticeYellow.BringToFront();
-                        labelNoticeYellow.Visible = true;
-                        labelNoticeYellow.Text = "文件传输已经取消。";*/
                         NotificationSystem notificationSystem = new NotificationSystem();
                         notificationSystem.PushNotification("提醒", "文件接收已被取消。", NotificationSystem.PresetColors.TipsBlue);
                         ResetSendFileBarUI(false);
@@ -1473,9 +1373,7 @@ namespace UChat
                     else
                     {
                         NotificationSystem notificationSystem = new NotificationSystem();
-                        //MessageBox.Show(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
                         notificationSystem.PushNotification("完成", "文件接收已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
-                        //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
                         FTROverProcessor();
                     }
 
@@ -1496,9 +1394,6 @@ namespace UChat
             {
                 if (FTRResult == TCPFileTransfer.TaskCompletionStatus.OppositeCancel)
                 {
-                    /*panelNoticeRed.BringToFront();
-                    panelNoticeRed.Visible = true;
-                    labelNoticeRed.Text = "文件传输被对方取消。";*/
                     NotificationSystem notificationSystem = new NotificationSystem();
                     notificationSystem.PushNotification("注意", "文件发送已被对方取消。", NotificationSystem.PresetColors.AttentionYellow);
                     ResetSendFileBarUI(false);
@@ -1508,9 +1403,6 @@ namespace UChat
                 {
                     if (FTRResult == TCPFileTransfer.TaskCompletionStatus.HostCancel)
                     {
-                        /*labelNoticeYellow.BringToFront();
-                        labelNoticeYellow.Visible = true;
-                        labelNoticeYellow.Text = "文件传输已经取消。";*/
                         NotificationSystem notificationSystem = new NotificationSystem();
                         notificationSystem.PushNotification("提醒", "文件发送已被取消。", NotificationSystem.PresetColors.TipsBlue);
                         ResetSendFileBarUI(false);
@@ -1520,7 +1412,6 @@ namespace UChat
                     {
                         NotificationSystem notificationSystem = new NotificationSystem();
                         notificationSystem.PushNotification("完成", "文件发送已完成。", NotificationSystem.PresetColors.OKGreen, CommonFoundations.FileTransferTempData.FRSourcePath);
-                        //RecePath = CommonFoundations.FileTransferTempData.FRSourcePath;
                         FTROverProcessor();
                     }
                 }
@@ -1572,8 +1463,6 @@ namespace UChat
             CommonFoundations.FileTransferTempData.CancelFTR = true;
             try
             {
-                /*fileReceiver.Abort();
-                fileSender.Abort();*/
                 if (buttonFiles.Visible == false)
                 {
                     ResetSendFileBarUI(false);
@@ -1596,15 +1485,6 @@ namespace UChat
             {
                 MessageBox.Show(ed.ToString());
             }
-        }
-
-        private void Button4_Click_1(object sender, EventArgs e)
-        {
-            //使用命令行打开资源管理器并定位到文件。
-            Process p = new Process();
-            p.StartInfo.FileName = "explorer.exe";
-            p.StartInfo.Arguments = "/e,/select," + RecePath;//参数 -e 此命令使用默认视图启动 Windows 资源管理器，并把焦点定位在 RecePath。
-            p.Start();
         }
 
         private void ButtonSetting_Click(object sender, EventArgs e)
@@ -1719,7 +1599,6 @@ namespace UChat
             if (buttonEnableQSI.BackColor == CommonFoundations.DarkBlue)//快捷登录启动
             {
                 buttonEnableQSI.BackColor = CommonFoundations.MainBlue;
-                //File.Create(CommonFoundations.QuickSignIn_Path);
                 FileStream fileStream = new FileStream(CommonFoundations.QuickSignIn_Path, FileMode.Create);
                 fileStream.Close();
 
@@ -1745,5 +1624,4 @@ namespace UChat
             }
         }
     }
-
 }

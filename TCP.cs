@@ -1,32 +1,16 @@
 ﻿#define debug
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using System.IO;
-using System.Net;
 using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Management;
-using System.Threading;
-using System.Windows;
-using System.Timers;
-using SpecialEnumeration;
+using System.Text;
 
 //fsutil file createnew null.txt 5278350000
+//CMD创建一个指定大小的文件
 namespace UChat
-{ /// <summary> 
-  /// 进行局域网 TCP 通信。信息发送在 50012 端口进行，文件传输在 50024 端口进行。
-  /// </summary> 
-  /// <returns></returns> 
+{
+    /// <summary> 
+    /// 进行局域网 TCP 通信。信息发送在 50012 端口进行，文件传输在 50024 端口进行。
+    /// </summary> 
+    /// <returns></returns> 
     public class TCP
     {
         /// <summary>
@@ -52,7 +36,6 @@ namespace UChat
                         sendStream.Close();//关闭网络流  
                     }
                 }
-                //client.Close();//关闭客户端
             }
             catch
             {
@@ -102,7 +85,7 @@ namespace UChat
         {
             TcpListener tcpListener = new TcpListener(HostInfo.IPv4Address, port);//本机ip 
             tcpListener.Start();
-            
+
             string message = "";
             try
             {
@@ -129,8 +112,7 @@ namespace UChat
             {
                 tcpListener.Stop();
             }
-            //MessageBox.Show(message);
-            return message;            
+            return message;
         }
 
         /// <summary>
@@ -139,7 +121,7 @@ namespace UChat
         /// <param name="carrier"></param>
         private static void MessageProcessor(string carrier)
         {
-            if (carrier.Substring(0,2) == "FR")//首部有文件传输请求
+            if (carrier.Substring(0, 2) == "FR")//首部有文件传输请求
             {
 
             }

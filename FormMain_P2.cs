@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace UChat
@@ -305,5 +306,44 @@ namespace UChat
             labelUnread.Click += new EventHandler(formMain.Labels_Click);
             SetDouble(labelUnread);
         }
+
+        //去掉panel水平滚动条子-------------------------------------------------------------------
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int ShowScrollBar(IntPtr hWnd, int bar, int show);
+        //-------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// 点击任务栏实现窗口最小化与还原。
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                const int WS_MINIMIZEBOX = 0x00020000;
+                CreateParams cp = base.CreateParams;
+                cp.Style = cp.Style | WS_MINIMIZEBOX;   // 允许最小化操作                  
+                return cp;
+            }
+        }
+
+        /// <summary>
+        /// 为控件提供双缓冲，防止画面撕裂和闪烁。
+        /// </summary>
+        /// <param name="cc"></param>
+        public static void SetDouble(Control cc)
+        {
+            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
+        }
+
+        ///允许无边框窗口拖动————————————
+        #region
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        ///————————End——————————
+        #endregion
     }
 }

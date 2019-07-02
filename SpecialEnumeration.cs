@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/// <summary>
+﻿/// <summary>
 /// 这个命名空间是专门放置特殊的枚举类型或结构体。
 /// </summary>
 namespace SpecialEnumeration

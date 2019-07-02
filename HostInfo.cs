@@ -1,23 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
 using System.Management;
-using System.Threading;
-using System.Windows;
-using System.Timers;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace UChat
 {
@@ -38,6 +23,7 @@ namespace UChat
                 return hostname;
             }
         }
+
         /// <summary> 
         /// 获取主机 CPU ID。
         /// </summary> 
@@ -58,6 +44,7 @@ namespace UChat
                 return cpuInfo;
             }
         }
+
         /// <summary> 
         /// 以 IPAddress 格式（原始格式）获取主机活动网络适配器的IPv4地址。
         /// </summary> 
@@ -74,7 +61,7 @@ namespace UChat
                     Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(fRegistryKey, false);
                     if (rk != null)
                     {
-                        // 区分 PnpInstanceID      
+                        // 区分 PnpInstanceID  注册表项    
                         // 如果前面有 PCI 就是本机的真实网卡          
                         string fPnpInstanceID = rk.GetValue("PnpInstanceID", "").ToString();
                         int fMediaSubType = Convert.ToInt32(rk.GetValue("MediaSubType", 0));

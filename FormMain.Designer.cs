@@ -152,7 +152,6 @@
             this.labelChatBoxBG.Name = "labelChatBoxBG";
             this.labelChatBoxBG.Size = new System.Drawing.Size(861, 718);
             this.labelChatBoxBG.TabIndex = 5;
-            this.labelChatBoxBG.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label2_MouseDown);
             // 
             // panelSideBar
             // 
@@ -170,7 +169,6 @@
             this.panelSideBar.Name = "panelSideBar";
             this.panelSideBar.Size = new System.Drawing.Size(50, 718);
             this.panelSideBar.TabIndex = 7;
-            this.panelSideBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelSideBar_MouseDown);
             // 
             // labelSideBarBorder
             // 
@@ -435,7 +433,6 @@
             this.labelNameIndicator.Name = "labelNameIndicator";
             this.labelNameIndicator.Size = new System.Drawing.Size(323, 29);
             this.labelNameIndicator.TabIndex = 12;
-            this.labelNameIndicator.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelNameIndicator_MouseDown);
             // 
             // timer1
             // 
@@ -772,7 +769,6 @@
             this.labelForbid.Text = "对方已下线。你无法继续与 ta 聊天。";
             this.labelForbid.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelForbid.Visible = false;
-            this.labelForbid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelForbid_MouseDown);
             // 
             // panelTips
             // 
@@ -783,7 +779,6 @@
             this.panelTips.Name = "panelTips";
             this.panelTips.Size = new System.Drawing.Size(861, 682);
             this.panelTips.TabIndex = 21;
-            this.panelTips.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelTips_MouseDown);
             // 
             // pictureBoxTips
             // 
@@ -795,7 +790,6 @@
             this.pictureBoxTips.Size = new System.Drawing.Size(856, 184);
             this.pictureBoxTips.TabIndex = 25;
             this.pictureBoxTips.TabStop = false;
-            this.pictureBoxTips.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
             // 
             // backgroundWorkerFileReceiver
             // 

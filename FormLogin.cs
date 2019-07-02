@@ -1,31 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Management;
-using System.Threading;
-using System.Windows;
-using System.Timers;
 
 namespace UChat
 {
     public partial class FormLogin : Form
     {
-
+        /// <summary>
+        /// 点击任务栏实现窗口最小化与还原。
+        /// </summary>
         protected override CreateParams CreateParams
-        { 
+
+        {
             get
             {
                 CreateParams cp = base.CreateParams;
@@ -35,7 +25,6 @@ namespace UChat
         }
 
         System.Timers.Timer Timer = new System.Timers.Timer();
-        //static int pictureboxY = 160;
         public FormLogin()
         {
             InitializeComponent();
@@ -47,7 +36,7 @@ namespace UChat
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
         }
 
-      
+
 
         //无边框拖动
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -81,7 +70,6 @@ namespace UChat
             buttonExit.Parent = labelBackGround;
             buttonCreate.Parent = labelBackGround;
             labelTips.Parent = labelBackGround;
-            //buttonSeePW.Parent = labelBackGround;
             buttonSignIn.Parent = labelBackGround;
             labelUID.Parent = labelBackGround;
             buttonChange.Parent = labelBackGround;
@@ -105,7 +93,6 @@ namespace UChat
             buttonExit.Parent = labelBG;
             buttonCreate.Parent = labelBG;
             labelTips.Parent = labelBG;
-            //buttonSeePW.Parent = labelBG;
             buttonSignIn.Parent = labelBG;
             labelUID.Parent = labelBG;
             buttonChange.Parent = labelBG;
@@ -164,13 +151,11 @@ namespace UChat
             {
                 timer1.Stop();
                 timer1.Enabled = false;
-                //buttonExit2.Visible = true;
                 labelBackGround.Visible = false;
                 IamYourFather2();
                 Opacity = 0.99;//调整窗口透明度
                 if (CommonFoundations.fileExist == false)//不存在存在文件就创建新账户
                 {
-                    //AcceptButton = buttonCreate;
                     labelBar.Text = "UChat  创建账户向导";
                     labelTitle.Visible = false;
                     textBoxUserName.Visible = true;
@@ -186,21 +171,16 @@ namespace UChat
                 }
                 else                                         //存在文件就直接登录
                 {
-                    //AcceptButton = buttonSignIn;
                     labelBar.Text = "UChat  登录账户";
                     DataSet userDataSet = new DataSet();
                     userDataSet.ReadXml(CommonFoundations.HostUsers_FilePath);//读取本地用户xml存档为表格
                     labelTitle.Top -= 120;
                     textBoxPassword.Top += 10;
                     buttonSeePW.Top += 10;
-                    //labelUID.Top += 215;
                     labelTitle.Visible = true;
                     labelTitle.Font = new Font(labelTitle.Font.FontFamily, 36, labelTitle.Font.Style);//改小字体
                     labelTitle.Text = userDataSet.Tables[0].Rows[0][0].ToString();//显示用户名
-                    //labelUID.Text =  "UID："+ userDataSet.Tables[0].Rows[0][2].ToString();//显示UID
                     textBoxPassword.Visible = true;
-                    //labelUID.BorderStyle = BorderStyle.None;
-                    //labelUID.Visible = true;
                     buttonSignIn.Visible = true;
                     buttonSwitchUID.Visible = true;
                 }
@@ -219,7 +199,7 @@ namespace UChat
                 CommonFoundations.HostUID = userDataSet.Tables[0].Rows[0][2].ToString();
                 FormMain formMain = new FormMain();
                 formMain.Show();
-                Close();                
+                Close();
             }
             else//不存在
             {
@@ -239,7 +219,6 @@ namespace UChat
 
         private void TextBoxPassword_MouseClick(object sender, MouseEventArgs e)
         {
-            //buttonSeePW.Parent = labelBG;
             buttonSeePW.BringToFront();
             buttonSeePW.Visible = true;
             if (textBoxPassword.Text == "密码")
@@ -302,9 +281,9 @@ namespace UChat
         /// 创建本地用户存档。
         /// </summary> 
         /// <returns></returns> 
-        private void CreateHostFiles(string name, string password,string UID)
+        private void CreateHostFiles(string name, string password, string UID)
         {
-            string userXml = "<Users><User><name>"+ name +"</name><password>"+ password + "</password><UID>" + UID+ "</UID></User></Users>";
+            string userXml = "<Users><User><name>" + name + "</name><password>" + password + "</password><UID>" + UID + "</UID></User></Users>";
             Directory.CreateDirectory(CommonFoundations.Directory_Path);
             Directory.CreateDirectory(CommonFoundations.History_Path);
             XmlDocument doc = new XmlDocument();
@@ -323,7 +302,7 @@ namespace UChat
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
-            
+
         }
 
 
@@ -334,7 +313,7 @@ namespace UChat
         private static string UIDMaker()
         {
             char zero = '0';
-            string UID = DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString().PadLeft(3,zero) + DateTime.Now.Hour.ToString().PadLeft(2, zero) + DateTime.Now.Minute.ToString().PadLeft(2, zero) + DateTime.Now.Second.ToString().PadLeft(2, zero) + DateTime.Now.Millisecond.ToString().PadLeft(4, zero);
+            string UID = DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString().PadLeft(3, zero) + DateTime.Now.Hour.ToString().PadLeft(2, zero) + DateTime.Now.Minute.ToString().PadLeft(2, zero) + DateTime.Now.Second.ToString().PadLeft(2, zero) + DateTime.Now.Millisecond.ToString().PadLeft(4, zero);
             return UID;
         }
 

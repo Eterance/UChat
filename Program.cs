@@ -14,6 +14,7 @@ namespace UChat
         [STAThread]
         static void Main()
         {
+            //使程序只能运行一个实例。
             bool isAppRunning = false;
             System.Threading.Mutex mutex = new System.Threading.Mutex(true, System.Diagnostics.Process.GetCurrentProcess().ProcessName, out isAppRunning);
             if (!isAppRunning)
@@ -28,6 +29,5 @@ namespace UChat
                 Application.Run(new FormBackground());
             }
         }
-    }
-    
+    }    
 }
