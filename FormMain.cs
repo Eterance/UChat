@@ -35,8 +35,7 @@ namespace UChat
         }
 
         TCPFileTransfer.TaskCompletionStatus FTRResult;
-
-        private string RecePath = "";
+        
         /// <summary> 
         /// 一个集合了本程序所有线程的队列，便于程序关闭时结束所有线程。
         /// </summary> 
@@ -115,6 +114,23 @@ namespace UChat
                 if (dataRow[0].ToString() == uid)
                 {
                     return dataRow[2].ToString();//返回IP
+                }
+            }
+            return "";
+        }
+
+        /// <summary>
+        /// 遍历查找指定 UID 的对应名字。
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public string UIDtoName(string uid)
+        {
+            foreach (DataRow dataRow in LANtable.Rows)
+            {
+                if (dataRow[0].ToString() == uid)
+                {
+                    return dataRow[1].ToString();//返回名字
                 }
             }
             return "";
@@ -481,11 +497,13 @@ namespace UChat
             string chatHistoryFilePath = CommonFoundations.history_Path_Slash + CommonFoundations.RemoteUID + "/" + "history.uch";
             if (File.Exists(chatHistoryFilePath) == true)//检查有没有历史记录，有就直接加载
             {
+                richTextBoxChat.Clear();//清空高级文本框
                 richTextBoxChat.LoadFile(chatHistoryFilePath);
                 ScrollToTheBottom();
             }
             else
             {
+                richTextBoxChat.Clear();//清空高级文本框
                 Directory.CreateDirectory(CommonFoundations.history_Path_Slash + CommonFoundations.RemoteUID);
             }
         }
@@ -1453,7 +1471,14 @@ namespace UChat
             {
                 delayFactor++;
             }
-            formMain.progressBar1.Value = CommonFoundations.FileTransferTempData.FTRPercentage2;
+            if (CommonFoundations.FileTransferTempData.FTRPercentage2 >=0 && CommonFoundations.FileTransferTempData.FTRPercentage2 <=100)
+            {
+                formMain.progressBar1.Value = CommonFoundations.FileTransferTempData.FTRPercentage2;
+            }
+            else
+            {
+                formMain.progressBar1.Value = 100;
+            }
             formMain.labelPercent.Text = CommonFoundations.FileTransferTempData.FTRPercentage2.ToString() + "%";
             formMain.labelProgress.Text = cb + " / " + tb;
         }
