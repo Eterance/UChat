@@ -47,7 +47,8 @@ namespace UChat
         /// </summary>
         public void TCPMessageListener()
         {
-            TcpListener tcpListener = new TcpListener(HostInfo.IPv4Address, 50012);//本机ip 
+            HostInfo hostInfo = new HostInfo();
+            TcpListener tcpListener = new TcpListener(hostInfo.IPv4Address, 50012);//本机ip 
             tcpListener.Start();
 
             while (true)
@@ -83,7 +84,8 @@ namespace UChat
         /// <returns></returns>
         public string TCPMessageListener(int port)
         {
-            TcpListener tcpListener = new TcpListener(HostInfo.IPv4Address, port);//本机ip 
+            HostInfo hostInfo = new HostInfo();
+            TcpListener tcpListener = new TcpListener(hostInfo.IPv4Address, port);//本机ip 
             tcpListener.Start();
 
             string message = "";

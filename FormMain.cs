@@ -9,6 +9,8 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using System.Diagnostics;
+
 
 namespace UChat
 {
@@ -265,6 +267,12 @@ namespace UChat
             SetDouble(buttonCancelChangePW);
             SetDouble(buttonSavePW);
             SetDouble(buttonEnableQSI);
+            SetDouble(buttonRechooseFolder);
+            SetDouble(buttonOpenFolder);
+            SetDouble(buttonRefuse2);
+            SetDouble(buttonCover);
+            SetDouble(buttonRechooseFolder);
+            SetDouble(button1);
 
             SetDouble(labelEmptyText);
             SetDouble(label4);
@@ -295,6 +303,9 @@ namespace UChat
             SetDouble(label22);
             SetDouble(labelSpeed);
             SetDouble(labelProgress);
+            SetDouble(label24);
+            SetDouble(label23);
+            SetDouble(label25);
 
             SetDouble(panel2);
             SetDouble(panelLANBar);
@@ -307,9 +318,11 @@ namespace UChat
             SetDouble(panelInfo);
             SetDouble(panelLANBarTitle);
             SetDouble(panelChangePW);
+            SetDouble(panelSameFile);
 
             SetDouble(pictureBoxTips);
             SetDouble(pictureBoxEmptyIcon);
+            SetDouble(pictureBox1);
 
             SetDouble(progressBar1);
 
@@ -336,38 +349,47 @@ namespace UChat
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            ///UDP监听线程
-            UDP uDP = new UDP();
-            Thread UDPListenThread = new Thread(uDP.UDPMessageListener);
-            ThreadsList.Add(UDPListenThread); //将新建的线程加入到线程队列中，以便在窗体结束时关闭所有的线程
-            UDPListenThread.Start();
-            //TCP消息监听线程
-            TCP tCP = new TCP();
-            Thread TCPMessageListenThread = new Thread(tCP.TCPMessageListener);
-            ThreadsList.Add(TCPMessageListenThread); //将新建的线程加入到线程队列中，以便在窗体结束时关闭所有的线程
-            TCPMessageListenThread.Start();
-
-            InitLANTable();//初始化局域网表格
-
-            uDP.OnlineMessageSend(IPAddress.Broadcast, ReplyStatus.NeedReply, OnlineStatus.Online);//上线广播
-            ControlsDoubleBuffered();
-            MouseDownDragMove();
-
-            buttonSendM.Enabled = false;
-            textBoxInfoUID.Text = CommonFoundations.HostUID;
-            textBoxInfoIP.Text = HostInfo.IPv4Address.ToString();
-            textBoxInfoName.Text = CommonFoundations.HostName;
-            panelLANBar.BringToFront();
-            panelLANBarTitle.BringToFront();
-            panelSideBar.BringToFront();
-
-            if (File.Exists(CommonFoundations.QuickSignIn_Path) == true)//快捷登录文件存在，把设置页面的快捷登录勾上
+            HostInfo hostInfo = new HostInfo();
+            if (hostInfo.IPv4Address.ToString() == "0.0.0.0")//没有网
             {
-                buttonEnableQSI.BackColor = CommonFoundations.MainBlue;
+                panelNoConnection.Visible = true;
+                panelNoConnection.BringToFront();
             }
             else
             {
-                buttonEnableQSI.BackColor = CommonFoundations.DarkBlue;
+                ///UDP监听线程
+                UDP uDP = new UDP();
+                Thread UDPListenThread = new Thread(uDP.UDPMessageListener);
+                ThreadsList.Add(UDPListenThread); //将新建的线程加入到线程队列中，以便在窗体结束时关闭所有的线程
+                UDPListenThread.Start();
+                //TCP消息监听线程
+                TCP tCP = new TCP();
+                Thread TCPMessageListenThread = new Thread(tCP.TCPMessageListener);
+                ThreadsList.Add(TCPMessageListenThread); //将新建的线程加入到线程队列中，以便在窗体结束时关闭所有的线程
+                TCPMessageListenThread.Start();
+
+                InitLANTable();//初始化局域网表格
+
+                uDP.OnlineMessageSend(IPAddress.Broadcast, ReplyStatus.NeedReply, OnlineStatus.Online);//上线广播
+                ControlsDoubleBuffered();
+                MouseDownDragMove();
+
+                buttonSendM.Enabled = false;
+                textBoxInfoUID.Text = CommonFoundations.HostUID;
+                textBoxInfoIP.Text = hostInfo.IPv4Address.ToString();
+                textBoxInfoName.Text = CommonFoundations.HostName;
+                panelLANBar.BringToFront();
+                panelLANBarTitle.BringToFront();
+                panelSideBar.BringToFront();
+
+                if (File.Exists(CommonFoundations.QuickSignIn_Path) == true)//快捷登录文件存在，把设置页面的快捷登录勾上
+                {
+                    buttonEnableQSI.BackColor = CommonFoundations.MainBlue;
+                }
+                else
+                {
+                    buttonEnableQSI.BackColor = CommonFoundations.DarkBlue;
+                }
             }
         }
 
@@ -775,6 +797,7 @@ namespace UChat
                 panelConfirm.Visible = false;
                 buttonRefuse.Text = "拒绝(180)";
                 panelPercent.Visible = false;
+                panelSameFile.Visible = false;
                 if (isBringToFront == true)
                 {
                     panelFileBar.BringToFront();
@@ -914,6 +937,43 @@ namespace UChat
                 long sec2 = sec % 60;
                 return min.ToString() + " 分钟 " + sec2.ToString() + " 秒";
             }
+        }
+
+        /// <summary>
+        /// 拒绝文件传输。
+        /// </summary>
+        private void RefuseFTR()
+        {
+            timerFTTimeout.Stop();//超时计时器停止计时
+            timerFTTimeout.Enabled = false;
+            FileTransfer.FileTransferAnswerSender(AcceptStatus.RefuseByUser, CommonFoundations.FileTransferTempData.FRSourceIP);
+            CommonFoundations.FileTransferTempData.ResetFTRTempData();
+            ResetSendFileBarUI(false);
+            panelFileBar.SendToBack();
+            panelLANBar.BringToFront();
+            panelLANBarTitle.BringToFront();
+            panelSideBar.BringToFront();
+            buttonLAN.BackColor = CommonFoundations.MainBlue;
+            buttonFiles.BackColor = Color.Transparent;
+            this.BackColor = Color.FromArgb(0, 125, 236);
+        }
+
+        /// <summary>
+        /// 接受文件传输。
+        /// </summary>
+        private void AcceptFTR()
+        {
+            timerFTTimeout.Stop();//超时计时器停止计时
+            timerFTTimeout.Enabled = false;
+            FileTransfer.FileTransferAnswerSender(AcceptStatus.Accept, CommonFoundations.FileTransferTempData.FRSourceIP);//向对方确认接收文件
+            panelConfirm.Visible = false;
+            panelSameFile.Visible = false;
+            panelPercent.Visible = true;
+            panelPercent.BringToFront();
+            labelWaiting.Text = "正在接受文件\r\n\r\n" + CommonFoundations.FileTransferTempData.FileFullName;
+            timerPercent.Enabled = true;
+            timerPercent.Start();
+            backgroundWorkerFileReceiver.RunWorkerAsync();//开启后台线程，等待 TCP 接受文件
         }
 
         /// <summary>
@@ -1273,24 +1333,12 @@ namespace UChat
 
         private void ButtonRefuse_Click(object sender, EventArgs e)
         {
-            timerFTTimeout.Stop();//超时计时器停止计时
-            timerFTTimeout.Enabled = false;
-            FileTransfer.FileTransferAnswerSender(AcceptStatus.RefuseByUser, CommonFoundations.FileTransferTempData.FRSourceIP);
-            CommonFoundations.FileTransferTempData.ResetFTRTempData();
-            ResetSendFileBarUI(false);
-            panelFileBar.SendToBack();
-            panelLANBar.BringToFront();
-            panelLANBarTitle.BringToFront();
-            panelSideBar.BringToFront();
-            buttonLAN.BackColor = CommonFoundations.MainBlue;
-            buttonFiles.BackColor = Color.Transparent;
-            this.BackColor = Color.FromArgb(0, 125, 236);
+            RefuseFTR();
         }
 
         private void ButtonAcceptFTR_Click(object sender, EventArgs e)
         {
-            timerFTTimeout.Stop();//超时计时器停止计时
-            timerFTTimeout.Enabled = false;
+            timerFTTimeout.Enabled = false;//暂停计时
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog
             {
                 RootFolder = Environment.SpecialFolder.Desktop,//起始文件夹设为桌面
@@ -1299,15 +1347,22 @@ namespace UChat
             };
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)//用户点了确认
             {
+                timerFTTimeout.Enabled = true;//继续计时
                 CommonFoundations.FileTransferTempData.FRDestinationFolder = folderBrowserDialog.SelectedPath;//获取用户选定的保存文件夹
-                FileTransfer.FileTransferAnswerSender(AcceptStatus.Accept, CommonFoundations.FileTransferTempData.FRSourceIP);//向对方确认接收文件
-                panelConfirm.Visible = false;
-                panelPercent.Visible = true;
-                panelPercent.BringToFront();
-                labelWaiting.Text = "正在接受文件\r\n\r\n" + CommonFoundations.FileTransferTempData.FileFullName;
-                timerPercent.Enabled = true;
-                timerPercent.Start();
-                backgroundWorkerFileReceiver.RunWorkerAsync();//开启后台线程，等待 TCP 接受文件
+
+                if (File.Exists(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName))//文件已存在，需要询问操作
+                {
+                    panelSameFile.Visible = true;
+                    panelSameFile.BringToFront();
+                }
+                else//文件夹没有同名文件，直接接收
+                {
+                    AcceptFTR();
+                }
+            }
+            else//用户没有点确认
+            {
+                timerFTTimeout.Enabled = true;//继续计时
             }
         }
 
@@ -1647,6 +1702,67 @@ namespace UChat
                 FormClearData formClearData = new FormClearData();
                 formClearData.ShowDialog();
             }
+        }
+
+        private void ButtonRefuse2_Click(object sender, EventArgs e)
+        {
+            RefuseFTR();
+        }
+
+        private void ButtonOpenFolder_Click(object sender, EventArgs e)
+        {
+            //使用命令行打开资源管理器并定位到文件。
+            Process p = new Process();
+            p.StartInfo.FileName = "explorer.exe";
+            p.StartInfo.Arguments = "/e,/select," + CommonFoundations.FileTransferTempData.FRDestinationFolder;//参数 -e 此命令使用默认视图启动 Windows 资源管理器，并把焦点定位在 RecePath。
+            p.Start();
+        }
+
+        private void ButtonCover_Click(object sender, EventArgs e)
+        {
+            File.Delete(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName);
+            AcceptFTR();
+        }
+
+        private void ButtonRename_Click(object sender, EventArgs e)
+        {
+            CommonFoundations.FileTransferTempData.FileFullName += " (2) ";
+            AcceptFTR();
+        }
+
+        private void ButtonRechooseFolder_Click(object sender, EventArgs e)
+        {
+            timerFTTimeout.Enabled = false;//暂停计时
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog
+            {
+                RootFolder = Environment.SpecialFolder.Desktop,//起始文件夹设为桌面
+                Description = "选择文件要保存的位置",
+                ShowNewFolderButton = true
+            };
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)//用户点了确认
+            {
+                timerFTTimeout.Enabled = true;//继续计时
+                CommonFoundations.FileTransferTempData.FRDestinationFolder = folderBrowserDialog.SelectedPath;//获取用户选定的保存文件夹
+
+                if (File.Exists(CommonFoundations.FileTransferTempData.FRDestinationFolder + @"\" + CommonFoundations.FileTransferTempData.FileFullName))//文件已存在，需要询问操作
+                {
+                    panelSameFile.Visible = true;
+                    panelSameFile.BringToFront();
+                }
+                else//文件夹没有同名文件，直接接收
+                {
+                    AcceptFTR();
+                }
+            }
+            else//用户没有点确认
+            {
+                timerFTTimeout.Enabled = true;//继续计时
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            ExitProgram();
         }
     }
 }

@@ -130,6 +130,12 @@
   <data name="6bead974b64d66c66cee3e536d001ee82" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\6bead974b64d66c66cee3e536d001ee81.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="guanbi3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\guanbi3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chat5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chat5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="退出1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\退出1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,9 +169,6 @@
   <data name="菜单2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\菜单2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="guanbi3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\guanbi3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="传输文件2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\传输文件2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -175,7 +178,7 @@
   <data name="个人信息" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\个人信息.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="chat5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chat5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="duanwang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\duanwang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

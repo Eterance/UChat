@@ -47,7 +47,8 @@ namespace UChat
             {
                 re = "0";
             }
-            string carrier = HostInfo.IPv4Address.ToString() + onlineStatus.ToString() + CommonFoundations.HostUID + re + CommonFoundations.HostName;
+            HostInfo hostInfo = new HostInfo();
+            string carrier = hostInfo.IPv4Address.ToString() + onlineStatus.ToString() + CommonFoundations.HostUID + re + CommonFoundations.HostName;
             UDPMessageSender(iPAddress, carrier);
         }
         /// <summary>
@@ -59,7 +60,8 @@ namespace UChat
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint iep1 = new IPEndPoint(iPAddress, 50050);
-            IPEndPoint iepHost = new IPEndPoint(HostInfo.IPv4Address, 50050);
+            HostInfo hostInfo = new HostInfo();
+            IPEndPoint iepHost = new IPEndPoint(hostInfo.IPv4Address, 50050);
             byte[] data = Encoding.UTF8.GetBytes(carrier);
             socket.Bind(iepHost);                                                                                                                                               //需要绑定一块活动的网卡，不然无法发送信息
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
@@ -110,7 +112,8 @@ namespace UChat
                 /// 【IP地址】 + 【分隔符“英文逗号 , ”】 + 【上下线状态字 UP 或 DP 】 + 【17位UID】+ 【广播状态字】 + 【用户名】
                 /// 广播状态字：1代表是广播需要回复，0代表不是广播（是回复）
                 string IP = message.Substring(0, message.IndexOf(',')); //远程主机的IP
-                if (IP != HostInfo.IPv4Address.ToString())//不是本机发出的
+                HostInfo hostInfo = new HostInfo();
+                if (IP != hostInfo.IPv4Address.ToString())//不是本机发出的
                 {
                     string status = message.Substring(message.IndexOf(',') + 1, message.IndexOf('P') - message.IndexOf(','));   //远程主机的上下线状态字
                     string UID = message.Substring(message.IndexOf('P') + 1, 17);   //远程主机的UID

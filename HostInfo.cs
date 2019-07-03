@@ -9,13 +9,13 @@ namespace UChat
     /// <summary>
     /// 获取本地主机各种信息。
     /// </summary>
-    public static class HostInfo
+    public class HostInfo
     {
         /// <summary> 
         /// 获取主机名 
         /// </summary> 
         /// <returns></returns> 
-        public static string HostName
+        public string HostName
         {
             get
             {
@@ -28,7 +28,7 @@ namespace UChat
         /// 获取主机 CPU ID。
         /// </summary> 
         /// <returns></returns> 
-        public static string CPUID
+        public string CPUID
         {
             get
             {
@@ -49,10 +49,11 @@ namespace UChat
         /// 以 IPAddress 格式（原始格式）获取主机活动网络适配器的IPv4地址。
         /// </summary> 
         /// <returns></returns> 
-        public static IPAddress IPv4Address
+        public IPAddress IPv4Address
         {
             get
             {
+                bool found = false;
                 IPAddress ipv4 = new IPAddress(0);
                 NetworkInterface[] fNetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
                 foreach (NetworkInterface adapter in fNetworkInterfaces)
@@ -76,6 +77,7 @@ namespace UChat
                                     if (ipAddress.Address.AddressFamily == AddressFamily.InterNetwork)//如果是ipv4地址，ipv6是InterNetworkv6
                                     {
                                         ipv4 = ipAddress.Address;
+                                        found = true;
                                     }
                                 }
                             }
@@ -88,13 +90,21 @@ namespace UChat
                                     if (ipAddress.Address.AddressFamily == AddressFamily.InterNetwork)//如果是ipv4地址，ipv6是InterNetworkv6
                                     {
                                         ipv4 = ipAddress.Address;
+                                        found = true;
                                     }
                                 }
                             }
                         }
                     }
                 }
-                return ipv4;
+                if (found == true)
+                {
+                    return ipv4;
+                }
+                else
+                {
+                    return IPAddress.Parse("0.0.0.0");
+                }
             }
         }
     }
