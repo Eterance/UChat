@@ -1018,6 +1018,7 @@ namespace UChat
             pictureBoxTips.MouseDown += new MouseEventHandler(Controls_MouseDown);
             panelTips.MouseDown += new MouseEventHandler(Controls_MouseDown);
             labelForbid.MouseDown += new MouseEventHandler(Controls_MouseDown);
+            labelChatBoxBG.MouseDown += new MouseEventHandler(Controls_MouseDown);
         }
         #endregion
 
