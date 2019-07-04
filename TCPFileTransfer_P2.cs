@@ -172,7 +172,7 @@ namespace UChat
                                                 if (mod == 0)//文件总字节长度是 数据片 的整数倍，即本次传输没有任何有效字节
                                                 {
                                                     fragmentBufferLength = 0;
-                                                    break;//放弃本次的无效数据，退出循环
+                                                    //break;//放弃本次的无效数据，退出循环
                                                 }
                                                 else//不是整数倍
                                                 {
@@ -232,7 +232,7 @@ namespace UChat
                                         {
                                             fStream.Write(blockBuffer, 0, blockElementsNums);
                                         }
-                                        //BlockSaved(ref signalStream, "OVER");//发送消息让对方结束传输
+                                        BlockConfirm(ref signalStream, "OVER");//发送消息让对方结束传输
                                     }
 
                                 }
